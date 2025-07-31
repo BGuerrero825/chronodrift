@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cbt3f56ene1c0" path="res://environment/coast_rocks.jpg" id="1_uyqbr"]
 [ext_resource type="Texture2D" uid="uid://bkxiyymkm26m6" path="res://environment/coast_rocks_normal.jpg" id="2_jn7gl"]
-[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://Ship/Ship.tscn" id="3_pd18f"]
+[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://ship/Ship.tscn" id="3_pd18f"]
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://levels/track_mesh.tscn" id="4_y45mn"]
 [ext_resource type="Texture2D" uid="uid://cacxywgcw1lvv" path="res://environment/autumn_field_puresky_2k.hdr" id="5_pklr3"]
 [ext_resource type="PackedScene" uid="uid://bem0e5o70exo5" path="res://environment/advanced_rocks.tscn" id="6_ao36d"]

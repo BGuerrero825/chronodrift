@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://4ayl1q75x27y"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://levels/track_mesh.tscn" id="1_myykx"]
-[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://Ship/Ship.tscn" id="2_c2xtl"]
+[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://ship/Ship.tscn" id="2_c2xtl"]
 [ext_resource type="Texture2D" uid="uid://cbt3f56ene1c0" path="res://environment/coast_rocks.jpg" id="3_j4f7o"]
 [ext_resource type="Texture2D" uid="uid://bkxiyymkm26m6" path="res://environment/coast_rocks_normal.jpg" id="4_hhh1h"]
 [ext_resource type="Texture2D" uid="uid://cacxywgcw1lvv" path="res://environment/autumn_field_puresky_2k.hdr" id="5_aowa0"]
