@@ -1,0 +1,338 @@
+[gd_scene load_steps=4 format=3 uid="uid://bem0e5o70exo5"]
+
+[ext_resource type="PackedScene" uid="uid://c7vm676sqmf5d" path="res://environment/advanced-rocks.blend" id="1_xe1cm"]
+[ext_resource type="Texture2D" uid="uid://dv1q6kderkt44" path="res://environment/advanced-rocks__albedo002.png" id="2_k6ki0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4w5yl"]
+albedo_color = Color(0.596078, 0.560784, 0.537255, 1)
+albedo_texture = ExtResource("2_k6ki0")
+uv1_scale = Vector3(3, 3, 3)
+
+[node name="advanced-rocks" instance=ExtResource("1_xe1cm")]
+
+[node name="rock_sm2_01" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm2_02" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm2_03" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm2_04" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm2_05" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm_01" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm_02" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm_03" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm_04" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_sm_05" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_md_05" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_md_04" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_md_02" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_md_01" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_md_03" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere" parent="." index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_001" parent="." index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_002" parent="." index="17"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_003" parent="." index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_004" parent="." index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_005" parent="." index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_006" parent="." index="21"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_007" parent="." index="22"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_008" parent="." index="23"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_009" parent="." index="24"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_011" parent="." index="25"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_012" parent="." index="26"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_013" parent="." index="27"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="Icosphere_014" parent="." index="28"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-1" parent="." index="29"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-12" parent="." index="30"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-11" parent="." index="31"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-10" parent="." index="32"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-9" parent="." index="33"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-8" parent="." index="34"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-7" parent="." index="35"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-6" parent="." index="36"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-5" parent="." index="37"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-4" parent="." index="38"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-3" parent="." index="39"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-c-2" parent="." index="40"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-1" parent="." index="41"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-2" parent="." index="42"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-3" parent="." index="43"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-4" parent="." index="44"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-5" parent="." index="45"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-12" parent="." index="46"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-6" parent="." index="47"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-11" parent="." index="48"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-10" parent="." index="49"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-9" parent="." index="50"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-8" parent="." index="51"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="road-s-7" parent="." index="52"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="apachetas-1" parent="." index="53"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="apachetas-2" parent="." index="54"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="apachetas-3" parent="." index="55"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-1" parent="." index="56"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-2" parent="." index="57"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-3" parent="." index="58"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-4" parent="." index="59"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-5" parent="." index="60"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-6" parent="." index="61"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_04" parent="." index="62"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_03" parent="." index="63"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_02" parent="." index="64"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_01" parent="." index="65"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_05" parent="." index="66"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_08" parent="." index="67"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_07" parent="." index="68"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_lg_06" parent="." index="69"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xl_03" parent="." index="70"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xl_02" parent="." index="71"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xl_01" parent="." index="72"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xl_02_001" parent="." index="73"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_01" parent="." index="74"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_02" parent="." index="75"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03" parent="." index="76"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_07" parent="." index="77"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03_001" parent="." index="78"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03_002" parent="." index="79"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03_003" parent="." index="80"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_02_001" parent="." index="81"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_02_002" parent="." index="82"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_02_003" parent="." index="83"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_07_001" parent="." index="84"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03_004" parent="." index="85"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_01_001" parent="." index="86"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03_005" parent="." index="87"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_07_002" parent="." index="88"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_07_003" parent="." index="89"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_03_006" parent="." index="90"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_01_002" parent="." index="91"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-4_001" parent="." index="92"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-1_001" parent="." index="93"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="basaltic-columns-4_002" parent="." index="94"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-5_001" parent="." index="95"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-5_002" parent="." index="96"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-5_003" parent="." index="97"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-1_002" parent="." index="98"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-1_003" parent="." index="99"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="rock_xxl_07_004" parent="." index="100"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-1_004" parent="." index="101"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-1_005" parent="." index="102"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-1" parent="." index="103"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-2" parent="." index="104"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-3" parent="." index="105"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-4" parent="." index="106"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-5" parent="." index="107"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")
+
+[node name="column-rock-6" parent="." index="108"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4w5yl")

@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8eae2dt0g146"]
+
+[ext_resource type="AudioStream" uid="uid://dy3wtt4ld1iki" path="res://audio/music/racetrack_theme.wav" id="1_r5pl4"]
+[ext_resource type="AudioStream" uid="uid://ge5n5rk6jgwg" path="res://audio/sfx/bumps/death_explosion.wav" id="2_1uxa8"]
+[ext_resource type="Script" path="res://audio/sfx/voice_acting/checkpoint_sound_player.gd" id="3_il74p"]
+[ext_resource type="AudioStream" uid="uid://bk2mlocmcm3ad" path="res://audio/sfx/bumps/bump_1.wav" id="4_eu10s"]
+[ext_resource type="Script" path="res://audio/sfx/bumps/bump_sound.gd" id="5_hc8t8"]
+[ext_resource type="AudioStream" uid="uid://38fbnpp684xf" path="res://audio/sfx/engine/wind_noise.wav" id="6_iqrl2"]
+[ext_resource type="AudioStream" uid="uid://gh2b756mpqbx" path="res://audio/sfx/engine/engine_a.wav" id="7_1048o"]
+[ext_resource type="AudioStream" uid="uid://wpkcrl16uujh" path="res://audio/sfx/engine/engine_b.wav" id="8_rrf3m"]
+[ext_resource type="AudioStream" uid="uid://ccidwj50bik82" path="res://audio/sfx/engine/engine_rocket.wav" id="9_37frc"]
+
+[node name="Camera3D" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.989629, 0.143648, 0, -0.143648, 0.989629, 0, 0.171, -2.23074)
+fov = 95.8
+
+[node name="MusicPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_r5pl4")
+autoplay = true
+
+[node name="DeathSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_1uxa8")
+
+[node name="CheckpointSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_il74p")
+
+[node name="RightBumpSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.989629, -0.143648, 0, 0.143648, 0.989629, 1.36838, -0.183207, 0.0717525)
+stream = ExtResource("4_eu10s")
+script = ExtResource("5_hc8t8")
+
+[node name="LeftBumpSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.989629, -0.143648, 0, 0.143648, 0.989629, -1.49613, -0.183207, 0.0717525)
+script = ExtResource("5_hc8t8")
+
+[node name="WindSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_iqrl2")
+
+[node name="EngineASoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.20872, 1.43793)
+stream = ExtResource("7_1048o")
+
+[node name="EngineBSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.206448, 1.42227)
+stream = ExtResource("8_rrf3m")
+
+[node name="RocketSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.211028, 1.45383)
+stream = ExtResource("9_37frc")

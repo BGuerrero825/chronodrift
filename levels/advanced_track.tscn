@@ -1,0 +1,167 @@
+[gd_scene load_steps=16 format=3 uid="uid://daqy8skjhafit"]
+
+[ext_resource type="Texture2D" uid="uid://cbt3f56ene1c0" path="res://environment/coast_rocks.jpg" id="1_uyqbr"]
+[ext_resource type="Texture2D" uid="uid://bkxiyymkm26m6" path="res://environment/coast_rocks_normal.jpg" id="2_jn7gl"]
+[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://Ship/Ship.tscn" id="3_pd18f"]
+[ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://levels/track_mesh.tscn" id="4_y45mn"]
+[ext_resource type="Texture2D" uid="uid://cacxywgcw1lvv" path="res://environment/autumn_field_puresky_2k.hdr" id="5_pklr3"]
+[ext_resource type="PackedScene" uid="uid://bem0e5o70exo5" path="res://environment/advanced_rocks.tscn" id="6_ao36d"]
+[ext_resource type="PackedScene" uid="uid://c3ren7jhcskfa" path="res://checkpoint/checkpoint.tscn" id="7_k8oye"]
+
+[sub_resource type="Curve3D" id="Curve3D_ortey"]
+bake_interval = 0.5
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -41.2909, 259.338, 0.00244141, -6.17532, 2.42601, 0, 6.17532, -2.42601, 0, -18.5745, 258.014, 0.0100098, -3.42775, 10.338, -0.000122121, 3.42775, -10.338, 0.000122121, -2.68272, 240.675, 0.0117188, -77.327, 25.5424, 0, 77.327, -25.5424, 0, 83.5219, -1.22948, -0.246826, -60.8785, 0.218313, -11.5565, 60.8785, -0.218313, 11.5565, 405.096, -0.0601676, 1.06763, -128.836, 0, -1.30078, 128.836, 0, 1.30078, 612.698, -0.0600967, 196.824, -129.552, 0, -0.806854, 129.552, 0, 0.806854, 806.439, 34.0435, 0.117615, -131.392, -0.926331, -1.17615, 131.392, 0.926331, 1.17615, 1001.51, -0.0600967, 195.83, -61.0946, 0, 95.2231, 61.0946, 0, -95.2231, 1188.77, -0.0600967, 4.31055, 0, 0, 0, 0, 0, 0, 1438.42, 98.7747, -256.277),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0.4, -0.6, 0.6, -0.6, 0.15, -0.05)
+}
+point_count = 10
+
+[sub_resource type="Curve3D" id="Curve3D_msehy"]
+_data = {
+"points": PackedVector3Array(-81.8735, 8.13948, 82.3777, 81.8735, -8.13948, -82.3777, 1702.55, 100.49, -510.594, -141.012, -0.306007, 4.00244, 141.012, 0.306007, -4.00244, 1832.8, 36.8186, -643.517, 5.849, 13.7909, -79.125, -5.849, -13.7909, 79.125, 1955.76, 22.4634, -510.163, -3.34094, 2.9347, -95.7791, 3.34094, -2.9347, 95.7791, 1955.77, 3.78194, -318.164, 0.00012207, -27.7737, -91.2096, -0.00012207, 27.7737, 91.2096, 1957.74, -37.8784, -127.229, -0.045166, -26.0075, -35.1799, 0.045166, 26.0075, 35.1799, 1957.96, 248.9, 10.0276, -3.37317, -0.0503235, -41.2958, 3.37317, 0.0503235, 41.2958, 1960.36, 265.093, 125.697, 45.9193, 0.427368, -0.0680542, -45.9193, -0.427368, 0.0680542, 1942.06, 275.306, 256.764, -0.713379, 0.105682, 34.7277, 0.713379, -0.105682, -34.7277, 1924.1, 260.328, 129.004, 8.03223, 15.5685, 40.5837, -8.03223, -15.5685, -40.5837, 1900.77, 210.612, 11.0157, 36.9143, 9.38391, 36.4339, -36.9143, -9.38391, -36.4339, 1800.22, 148.848, -191.493, 42.4905, 0.892426, 23.8988, -42.4905, -0.892426, -23.8988, 1649.44, 98.5146, -335.301, 15.3348, -2.23509, 17.7349, -15.3348, 2.23509, -17.7349, 1576.14, 97.7785, -394.513, 1.05005, -36.1091, -0.734375, -1.05005, 36.1091, 0.734375, 1532.8, 150.627, -438.222, -27.3301, 0.739716, -31.6969, 27.3301, -0.739716, 31.6969, 1572.2, 215.02, -382.489, 3.07446, 32.235, -3.65796, -3.07446, -32.235, 3.65796, 1609.2, 152.697, -329.099, 17.6503, 1.57219, 20.8035, -17.6503, -1.57219, -20.8035, 1562.7, 99.491, -371.839, 19.1323, -13.3728, 21.5243, -19.1323, 13.3728, -21.5243, 1407.76, 129.809, -545.891),
+"tilts": PackedFloat32Array(0, 1.05368, 1.05659, 0.55, 0.55, 0.507433, 0.5, 1.6, 0.761566, 0.45, 0.384253, 0.5, 0.4, 0.35, 0, 0.2, 0, 0)
+}
+point_count = 18
+
+[sub_resource type="Curve3D" id="Curve3D_5c5if"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1190.33, 159.664, -828.82, 41.6212, 6.10352e-05, 53.15, -41.6212, -6.10352e-05, -53.15, 929.362, 139.512, -1092.63, 71.0173, 0, 0.354248, -71.0173, 0, -0.354248, 801.202, 170.619, -1344.51, 63.6735, -1.70206, -18.2371, -63.6735, 1.70206, 18.2371, 678.233, 174.852, -1088.26, 28.6383, -24.3882, 0.0378418, -28.6383, 24.3882, -0.0378418, 519.454, 208.123, -1087.11, 34.3863, 4.07129, 0, -34.3863, -4.07129, 0, 475.806, 51.0412, -1087.22, 38.412, -15.4592, 0, -38.412, 15.4592, 0, 347.735, 83.7683, -1087.87, 29.4601, -8.42529, -5.28809, -29.4601, 8.42529, 5.28809, 229.606, 147.052, -1087.9, 15.81, -1.17755, -24.4091, -15.81, 1.17755, 24.4091, 101.019, 147.052, -1021.97, -18.441, 0, -23.4607, 18.441, 0, 23.4607, 101.019, 147.052, -895.404, 1.96875, -0.282593, -80.9655, -1.96875, 0.282593, 80.9655, 355.015, 167.825, -769.376, 47.7989, 0, -37.4058, -47.7989, 0, 37.4058, 95.3882, 147.052, -638.055, -4.90942, 1.98416, -43.7078, 4.90942, -1.98416, 43.7078, 33.4107, 136.932, -443.833, -12.0738, 15.3707, -50.1133, 12.0738, -15.3707, 50.1133, 65.1729, 89.4946, -253.982, -14.3377, 14.6428, -34.6045, 14.3377, -14.6428, 34.6045, 106.356, 38.5498, -122.231, -73.9495, 11.5342, -30.7714, 73.9495, -11.5342, 30.7714, 218.007, -9.64943, -20.6468),
+"tilts": PackedFloat32Array(0, 0.3, -0.8, 0.35, 0.1, 0.05, 0.1, -0.3, -0.4, -0.3, 0.5, -0.3, -0.3, -0.3, -0.3, -0.3)
+}
+point_count = 16
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_adgx1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hcwyf"]
+albedo_texture = ExtResource("1_uyqbr")
+normal_enabled = true
+normal_texture = ExtResource("2_jn7gl")
+uv1_scale = Vector3(1024, 1024, 1024)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_o78og"]
+panorama = ExtResource("5_pklr3")
+
+[sub_resource type="Sky" id="Sky_3eepx"]
+sky_material = SubResource("PanoramaSkyMaterial_o78og")
+
+[sub_resource type="Environment" id="Environment_gbk1l"]
+background_mode = 2
+background_color = Color(0.486275, 0.486275, 0.486275, 1)
+background_energy_multiplier = 0.7
+sky = SubResource("Sky_3eepx")
+
+[node name="advanced_track" type="Node3D"]
+
+[node name="tracks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -740.417, 63.5767, 447.236)
+
+[node name="Path3D" type="Path3D" parent="tracks"]
+curve = SubResource("Curve3D_ortey")
+
+[node name="Path3D2" type="Path3D" parent="tracks"]
+curve = SubResource("Curve3D_msehy")
+
+[node name="Path3D3" type="Path3D" parent="tracks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.1734, 19.5976, 0)
+curve = SubResource("Curve3D_5c5if")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.898028, 0.21997, -0.380998, 0, 0.866026, 0.5, 0.439939, -0.449014, 0.777714, 0, 500, 0)
+light_color = Color(0.647059, 0.815686, 0.843137, 1)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60992, 0)
+mesh = SubResource("CapsuleMesh_adgx1")
+
+[node name="ground" type="CSGBox3D" parent="."]
+size = Vector3(2048, 1, 2048)
+material = SubResource("StandardMaterial3D_hcwyf")
+
+[node name="Ship" parent="." instance=ExtResource("3_pd18f")]
+transform = Transform3D(-0.016737, 0, -0.99986, 0, 1, 0, 0.99986, 0, -0.016737, -770.806, 324.602, 447.983)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gbk1l")
+
+[node name="track_mesh" parent="." instance=ExtResource("4_y45mn")]
+
+[node name="track_floor" parent="track_mesh" index="0"]
+path_node = NodePath("../../tracks/Path3D")
+
+[node name="track_rail2" parent="track_mesh" index="1"]
+path_node = NodePath("../../tracks/Path3D")
+
+[node name="track_rail1" parent="track_mesh" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0748501, 0)
+path_node = NodePath("../../tracks/Path3D")
+
+[node name="wall1" parent="track_mesh" index="3"]
+path_node = NodePath("../../tracks/Path3D")
+
+[node name="wall2" parent="track_mesh" index="4"]
+path_node = NodePath("../../tracks/Path3D")
+
+[node name="track_mesh2" parent="." instance=ExtResource("4_y45mn")]
+
+[node name="track_floor" parent="track_mesh2" index="0"]
+path_node = NodePath("../../tracks/Path3D2")
+
+[node name="track_rail2" parent="track_mesh2" index="1"]
+path_node = NodePath("../../tracks/Path3D2")
+
+[node name="track_rail1" parent="track_mesh2" index="2"]
+path_node = NodePath("../../tracks/Path3D2")
+
+[node name="wall1" parent="track_mesh2" index="3"]
+path_node = NodePath("../../tracks/Path3D2")
+
+[node name="wall2" parent="track_mesh2" index="4"]
+path_node = NodePath("../../tracks/Path3D2")
+
+[node name="track_mesh3" parent="." instance=ExtResource("4_y45mn")]
+
+[node name="track_floor" parent="track_mesh3" index="0"]
+path_node = NodePath("../../tracks/Path3D3")
+
+[node name="track_rail2" parent="track_mesh3" index="1"]
+path_node = NodePath("../../tracks/Path3D3")
+
+[node name="track_rail1" parent="track_mesh3" index="2"]
+path_node = NodePath("../../tracks/Path3D3")
+
+[node name="wall1" parent="track_mesh3" index="3"]
+path_node = NodePath("../../tracks/Path3D3")
+
+[node name="wall2" parent="track_mesh3" index="4"]
+path_node = NodePath("../../tracks/Path3D3")
+
+[node name="advanced-rocks" parent="." instance=ExtResource("6_ao36d")]
+
+[node name="Checkpoint1" parent="." instance=ExtResource("7_k8oye")]
+transform = Transform3D(-0.0603343, 0, -0.998178, 0, 1, 0, 0.998178, 0, -0.0603343, -387.456, 66.6913, 445.408)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("7_k8oye")]
+transform = Transform3D(0.907748, 0, -0.419516, 0, 1, 0, 0.419516, 0, 0.907748, 403.133, 67.0964, 540.895)
+checkpoint_number = 2
+
+[node name="Checkpoint3" parent="." instance=ExtResource("7_k8oye")]
+transform = Transform3D(-0.990302, 0, 0.138931, 0.0203938, 0.989168, 0.145367, -0.137426, 0.146791, -0.979575, 1212.84, 87.6862, -56.5777)
+checkpoint_number = 3
+
+[node name="Checkpoint4" parent="." instance=ExtResource("7_k8oye")]
+transform = Transform3D(0.721313, 0, 0.692609, 0, 1, 0, -0.692609, 0, 0.721313, 825.111, 273.957, 57.5906)
+checkpoint_number = 4
+
+[node name="Checkpoint5" parent="." instance=ExtResource("7_k8oye")]
+transform = Transform3D(-0.0131419, 0, 0.999914, 0, 1, 0, -0.999914, 0, -0.0131419, -374.051, 152.934, -640.349)
+checkpoint_number = 5
+
+[node name="Checkpoint6" parent="." instance=ExtResource("7_k8oye")]
+transform = Transform3D(0.940175, 0, 0.340691, 0, 1, 0, -0.340691, 0, 0.940175, -716.267, 189.169, 153.361)
+checkpoint_number = 6
+finish = true
+
+[editable path="track_mesh"]
+[editable path="track_mesh2"]
+[editable path="track_mesh3"]

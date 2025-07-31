@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkd8sa7614aer"]
+
+[ext_resource type="Texture2D" uid="uid://dd81npaxyysjb" path="res://textures/concrete_wall_004_diff_1k_rot.png" id="1_benff"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d813i"]
+albedo_texture = ExtResource("1_benff")
+metallic = 0.6
+roughness = 0.51
+uv1_scale = Vector3(0.3, 16, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8web4"]
+albedo_color = Color(0.478431, 0.435294, 0.427451, 1)
+metallic = 0.39
+roughness = 0.7
+uv1_scale = Vector3(0.2, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwml3"]
+albedo_color = Color(0.478431, 0.435294, 0.427451, 1)
+metallic = 0.39
+roughness = 0.7
+
+[node name="cave_mesh" type="Node3D"]
+
+[node name="track_floor" type="CSGPolygon3D" parent="."]
+use_collision = true
+polygon = PackedVector2Array(-10, -0.8, -10, 0, 10, 0, 10, -0.8)
+material = SubResource("StandardMaterial3D_d813i")
+
+[node name="track_rail2" type="CSGPolygon3D" parent="."]
+use_collision = true
+polygon = PackedVector2Array(-10, -0.8, -10, 0.4, -11, 1.4, -11, -0.3)
+material = SubResource("StandardMaterial3D_8web4")
+
+[node name="track_rail1" type="CSGPolygon3D" parent="."]
+use_collision = true
+polygon = PackedVector2Array(10, -0.8, 10, 0.4, 11, 1.4, 11, -0.3)
+material = SubResource("StandardMaterial3D_wwml3")
+
+[node name="cave" type="CSGPolygon3D" parent="."]
+operation = 2
+flip_faces = true
+polygon = PackedVector2Array(-6.13307, 9.5088, 2.24267, 10.1192, 10.1478, 6.79075, 11.9785, -0.448708, 6.94415, -3.94361, -6.95227, -3.73558, -11.8202, -0.490313, -9.53185, 5.7506)

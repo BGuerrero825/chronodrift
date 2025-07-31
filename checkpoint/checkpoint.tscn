@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3ren7jhcskfa"]
+
+[ext_resource type="Script" path="res://checkpoint/checkpoint.gd" id="1_37it0"]
+[ext_resource type="PackedScene" uid="uid://dv2oui0aooeew" path="res://checkpoint/checkpoint.blend" id="1_rnixr"]
+[ext_resource type="Script" path="res://checkpoint/checkpoint_area.gd" id="3_fu77b"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_avvd3"]
+height = 4.04974
+radius = 12.1868
+
+[node name="Checkpoint" type="Node3D"]
+script = ExtResource("1_37it0")
+
+[node name="checkpoint" parent="." instance=ExtResource("1_rnixr")]
+
+[node name="checkpoint_area" type="Area3D" parent="." groups=["checkpoint"]]
+script = ExtResource("3_fu77b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="checkpoint_area"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_avvd3")

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceclssy2blgji"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mdw5u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q7hen"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1t8r"]
+albedo_color = Color(0.668545, 0.177583, 0.307031, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cigx7"]
+size = Vector3(80.2832, 1, 79.9552)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eao78"]
+albedo_color = Color(0.351563, 0.351563, 0.351563, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ignvh"]
+material = SubResource("StandardMaterial3D_eao78")
+size = Vector3(80, 1, 80)
+
+[node name="World" type="Node3D"]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.9107, 0)
+light_color = Color(0.636292, 0.63128, 0, 1)
+
+[node name="test_box" type="RigidBody3D" parent="Map"]
+transform = Transform3D(0.80237, -0.284259, 0.524785, 0, 0.879291, 0.476284, -0.596827, -0.382156, 0.705517, 0, 6.11226, -10.8575)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/test_box"]
+shape = SubResource("BoxShape3D_mdw5u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/test_box"]
+mesh = SubResource("BoxMesh_q7hen")
+surface_material_override/0 = SubResource("StandardMaterial3D_u1t8r")
+
+[node name="plane" type="StaticBody3D" parent="Map"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/plane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.239338, 0, -0.0426636)
+shape = SubResource("BoxShape3D_cigx7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/plane"]
+mesh = SubResource("BoxMesh_ignvh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.979624, 0.200839, 0, -0.200839, 0.979624, 0, 5.54301, 0)

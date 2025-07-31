@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://nh4vnrkjrxti"]
+
+[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://Ship/Ship.tscn" id="1_tdhxj"]
+[ext_resource type="PackedScene" uid="uid://c46c0cq7afah7" path="res://levels/wesphysics_track.tscn" id="2_jrjx1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwydq"]
+size = Vector3(1000, 5, 1000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mfrtk"]
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oe0rp"]
+albedo_color = Color(0.296502, 0.480032, 0.231978, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 198.442, 0)
+light_color = Color(0.996078, 0.780392, 0.537255, 1)
+light_energy = 1.2
+
+[node name="wesphysics_track" parent="." instance=ExtResource("2_jrjx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38.4788, 0)
+
+[node name="Ship" parent="." instance=ExtResource("1_tdhxj")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.481199, 76.987, -317.054)
+air_acceleration = null
+air_decceleration = null
+air_yaw_acceleration = null
+air_yaw_decceleration = null
+air_yaw_max_speed = null
+air_roll_acceleration = null
+air_roll_decceleration = null
+air_roll_max_speed = null
+air_roll_decay_speed = null
+air_pitch_acceleration = null
+air_pitch_decceleration = null
+air_pitch_max_speed = null
+air_pitch_decay_speed = null
+air_friction = null
+air_max_speed = null
+air_min_speed = null
+air_gravity = null
+air_stall_acceleration = null
+air_stall_recovery_angle = null
+ground_acceleration = null
+ground_yaw_acceleration = null
+ground_yaw_decceleration = null
+ground_yaw_max_speed = null
+ground_pitch_acceleration = null
+ground_pitch_decceleration = null
+ground_pitch_max_speed = null
+ground_roll_acceleration = null
+ground_roll_decceleration = null
+ground_roll_max_speed = null
+ground_friction = null
+ground_max_speed = null
+ground_gravity = null
+ground_auto_pitch_speed = null
+ground_auto_roll_speed = null
+ground_suction_angle_offset = null
+ground_strafe_angle_offset = null
+ground_bumper_bounce_speed = null
+ground_bumper_friction = null
+ground_bumper_min_speed = null
+
+[node name="ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+shape = SubResource("BoxShape3D_wwydq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("BoxMesh_mfrtk")
+surface_material_override/0 = SubResource("StandardMaterial3D_oe0rp")
