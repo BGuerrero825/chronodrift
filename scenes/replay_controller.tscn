@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3ghog3f33nbe"]
+
+[ext_resource type="Script" uid="uid://qpx5r1lx3uaw" path="res://scripts/replay_controller.gd" id="1_qhce3"]
+
+[node name="ReplayController" type="Node3D"]
+script = ExtResource("1_qhce3")

@@ -1,3 +1,4 @@
+class_name PlayerShip
 extends CharacterBody3D
 
 # Draft Controls
@@ -312,6 +313,8 @@ func move_ship(delta: float) -> void:
 	else:
 		move_ship_flying(delta)
 
+func _ready() -> void:
+	EventsBus.register_player(self)
 
 func _physics_process(delta: float) -> void:
 
