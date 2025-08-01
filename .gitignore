@@ -1,6 +1,9 @@
-deployment.json
-
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# User ignores
+deployment.json
 .vscode
+/build/
+export_presets.cfg
