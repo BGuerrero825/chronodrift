@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://nh4vnrkjrxti"]
 
-[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://Ship/Ship.tscn" id="1_tdhxj"]
+[ext_resource type="PackedScene" uid="uid://b3mi6w6egox4h" path="res://ship/ship.tscn" id="1_tdhxj"]
 [ext_resource type="PackedScene" uid="uid://c46c0cq7afah7" path="res://levels/wesphysics_track.tscn" id="2_jrjx1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wwydq"]
