@@ -1,0 +1,5 @@
+Texture "billboards-texture-1024.png" by Majadroid.
+
+All other textures by cc0textures.com ->
+	They are also availbale in higher resolution there.
+	For those textures, there also additional maps (like normal map) available.

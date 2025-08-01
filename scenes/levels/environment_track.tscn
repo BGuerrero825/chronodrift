@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=3 uid="uid://ch4j1u1jxfod4"]
+
+[ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_s7rrc"]
+[ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_5p15t"]
+[ext_resource type="PackedScene" uid="uid://b3ghog3f33nbe" path="res://scenes/replay_controller.tscn" id="3_pjnwa"]
+[ext_resource type="Texture2D" uid="uid://dp6mjv31mtp04" path="res://assets/environment/kloppenheim_02_puresky_1k.hdr" id="4_5p15t"]
+[ext_resource type="PackedScene" uid="uid://bb707s4jelh2u" path="res://assets/buildings/crane.glb" id="5_pjnwa"]
+[ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="6_rk3j2"]
+[ext_resource type="PackedScene" uid="uid://bt2i3l2j0kxim" path="res://assets/buildings/destroyed_building.glb" id="7_cpeqc"]
+
+[sub_resource type="Curve3D" id="Curve3D_ortey"]
+bake_interval = 0.5
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -33.3577, 173.668, 0.00231457, -15.619, 16.5191, 0, 15.619, -16.5191, 0, -3.12176, 158.179, 0.011714, -44.2325, 10.2471, 0, 44.2325, -10.2471, 0, 35.3296, 1.80547, -0.246831, 0, 0, 0, 0, 0, 0, 833.144, 0, -1.84283, -14.8429, 0.0647044, 12.0302, 14.8429, -0.0647044, -12.0302, 1152.81, 0, -0.420544, -4.78516, -0.012207, 15.2622, 4.78516, 0.012207, -15.2622, 1342.21, 0, -130.63, 6.66675, 0, 16.6641, -6.66675, 0, -16.6641, 1343.3, 0, -254.819, 4.41101, -0.00751972, 9.45898, -4.41101, 0.00751972, -9.45898, 1150.4, 0, -385.032, -6.0918, -0.00999641, 12.4898, 6.0918, 0.00999641, -12.4898, 1151.64, 0, -510.801, -11.0436, -0.0135193, 16.8916, 11.0436, 0.0135193, -16.8916, 1344.55, 0, -643.426, 6.51807, -0.0146484, 17.3237, -6.51807, 0.0146484, -17.3237, 1346.16, 0, -768.976, 21.6161, -0.0170898, 20.984, -21.6161, 0.0170898, -20.984, 1150.84, 0, -961.884, 25.2911, 0.00354004, -3.98694, -25.2911, -0.00354004, 3.98694, 959.136, 0, -961.884, 51.1389, 0.0174561, -22.7299, -51.1389, -0.0174561, 22.7299, 317.715, 0, -837.699, 5.66079, 0.0163574, -20.4986, -5.66079, -0.0163574, 20.4986, -0.855225, 0, -515.274, -5.06598, 0.0168457, -22.0785, 5.06598, -0.0168457, 22.0785, -2.26154, 0, -326.829, 0, 0, 0, 0, 0, 0, 157.968, 6.51538, -97.6814, -13.5237, 0.159729, -5.85022, 13.5237, -0.159729, 5.85022, 304.864, 10.4972, -11.5239, 0.0733337, 0.0604973, -2.40834, -0.0733337, -0.0604973, 2.40834, 334.037, 8.92437, -5.76441),
+"tilts": PackedFloat32Array(0, 0, 0, 0, -0.0879254, -0.364625, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00980864)
+}
+point_count = 19
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpeqc"]
+albedo_color = Color(0.85, 0.629, 0.629, 1)
+albedo_texture = ExtResource("6_rk3j2")
+uv1_scale = Vector3(100, 100, 100)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4q1sw"]
+material = SubResource("StandardMaterial3D_cpeqc")
+size = Vector2(20000, 20000)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pjnwa"]
+panorama = ExtResource("4_5p15t")
+filter = false
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_rk3j2"]
+sky_material = SubResource("PanoramaSkyMaterial_pjnwa")
+
+[sub_resource type="Environment" id="Environment_cpeqc"]
+background_mode = 2
+sky = SubResource("Sky_rk3j2")
+glow_intensity = 0.0
+fog_enabled = true
+fog_light_color = Color(0.2975, 0.317625, 0.35, 1)
+fog_light_energy = 0.6
+fog_density = 0.005
+fog_sky_affect = 0.2
+
+[node name="basic_track" type="Node3D"]
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0524902, 0, 0.00183582)
+curve = SubResource("Curve3D_ortey")
+
+[node name="track_mesh" parent="." instance=ExtResource("1_s7rrc")]
+
+[node name="track_floor" parent="track_mesh" index="0"]
+path_node = NodePath("../../Path3D")
+
+[node name="track_rail2" parent="track_mesh" index="1"]
+path_node = NodePath("../../Path3D")
+
+[node name="track_rail1" parent="track_mesh" index="2"]
+path_node = NodePath("../../Path3D")
+
+[node name="wall1" parent="track_mesh" index="3"]
+path_node = NodePath("../../Path3D")
+
+[node name="wall2" parent="track_mesh" index="4"]
+path_node = NodePath("../../Path3D")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.541675, -0.454519, 0, 0.642788, 0.766044, 0.707107, -0.541675, 0.454519, 0, 0, 0)
+light_color = Color(0.97, 0.89434, 0.7178, 1)
+light_energy = 4.0
+
+[node name="Ship" parent="." instance=ExtResource("2_5p15t")]
+transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.0926485, 47.8325, 1.95332, -0.16252)
+
+[node name="ReplayController" parent="." instance=ExtResource("3_pjnwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
+
+[node name="Crane" parent="." instance=ExtResource("5_pjnwa")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 639.974, -16.5032, -31.3982)
+
+[node name="Crane2" parent="." instance=ExtResource("5_pjnwa")]
+transform = Transform3D(-0.689475, 0, -0.982153, 0, 1.2, 0, 0.982153, 0, -0.689475, 340.525, -17.2201, 22.5161)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.7587, 0)
+mesh = SubResource("PlaneMesh_4q1sw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cpeqc")
+
+[node name="destroyed_building" parent="." instance=ExtResource("7_cpeqc")]
+transform = Transform3D(-0.0116237, 1.01617e-09, 0.999932, -8.74228e-08, -1, 0, 0.999932, -8.74169e-08, 0.0116237, 478.12, 72.7423, 47.4276)
+
+[node name="destroyed_building2" parent="." instance=ExtResource("7_cpeqc")]
+transform = Transform3D(0.0317247, -2.77346e-09, 0.999497, -8.74228e-08, -1, -4.453e-16, 0.999497, -8.73788e-08, -0.0317247, 530.587, 72.7423, -52.3932)
+
+[node name="destroyed_building3" parent="." instance=ExtResource("7_cpeqc")]
+transform = Transform3D(-0.0418757, 0, 0.999123, 0, 1, 0, -0.999123, 0, -0.0418757, 625.626, -87.4084, 48.2421)
+
+[editable path="track_mesh"]
