@@ -1,25 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1lqrsav6jgk7"]
+[gd_scene load_steps=7 format=3 uid="uid://b1lqrsav6jgk7"]
 
 [ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
 [ext_resource type="PackedScene" uid="uid://dps5pw8c8odc6" path="res://scenes/hud.tscn" id="3_4tobq"]
+[ext_resource type="AudioStream" uid="uid://gh2b756mpqbx" path="res://audio/engine/engine_a.wav" id="4_gudjc"]
+[ext_resource type="AudioStream" uid="uid://djte806d2ebib" path="res://audio/engine/rocket.wav" id="5_7j21i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
-size = Vector3(5.5, 0.6, 10)
+size = Vector3(2.8, 0.6, 5)
 
 [node name="Ship" type="CharacterBody3D"]
 script = ExtResource("1_2gnfn")
 
 [node name="ship_guest" parent="." instance=ExtResource("1_q631a")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.01745, 0)
+transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0.792349, -0.653594)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.989656, -0.143458, 0, 0.143458, 0.989656, 0, 3.04709, 11.2731)
+transform = Transform3D(1, 0, 0, 0, 0.988338, 0.152279, 0, -0.152279, 0.988338, 0, 4.33174, 6.79795)
 current = true
 fov = 95.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00975937, 0, -1.40662)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00975937, 0, -0.874708)
 shape = SubResource("BoxShape3D_2gnfn")
 
 [node name="cast_center" type="RayCast3D" parent="."]
@@ -46,9 +48,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 target_position = Vector3(0, -5, 0)
 
 [node name="bumper_front_left" type="RayCast3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.5, 0, -6)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.33816, 0, -3.14354)
 
 [node name="bumper_front_right" type="RayCast3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.5, 0, -6)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.36143, 0, -3.15387)
 
 [node name="HUD" parent="." instance=ExtResource("3_4tobq")]
+
+[node name="EngineHum" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_gudjc")
+volume_db = 5.0
+autoplay = true
+
+[node name="RocketDrone" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_7j21i")
+volume_db = -15.0
+autoplay = true
