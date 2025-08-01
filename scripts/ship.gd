@@ -6,6 +6,8 @@ extends CharacterBody3D
 # Roll: Right Joystick or left and right arrow
 # Pitch: Right Joystick or up and down down arrow
 
+@onready var camera: = $Camera3D
+
 @onready var cast_center: = $cast_center
 @onready var cast_ground_detector: = $cast_ground_detector
 @onready var cast_front: = $cast_front
@@ -16,42 +18,24 @@ extends CharacterBody3D
 @onready var bumper_front_left: = $bumper_front_left
 @onready var bumper_front_right: = $bumper_front_right
 
-@export var air_acceleration: float = 10
-@export var air_decceleration: float = 10
+@export var camera_fov_base: float = 95
+@export var camera_fov_max: float = 125
 
-@export var air_yaw_acceleration: float = 1.5
-@export var air_yaw_decceleration: float = 4
-@export var air_yaw_max_speed: float = 2
+@export var air_gravity: float = 500
 
-@export var air_roll_acceleration: float = 3
-@export var air_roll_decceleration: float = 6
-@export var air_roll_max_speed: float = 4
-@export var air_roll_decay_speed: float = 40
+@export var ground_acceleration: float = 20
+@export var ground_decceleration: float = 60
 
-@export var air_pitch_acceleration: float = 3
-@export var air_pitch_decceleration: float = 6
-@export var air_pitch_max_speed: float = 4
-@export var air_pitch_decay_speed: float = 3
+@export var ground_yaw_acceleration: float = 8
+@export var ground_yaw_decceleration: float = 12
+@export var ground_yaw_max_speed: float = 1.5
 
-@export var air_friction: float = 1
-@export var air_max_speed: float = 70
-@export var air_min_speed: float = 10
-@export var air_gravity: float = 14
-@export var air_stall_acceleration: float = 10
-@export var air_stall_recovery_angle: float = deg_to_rad(70)
-
-@export var ground_acceleration: float = 8
-
-@export var ground_yaw_acceleration: float = 3
-@export var ground_yaw_decceleration: float = 6
-@export var ground_yaw_max_speed: float = 1.2
-
-@export var ground_pitch_acceleration: float = 6 
+@export var ground_pitch_acceleration: float = 6
 @export var ground_pitch_decceleration: float = 4
 @export var ground_pitch_max_speed: float = 2
 
-@export var ground_roll_acceleration: float = 6 
-@export var ground_roll_decceleration: float = 4
+@export var ground_roll_acceleration: float = 6
+@export var ground_roll_decceleration: float = 10
 @export var ground_roll_max_speed: float = 2
 
 @export var ground_friction: float = 1.5
@@ -76,20 +60,26 @@ var current_yaw_speed:float
 var current_roll_speed:float
 var current_pitch_speed:float
 
-var current_checkpoint:int = 0
 
-var lap_checkpoint_times: Array = []  # list of lists, each contains checkpoint times starting at first checkpoint
 var current_lap_time: float = 0  # tracks current time, reset to 0 when reaching finish
-var current_lap_idx: int = 0
 
-@onready var checkpoint_velocity: Vector3 = velocity
-@onready var checkpoint_position: Vector3 = position
-@onready var checkpoint_rotation: Vector3 = rotation
-var checkpoint_speed:float = 0
-var checkpoint_yaw_speed:float = 0
-var checkpoint_roll_speed:float = 0
-var checkpoint_pitch_speed:float = 0
-var checkpoint_lap_time:float = 0
+# TODO: part of temp impl for mouse
+var mouse_delta_x: float = 0.0
+
+
+func _ready() -> void:
+	pass
+
+
+func _physics_process(delta: float) -> void:
+	# update lap timer
+	current_lap_time += delta
+	move_ship(delta)
+
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouse_delta_x = event.relative.x
 
 
 # returns raycast distance to collider, this should not be called if raycast is not colliding
@@ -99,7 +89,7 @@ func raycast_distance(raycast: RayCast3D) -> float:
 
 
 # returns a new current rotation speed
-func update_rotation_speed(	current_rotation_speed: float, 
+func update_rotation_speed(current_rotation_speed: float, 
 							current_input: float,
 							rotation_acceleration: float,
 							rotation_decceleration: float,
@@ -143,10 +133,19 @@ func move_ship_grounded(delta: float) -> void:
 	# I want to get the front/back raycast distances to the nearest ground and adjust the velocity to keep
 	# those as close as possible to a certain goal hover height
 
-	if throttle > 0 and current_speed < ground_max_speed:
+	# braking
+	if throttle < 0 and current_speed > 0:
+		current_speed += throttle * ground_decceleration * delta
+	# accelerate
+	else:
 		current_speed += throttle * ground_acceleration * delta
-	elif throttle < 0 and current_speed > -ground_max_speed:
-		current_speed += throttle * ground_acceleration * delta
+
+	# cap speed to max speed
+	if current_speed < -ground_max_speed:
+		current_speed = -ground_max_speed
+	elif current_speed > ground_max_speed:
+		current_speed = ground_max_speed
+
 	
 	current_pitch_speed = update_rotation_speed(current_pitch_speed, rotate_input.x, ground_pitch_acceleration, ground_pitch_decceleration, ground_pitch_max_speed, delta)
 	current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
@@ -192,84 +191,16 @@ func move_ship_grounded(delta: float) -> void:
 		velocity = tilted_forward * current_speed
 	else:
 		velocity = forward * current_speed
+	
+	if not is_grounded():
+		velocity += (air_gravity * delta) * -Vector3.UP
 
 	# apply friction
 	current_speed = move_toward(current_speed, 0, ground_friction * delta)
 	
 	speed_sound_adjust(current_speed)
+	adjust_camera_fov(current_speed)
 
-	move_and_slide()
-
-
-func move_ship_flying(delta: float) -> void:
-
-	throttle_sound_adjust(0)
-
-	# TODO: should be positive basis (refactor)
-	var forward: = -basis.z
-	var horizon: = Vector3(forward.x, 0, forward.z).normalized()
-
-	current_yaw_speed = update_rotation_speed(current_yaw_speed, rotate_input.y, air_yaw_acceleration, air_yaw_decceleration, air_yaw_max_speed, delta)
-	current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, air_roll_acceleration, air_roll_decceleration, air_roll_max_speed, delta)
-	current_pitch_speed = update_rotation_speed(current_pitch_speed, rotate_input.x, air_pitch_acceleration, air_pitch_decceleration, air_pitch_max_speed, delta)
-	if is_zero_approx(rotate_input.x):
-		current_pitch_speed -= air_pitch_decay_speed * delta  # add decay
-	if is_zero_approx(rotate_input.z):
-		var rotation_correct_strength:float = clamp(-rotation.z, -0.2, 0.2)
-		current_roll_speed += rotation_correct_strength * air_roll_decay_speed * delta  # add decay
-
-	rotate(basis.y.normalized(), current_yaw_speed * delta)
-	rotate(basis.z.normalized(), current_roll_speed * delta)
-	rotate(basis.x.normalized(), current_pitch_speed * delta)
-
-	Debug.track("current_roll_speed", current_roll_speed)
-	Debug.track("current_yaw_speed", current_yaw_speed)
-
-	Debug.track("throttle", throttle)
-	Debug.track("current_speed", current_speed)
-	Debug.track("velocity.length", velocity.length())
-
-	# throttle, disabled for actual game
-	# if throttle > 0 and current_speed < air_max_speed:
-	# 	current_speed += throttle * air_acceleration * delta
-
-	# braking
-	if throttle < 0 and current_speed > air_min_speed:
-		current_speed += throttle * air_decceleration * delta
-	
-	# calculate angle to horizon
-	# straight down is -90* or -tau/4, straight up is +, aligned with horizon is 0
-	var angle_to_horizon: float
-	angle_to_horizon = forward.angle_to(horizon)
-	if forward.dot(Vector3.UP) < 0:
-		angle_to_horizon = -angle_to_horizon
-	Debug.track("angle_to_horizon", angle_to_horizon)
-
-	# apply gravity relative to angle to horizon
-	current_speed += -angle_to_horizon * air_gravity * delta
-
-	Debug.track("angle_to_vel", forward.angle_to(velocity))
-
-	if current_speed < -1:
-		is_stalling = true
-	if (	is_stalling and 
-			velocity.length() > air_min_speed and 
-			forward.angle_to(Vector3.DOWN) < air_stall_recovery_angle ):
-		is_stalling = false
-		current_speed = velocity.length()
-
-	if is_stalling:
-		velocity += forward * throttle * air_stall_acceleration * delta
-		velocity.y += -air_gravity * delta
-	else:
-		velocity = forward * current_speed
-	
-	# apply friction
-	current_speed = move_toward(current_speed, 0, air_friction * delta)
-
-	speed_sound_adjust(current_speed)
-	
-	Debug.track("is_stalling", is_stalling)
 	move_and_slide()
 
 
@@ -290,103 +221,21 @@ func is_grounded() -> bool:
 
 
 func move_ship(delta: float) -> void:
-
-	rotate_input.y = Input.get_axis("yaw_right", "yaw_left")
+	# take keyboard yaw if pressed, otherwise, take mouse
+	var yaw_input = Input.get_axis("yaw_right", "yaw_left")
+	if yaw_input != 0:
+		rotate_input.y = yaw_input
+	else: # TODO: fix temp mouse control impl
+		rotate_input.y = -mouse_delta_x / 10
+		mouse_delta_x = 0
 	rotate_input.x = Input.get_axis("pitch_down", "pitch_up")
-
-	# if not Options.inverted:
-	# 	rotate_input.x = -rotate_input.x
 
 	rotate_input.z = Input.get_axis("roll_right", "roll_left")
 	
 	throttle = Input.get_axis("brake", "gas")
 
-	# handle reset to last checkpoint
-	# TODO: don't allow reset to Vector3.ZEROs (start)
-	if Input.is_action_just_released("reset"):
-		load_checkpoint_data()
-		move_and_slide()
+	move_ship_grounded(delta)
 
-	if is_grounded():
-		move_ship_grounded(delta)
-	else:
-		move_ship_flying(delta)
-
-
-func _physics_process(delta: float) -> void:
-
-	# TODO: move to global/menu
-	if Input.is_action_just_released("escape"): get_tree().change_scene_to_file("res://levels/main_menu/main_menu.tscn")
-
-	# update lap timer
-	current_lap_time += delta
-	# HUD.display_time(current_lap_time)
-	# HUD.update_speedometer(current_speed)
-
-	move_ship(delta)
-
-
-func load_checkpoint_data() -> void:
-	current_speed = checkpoint_speed
-	current_yaw_speed = checkpoint_yaw_speed
-	current_pitch_speed = checkpoint_pitch_speed
-	position = checkpoint_position
-	velocity = checkpoint_velocity
-	rotation = checkpoint_rotation
-	current_lap_time = checkpoint_lap_time
-
-
-func save_checkpoint_data() -> void:
-	checkpoint_speed = current_speed
-	checkpoint_yaw_speed = current_yaw_speed
-	checkpoint_pitch_speed = current_pitch_speed
-	checkpoint_position = position
-	checkpoint_velocity = velocity
-	checkpoint_rotation = rotation
-	checkpoint_lap_time = current_lap_time
-
-
-func _on_checkpoint_detector_area_entered(area: Variant) -> void:
-	if not area.is_in_group("checkpoint"):
-		return
-
-	if area.checkpoint_number == current_checkpoint:
-		return
-	
-	# don't process if current_checkpoint is 0 and hitting finish (needs to be at least 1 non-finish checkpoint before finish)
-	if area.finish and current_checkpoint == 0:
-		return
-	
-	# checkpoints start at 1, player checkpoint starts at 0
-
-	# finish and correct checkpoint reached
-	if area.finish and area.checkpoint_number == current_checkpoint + 1:
-		lap_checkpoint_times[current_lap_idx].append(current_lap_time)
-		current_checkpoint = 0
-		current_lap_idx += 1
-		save_checkpoint_data()
-
-	# correct checkpoint reached
-	elif area.checkpoint_number == current_checkpoint + 1:
-		
-		if area.checkpoint_number == 1:
-			lap_checkpoint_times.append([])
-			current_lap_time = 0
-		lap_checkpoint_times[current_lap_idx].append(current_lap_time)
-
-		current_checkpoint += 1
-		save_checkpoint_data()
-
-	# skipped a checkpoint
-	else:
-		Debug.track("CHECKPOINT_SKIPPED")
-	
-	Debug.track("current_checkpoint", current_checkpoint)
-	# Debug.track("collided_checkpoint", area.get_checkpoint_number())
-	Debug.track("collided_checkpoint", area.checkpoint_number)
-	Debug.track("finish", area.finish)
-
-	Debug.track("lap time", lap_checkpoint_times)
 
 
 func throttle_sound_adjust(_in_throttle: float) -> void:
@@ -396,6 +245,11 @@ func throttle_sound_adjust(_in_throttle: float) -> void:
 	# NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
 	# var sound_throttle: = clampf(in_throttle, 0, 1)
 	pass
+
+
+func adjust_camera_fov(speed: float) -> void:
+	camera.fov = lerp(camera_fov_base, camera_fov_max, speed / ground_max_speed)
+	print(camera.fov)
 
 
 func speed_sound_adjust(speed: float) -> void:
