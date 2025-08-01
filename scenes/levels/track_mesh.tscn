@@ -31,6 +31,7 @@ path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
@@ -39,13 +40,14 @@ material = SubResource("StandardMaterial3D_d813i")
 
 [node name="track_rail2" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(-10, -0.8, -10, 0.4, -11, 1.4, -11, -0.3)
+polygon = PackedVector2Array(-10, -0.8, -10, 0.4, -14, 3.5, -11, -0.3)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
@@ -54,13 +56,14 @@ material = SubResource("StandardMaterial3D_8web4")
 
 [node name="track_rail1" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(10, -0.8, 10, 0.4, 11, 1.4, 11, -0.3)
+polygon = PackedVector2Array(10, -0.8, 10, 0.4, 14, 3.5, 11, -0.3)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
@@ -69,13 +72,14 @@ material = SubResource("StandardMaterial3D_8web4")
 
 [node name="wall1" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(-10, 0, -10, 3, -11, 3, -11, 0)
+polygon = PackedVector2Array(-10, 0, -10, 4, -12, 4, -12, 0)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
@@ -84,13 +88,14 @@ material = SubResource("StandardMaterial3D_sb5rq")
 
 [node name="wall2" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(10, 0, 10, 3, 11, 3, 11, 0)
+polygon = PackedVector2Array(10, 0, 10, 4, 12, 4, 12, 0)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
+path_rotation_accurate = false
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0

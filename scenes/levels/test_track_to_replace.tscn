@@ -22,26 +22,23 @@ curve = SubResource("Curve3D_ortey")
 
 [node name="track_floor" parent="track_mesh" index="0"]
 path_node = NodePath("../../Path3D")
-path_rotation_accurate = false
 
 [node name="track_rail2" parent="track_mesh" index="1"]
 path_node = NodePath("../../Path3D")
-path_rotation_accurate = false
 
 [node name="track_rail1" parent="track_mesh" index="2"]
 path_node = NodePath("../../Path3D")
-path_rotation_accurate = false
 
 [node name="wall1" parent="track_mesh" index="3"]
-path_rotation_accurate = false
+path_node = NodePath("../../Path3D")
 
 [node name="wall2" parent="track_mesh" index="4"]
-path_rotation_accurate = false
+path_node = NodePath("../../Path3D")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 188.005, 0)
-light_color = Color(1, 1, 0.0784314, 1)
-light_energy = 6.299
+transform = Transform3D(-0.71325, -0.450536, 0.536928, 0, 0.766044, 0.642788, -0.700909, 0.458468, -0.546381, 0, 0, 0)
+light_color = Color(1, 0.857, 0.61, 1)
+light_energy = 5.0
 
 [node name="Ship" parent="." instance=ExtResource("2_fupfa")]
 transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.0926485, 47.8325, 1.95332, -0.16252)
