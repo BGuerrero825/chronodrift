@@ -1,0 +1,26 @@
+class_name ReplayShip
+extends AnimatableBody3D
+
+@export var _paused := true
+@export var replay_data : ReplayData = null
+var current_tick := 0
+
+func play() -> void:
+	_paused = false
+	current_tick = 0
+
+func pause() -> void:
+	_paused = true
+
+func _process(_delta: float) -> void:
+	Debug.track("replay_ship_pos", self.position)
+	if _paused:
+		return
+	
+	assert(replay_data != null, "attempting to replay a replay ship without replay data")
+	
+	if current_tick > len(replay_data.position_tracker) - 1:
+		return
+	
+	global_position = replay_data.position_tracker[current_tick]
+	current_tick += 1

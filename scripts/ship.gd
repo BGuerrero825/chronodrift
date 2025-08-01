@@ -1,3 +1,4 @@
+class_name PlayerShip
 extends CharacterBody3D
 
 # Draft Controls
@@ -68,7 +69,7 @@ var mouse_delta_x: float = 0.0
 
 
 func _ready() -> void:
-	pass
+	EventsBus.register_player(self)
 
 
 func _physics_process(delta: float) -> void:

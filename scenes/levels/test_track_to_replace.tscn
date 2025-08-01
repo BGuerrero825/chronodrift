@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://0gt60veuu3jj"]
+[gd_scene load_steps=5 format=3 uid="uid://0gt60veuu3jj"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_xel3y"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_fupfa"]
+[ext_resource type="PackedScene" uid="uid://b3ghog3f33nbe" path="res://scenes/replay_controller.tscn" id="3_xq7g1"]
 
 [sub_resource type="Curve3D" id="Curve3D_ortey"]
 bake_interval = 0.5
@@ -41,5 +42,8 @@ light_energy = 5.0
 
 [node name="Ship" parent="." instance=ExtResource("2_fupfa")]
 transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.0926485, 47.8325, 1.95332, -0.16252)
+
+[node name="ReplayController" parent="." instance=ExtResource("3_xq7g1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
 
 [editable path="track_mesh"]

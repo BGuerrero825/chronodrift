@@ -11,6 +11,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ahhtf")
 
+[node name="DebugLog" type="Label" parent="."]
+offset_left = 907.0
+offset_top = 32.0
+offset_right = 947.0
+offset_bottom = 55.0
+text = "Test"
+horizontal_alignment = 1
+
 [node name="DebugTracker" type="Label" parent="."]
 layout_mode = 0
 offset_left = 9.0
