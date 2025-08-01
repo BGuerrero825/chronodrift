@@ -60,12 +60,10 @@ var current_yaw_speed:float
 var current_roll_speed:float
 var current_pitch_speed:float
 
-var current_checkpoint:int = 0
 
-var lap_checkpoint_times: Array = []  # list of lists, each contains checkpoint times starting at first checkpoint
 var current_lap_time: float = 0  # tracks current time, reset to 0 when reaching finish
-var current_lap_idx: int = 0
 
+# TODO: part of temp impl for mouse
 var mouse_delta_x: float = 0.0
 
 
@@ -91,7 +89,7 @@ func raycast_distance(raycast: RayCast3D) -> float:
 
 
 # returns a new current rotation speed
-func update_rotation_speed(	current_rotation_speed: float, 
+func update_rotation_speed(current_rotation_speed: float, 
 							current_input: float,
 							rotation_acceleration: float,
 							rotation_decceleration: float,
