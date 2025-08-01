@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=3 uid="uid://chtrr8xrlnya"]
+
+[ext_resource type="Script" uid="uid://bw7dgc1xn0kbx" path="res://scripts/settings_menu.gd" id="1_hayap"]
+
+[node name="SettingsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hayap")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 500
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 200
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "X"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FullscreenButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Fullscreen: Off"

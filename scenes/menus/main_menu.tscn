@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8dj67v0h1ja4"]
+
+[ext_resource type="Script" uid="uid://dnrrs0budlo2d" path="res://scripts/main_menu.gd" id="1_xqga4"]
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_xqga4")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Margin"]
+custom_minimum_size = Vector2(800, 200)
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/bold_italics_font_size = 100
+theme_override_font_sizes/italics_font_size = 100
+theme_override_font_sizes/mono_font_size = 100
+theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "Chronodrift"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="PlayButton" type="Button" parent="Margin/ButtonsVBox"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+text = "Level 1"
+
+[node name="PlayButton2" type="Button" parent="Margin/ButtonsVBox"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+text = "Level 2"
+
+[node name="PlayButton3" type="Button" parent="Margin/ButtonsVBox"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+text = "Level 3"

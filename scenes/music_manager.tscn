@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ri45jlttoygj"]
+
+[ext_resource type="Script" uid="uid://bwvlg3nkfae4v" path="res://scripts/music_manager.gd" id="1_tn5dr"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_tn5dr")
+
+[node name="GameplayMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
