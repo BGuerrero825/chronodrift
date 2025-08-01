@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://c415ljthd7h8a"]
+[gd_scene load_steps=3 format=3 uid="uid://c415ljthd7h8a"]
+
+[ext_resource type="Texture2D" uid="uid://dd3ka7jfydltb" path="res://icon.svg" id="1_37kl0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uh7m"]
+albedo_texture = ExtResource("1_37kl0")
 
 [node name="Node3D" type="Node3D"]
+
+[node name="hi" type="CSGBox3D" parent="."]
+material = SubResource("StandardMaterial3D_8uh7m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.756034, -0.216884, 0.617555, -0.00162834, 0.94288, 0.33313, -0.654531, -0.252863, 0.712495, 1.81664, 1.23518, 2.0399)
+near = 0.001
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76038, 2.56653, 0.994801)
+light_color = Color(1, 0.993, 0.97, 1)
+light_energy = 10.0

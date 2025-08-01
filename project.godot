@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="chronodrift"
+run/main_scene="uid://c415ljthd7h8a"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
