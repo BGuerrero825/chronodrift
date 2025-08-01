@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1lqrsav6jgk7"]
+
+[ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/ship.gd" id="1_2gnfn"]
+[ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
+[ext_resource type="PackedScene" uid="uid://dps5pw8c8odc6" path="res://scenes/hud.tscn" id="3_4tobq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
+size = Vector3(5.5, 0.6, 10)
+
+[node name="Ship" type="CharacterBody3D"]
+script = ExtResource("1_2gnfn")
+
+[node name="ship_guest" parent="." instance=ExtResource("1_q631a")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.01745, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989656, -0.143458, 0, 0.143458, 0.989656, 0, 3.04709, 11.2731)
+current = true
+fov = 95.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00975937, 0, -1.40662)
+shape = SubResource("BoxShape3D_2gnfn")
+
+[node name="cast_center" type="RayCast3D" parent="."]
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_ground_detector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13)
+target_position = Vector3(0, -3, 0)
+
+[node name="cast_front" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_rear" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_left" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_right" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+target_position = Vector3(0, -5, 0)
+
+[node name="bumper_front_left" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.5, 0, -6)
+
+[node name="bumper_front_right" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.5, 0, -6)
+
+[node name="HUD" parent="." instance=ExtResource("3_4tobq")]

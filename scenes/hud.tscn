@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dps5pw8c8odc6"]
+
+[ext_resource type="Script" uid="uid://c8ulb420kvf22" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahhtf")
+
+[node name="DebugTracker" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 49.0
+offset_bottom = 30.0
+text = "Test"
