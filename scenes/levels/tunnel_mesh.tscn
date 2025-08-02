@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://btiatyhoqo33s"]
+
+[ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="1_2q5l6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d813i"]
+albedo_color = Color(0.905882, 0.882353, 1, 1)
+albedo_texture = ExtResource("1_2q5l6")
+metallic = 0.6
+roughness = 0.6
+uv1_scale = Vector3(0.08, 10, 1)
+
+[node name="tunnel_mesh" type="Node3D"]
+
+[node name="tunnel_rock" type="CSGPolygon3D" parent="."]
+use_collision = true
+polygon = PackedVector2Array(20.7391, 8.69097, 17.7942, 13.1084, 11.9043, 15.9692, 4.8785, 17.61, -3.57771, 18.7038, -12.9595, 15.7588, -19.4804, 11.3414, -21.8785, 5.45152, -21.9626, 1.95966, -21.4998, -2.54191, -17.0403, -9.31529, -8.28962, -10.8298, 0.250726, -11.7975, 10.0953, -11.6292, 20.1922, -7.7166, 22.8006, -0.480442)
+mode = 2
+path_node = NodePath("")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_d813i")
+
+[node name="tunnel_bore" type="CSGPolygon3D" parent="tunnel_rock"]
+operation = 2
+use_collision = true
+polygon = PackedVector2Array(15.524, 7.66219, 10.8895, 10.9862, 4.59312, 13.2874, -3.01373, 11.7213, -9.37409, 12.7121, -16.2139, 8.2375, -17.6521, 0.470838, -14.9354, -5.31421, -9.37409, -6.97621, 0.438115, -7.80721, 8.52439, -6.94424, 15.3642, -5.85755, 16.5148, 0.023376)
+mode = 2
+path_node = NodePath("")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+material = SubResource("StandardMaterial3D_d813i")
