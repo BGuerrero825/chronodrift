@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1lqrsav6jgk7"]
+[gd_scene load_steps=9 format=3 uid="uid://b1lqrsav6jgk7"]
 
 [ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
@@ -10,10 +10,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
 size = Vector3(2.8, 0.6, 5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7j21i"]
+size = Vector3(1.68729, 1, 2.52084)
+
 [node name="Ship" type="CharacterBody3D"]
 script = ExtResource("1_2gnfn")
 
-[node name="ship_guest" parent="." instance=ExtResource("1_q631a")]
+[node name="ship_model" parent="." instance=ExtResource("1_q631a")]
+unique_name_in_owner = true
 transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0.792349, -0.653594)
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -74,3 +78,11 @@ bus = &"SFX"
 stream = ExtResource("5_7j21i")
 volume_db = -15.0
 autoplay = true
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.569208)
+shape = SubResource("BoxShape3D_7j21i")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

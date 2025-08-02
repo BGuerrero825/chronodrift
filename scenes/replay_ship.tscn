@@ -4,16 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="2_thtrp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_thtrp"]
-size = Vector3(7, 2, 13)
+size = Vector3(1.37006, 2, 1.79419)
 
-[node name="ReplayShip" type="AnimatableBody3D"]
+[node name="ReplayShip" type="Area3D"]
 script = ExtResource("1_itx2w")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.139771)
 shape = SubResource("BoxShape3D_thtrp")
-disabled = true
 
 [node name="ship_guest" parent="." instance=ExtResource("2_thtrp")]
 transform = Transform3D(-0.4, 0, 6.03983e-08, 0, 0.4, 0, -6.03983e-08, 0, -0.4, 0, 1, 0)
