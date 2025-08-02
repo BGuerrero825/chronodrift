@@ -1,17 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwy8x0eiyynbl"]
+[gd_scene load_steps=5 format=3 uid="uid://bwy8x0eiyynbl"]
 
 [ext_resource type="Script" uid="uid://vo16kiq8tpw2" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c8dj67v0h1ja4" path="res://scenes/menus/main_menu.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://chtrr8xrlnya" path="res://scenes/menus/settings_menu.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://ch4j1u1jxfod4" path="res://scenes/levels/environment_track.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://c8wawmsvfd31f" path="res://scenes/game_hud.tscn" id="5_tbgi4"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_o5qli")
 main_menu_scene = ExtResource("2_sugp2")
 settings_menu_scene = ExtResource("3_jyhfs")
 level_1_scene = ExtResource("4_jyhfs")
-game_hud_scene = ExtResource("5_tbgi4")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

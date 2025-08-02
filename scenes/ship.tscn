@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1lqrsav6jgk7"]
 
-[ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/ship.gd" id="1_2gnfn"]
+[ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
 [ext_resource type="PackedScene" uid="uid://dps5pw8c8odc6" path="res://scenes/hud.tscn" id="3_4tobq"]
 [ext_resource type="AudioStream" uid="uid://gh2b756mpqbx" path="res://audio/engine/engine_a.wav" id="4_gudjc"]
