@@ -4,6 +4,7 @@ var _player_ref: CharacterBody3D = null
 
 signal player_reached_goal
 signal replay_controller_ready
+signal player_destroyed
 
 func register_player(player: CharacterBody3D) -> void:
     _player_ref = player
@@ -16,3 +17,6 @@ func emit_player_reached_goal() -> void:
 
 func emit_replay_controller_ready() -> void:
     replay_controller_ready.emit()
+
+func emit_player_destroyed() -> void:
+    player_destroyed.emit()

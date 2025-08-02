@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ch4j1u1jxfod4"]
+[gd_scene load_steps=17 format=3 uid="uid://ch4j1u1jxfod4"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_s7rrc"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_5p15t"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="6_rk3j2"]
 [ext_resource type="PackedScene" uid="uid://bt2i3l2j0kxim" path="res://assets/buildings/destroyed_building.glb" id="7_cpeqc"]
 [ext_resource type="PackedScene" uid="uid://bwn0gfx6baet5" path="res://scenes/goal.tscn" id="8_4q1sw"]
+[ext_resource type="PackedScene" uid="uid://c2i2xnuagapim" path="res://scenes/gate_danger.tscn" id="9_muk05"]
+[ext_resource type="PackedScene" uid="uid://b5bopckenjkp" path="res://scenes/gate_safe.tscn" id="10_sveyl"]
 
 [sub_resource type="Curve3D" id="Curve3D_ortey"]
 bake_interval = 0.5
@@ -81,7 +83,7 @@ transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.09264
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
 
 [node name="Goal" parent="." instance=ExtResource("8_4q1sw")]
-transform = Transform3D(0.829603, 0, -0.558353, 0, 1, 0, 0.558353, 0, 0.829603, 1232.76, 2.40611, -331.893)
+transform = Transform3D(0.829603, 0, -0.558353, 0, 1, 0, 0.558353, 0, 0.829603, 866.553, 2.40611, 5.14366)
 
 [node name="Crane" parent="." instance=ExtResource("5_pjnwa")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 639.974, -16.5032, -31.3982)
@@ -104,5 +106,11 @@ transform = Transform3D(0.0317247, -2.77346e-09, 0.999497, -8.74228e-08, -1, -4.
 
 [node name="destroyed_building3" parent="." instance=ExtResource("7_cpeqc")]
 transform = Transform3D(-0.0418757, 0, 0.999123, 0, 1, 0, -0.999123, 0, -0.0418757, 625.626, -87.4084, 48.2421)
+
+[node name="DangerGate" parent="." instance=ExtResource("9_muk05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.744, -1.82299, -0.711533)
+
+[node name="SafeGate" parent="." instance=ExtResource("10_sveyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 815.701, -0.290894, -1.01647)
 
 [editable path="track_mesh"]

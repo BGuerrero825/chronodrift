@@ -25,6 +25,7 @@ extends CharacterBody3D
 
 @onready var thruster_particles: Node3D = %ThrusterParticles
 @onready var scraping_particles: GPUParticles3D = %ScrapingParticles
+@onready var ship_model := %ship_model
 
 @export var camera_fov_base: float = 95
 @export var camera_fov_max: float = 125
@@ -79,6 +80,7 @@ var current_lap_time: float = 0  # tracks current time, reset to 0 when reaching
 var mouse_delta_x: float = 0.0
 
 var _paused := false
+var invulnerable := true
 
 
 func _ready() -> void:
@@ -88,22 +90,41 @@ func _ready() -> void:
 
 func pause_ship() -> void:
 	_paused = true
+	engine_sound_a.stop()
+	engine_sound_b.stop()
 
 func unpause_ship() -> void:
 	_paused = false
+	engine_sound_a.play()
+	engine_sound_b.play()
 
 func _physics_process(delta: float) -> void:
 	if _paused:
 		return
 	# update lap timer
+
+	if OS.is_debug_build():
+		_debug_controls()
+
 	current_lap_time += delta
 	move_ship(delta)
 
+func _debug_controls() -> void:
+	if Input.is_action_just_released("debug4"):
+		destroy_ship()
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta_x = event.relative.x
 
+func destroy_ship() -> void:
+	ship_model.visible = false
+	pause_ship()
+
+func respawn_ship()  -> void:
+	ship_model.visible = true
+	invulnerable = true
+	unpause_ship()
 
 # returns raycast distance to collider, this should not be called if raycast is not colliding
 func raycast_distance(raycast: RayCast3D) -> float:
@@ -290,3 +311,9 @@ func adjust_camera_fov(speed: float) -> void:
 
 func speed_sound_adjust(speed: float) -> void:
 	speed = clampf(speed, 0, 150)
+
+
+func _on_area_3d_area_entered(area:Area3D) -> void:
+	if area is ReplayShip and not invulnerable: destroy_ship()
+	if area is SafeGate: invulnerable = true
+	if area is DangerGate: invulnerable = false

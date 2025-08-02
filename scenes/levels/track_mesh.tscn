@@ -1,20 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnw5ilawv3gd4"]
+[gd_scene load_steps=7 format=3 uid="uid://dnw5ilawv3gd4"]
 
-[ext_resource type="Texture2D" uid="uid://cxw8btm4ubj0" path="res://assets/environment/concrete_wall_004_ao_1k.png" id="1_vghf8"]
+[ext_resource type="Texture2D" uid="uid://h8vjgxyp8r2" path="res://assets/environment/road.jpg" id="1_x2ywq"]
+[ext_resource type="Texture2D" uid="uid://dgeytfe41t4lk" path="res://assets/environment/rail.jpg" id="2_x2ywq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d813i"]
-albedo_color = Color(0.905882, 0.882353, 1, 1)
-albedo_texture = ExtResource("1_vghf8")
-metallic = 0.6
-roughness = 0.6
-uv1_scale = Vector3(0.08, 10, 1)
+albedo_texture = ExtResource("1_x2ywq")
+uv1_scale = Vector3(0.1, 16, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8web4"]
-albedo_color = Color(0.443137, 0.415686, 0.494118, 1)
-albedo_texture = ExtResource("1_vghf8")
+albedo_color = Color(0.44, 0.44, 0.44, 1)
+albedo_texture = ExtResource("2_x2ywq")
 metallic = 0.39
-roughness = 0.7
-uv1_scale = Vector3(0.14, 1, 1)
+roughness = 0.9
+uv1_scale = Vector3(0.1, 3.8, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2ywq"]
+albedo_color = Color(0.44, 0.44, 0.44, 1)
+albedo_texture = ExtResource("2_x2ywq")
+metallic = 0.39
+roughness = 0.9
+uv1_scale = Vector3(-0.1, 3.8, 1)
+uv1_offset = Vector3(0, 0.6, 0)
+texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sb5rq"]
 transparency = 1
@@ -40,7 +48,7 @@ material = SubResource("StandardMaterial3D_d813i")
 
 [node name="track_rail2" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(-10, -0.8, -10, 0.4, -14, 3.5, -11, -0.3)
+polygon = PackedVector2Array(-10, -0.8, -10, 0, -14, 3.5, -11, -0.3)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -56,7 +64,7 @@ material = SubResource("StandardMaterial3D_8web4")
 
 [node name="track_rail1" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(10, -0.8, 10, 0.4, 14, 3.5, 11, -0.3)
+polygon = PackedVector2Array(10, -0.8, 10, 0, 14, 3.5, 11, -0.3)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -68,7 +76,7 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
-material = SubResource("StandardMaterial3D_8web4")
+material = SubResource("StandardMaterial3D_x2ywq")
 
 [node name="wall1" type="CSGPolygon3D" parent="."]
 use_collision = true

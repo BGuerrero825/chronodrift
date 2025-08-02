@@ -43,15 +43,15 @@ func _ready() -> void:
 func player_reached_goal() -> void:
 	Debug.log("replay controller sees player reached goal")
 	_finish_current_recording()
-	_reset_player_increase_speed()
+	_increase_player_speed()
+	_reset_player()
 	_start_new_recording()
 	_start_replaying_all()
 
-func _process(_delta: float) -> void: 
+func _physics_process(delta: float) -> void:
 	if OS.is_debug_build():
 		debug_input()
 
-func _physics_process(delta: float) -> void:
 	tick_accumulator += delta
 	
 	if tick_accumulator >= replay_tick_rate:
@@ -86,12 +86,13 @@ func _finish_current_recording() -> void:
 
 	_is_recording = false
 
-func _reset_player_increase_speed() -> void:
+func _reset_player() -> void:
 	player_ref.global_position = start_position
 	player_ref.global_transform = start_transform
 	player_ref.velocity = Vector3.ZERO
 	player_ref.current_speed = player_ref.starting_speed
 
+func _increase_player_speed() -> void:
 	player_ref.ground_max_speed += player_ref.ground_max_speed_linear_increment
 	player_ref.ground_max_speed *= player_ref.ground_max_speed_percent_increment
 
@@ -102,6 +103,16 @@ func _start_replaying_all() -> void:
 		s.play()
 		current_tick_offset -= _replay_offset_time
 	change_state(State.REPLAYING)
+
+func _cancel_current_recording() -> void:
+	_is_recording = false
+
+func _respawn_player() -> void:
+	_cancel_current_recording()
+	_reset_player()
+	_start_new_recording()
+	player_ref.respawn_ship()
+	_start_replaying_all()
 
 func change_state(new_state: State) -> void:
 	if new_state == _current_state:
@@ -146,18 +157,22 @@ func exit_state(state: State) -> void:
 			assert(false, "exiting unknown state")
 
 func debug_input() -> void:
-	if Input.is_action_just_released("debug1"):
-		_is_recording = not _is_recording
-		Debug.log("Recording: " + str(_is_recording))
+	pass
+	if Input.is_action_just_released("debug5"):
+		Debug.log("RESPAWNING PLAYER")
+		_respawn_player()
+# 	if Input.is_action_just_released("debug1"):
+# 		_is_recording = not _is_recording
+# 		Debug.log("Recording: " + str(_is_recording))
 	
-	if Input.is_action_just_released("debug2"):
-		change_state(State.REPLAYING)
+# 	if Input.is_action_just_released("debug2"):
+# 		change_state(State.REPLAYING)
 	
-	if Input.is_action_just_released("debug3"):
-		change_state(State.PAUSED)
+# 	if Input.is_action_just_released("debug3"):
+# 		change_state(State.PAUSED)
 
-	if Input.is_action_just_released("debug4"):
-		_finish_current_recording()
-		_reset_player_increase_speed()
-		_start_replaying_all()
-		_start_new_recording()
+# 	if Input.is_action_just_released("debug4"):
+# 		_finish_current_recording()
+# 		_reset_player_increase_speed()
+# 		_start_replaying_all()
+# 		_start_new_recording()

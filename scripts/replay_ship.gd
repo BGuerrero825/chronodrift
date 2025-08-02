@@ -1,5 +1,5 @@
 class_name ReplayShip
-extends AnimatableBody3D
+extends Area3D
 
 @export var _paused := true
 @export var replay_data : ReplayData = null
