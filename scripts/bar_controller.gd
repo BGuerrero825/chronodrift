@@ -24,7 +24,7 @@ func _process(_delta: float) -> void:
 	throttle_bar.material.set("shader_parameter/fade_fill_amount", throttle)
 
 	# Set speed bar color / fill
-	speed_ratio = ship.current_speed / ship.ground_max_speed
+	speed_ratio = ship.current_speed / ship.max_speed
 	speed_bar.material.set("shader_parameter/filled_color", get_fill_color(speed_ratio))
 	speed_bar.material.set("shader_parameter/fade_fill_amount", speed_ratio)
 

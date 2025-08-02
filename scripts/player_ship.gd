@@ -24,36 +24,34 @@ extends CharacterBody3D
 @export var camera_fov_base: float = 95
 @export var camera_fov_max: float = 125
 
-@export var air_gravity: float = 500
+@export var acceleration: float = 20
+@export var decceleration: float = 60
 
-@export var ground_acceleration: float = 20
-@export var ground_decceleration: float = 60
+@export var yaw_acceleration: float = 8
+@export var yaw_decceleration: float = 12
+@export var yaw_max_speed: float = 1.5
 
-@export var ground_yaw_acceleration: float = 8
-@export var ground_yaw_decceleration: float = 12
-@export var ground_yaw_max_speed: float = 1.5
+@export var pitch_acceleration: float = 6
+@export var pitch_decceleration: float = 4
+@export var pitch_max_speed: float = 2
 
-@export var ground_pitch_acceleration: float = 6
-@export var ground_pitch_decceleration: float = 4
-@export var ground_pitch_max_speed: float = 2
+@export var roll_acceleration: float = 6
+@export var roll_decceleration: float = 10
+@export var roll_max_speed: float = 2
 
-@export var ground_roll_acceleration: float = 6
-@export var ground_roll_decceleration: float = 10
-@export var ground_roll_max_speed: float = 2
+@export var friction: float = 1.5
+@export var max_speed: float = 100
+@export var max_speed_linear_increment: float = 2
+@export var max_speed_percent_increment: float = 1.0
+@export var gravity: float = 50
+@export var auto_pitch_speed: float = 8
+@export var auto_roll_speed: float = 8
+@export var suction_angle_offset: float = deg_to_rad(-2)
+@export var strafe_angle_offset: float = deg_to_rad(10)
 
-@export var ground_friction: float = 1.5
-@export var ground_max_speed: float = 100
-@export var ground_max_speed_linear_increment: float = 2
-@export var ground_max_speed_percent_increment: float = 1.0
-@export var ground_gravity: float = 50
-@export var ground_auto_pitch_speed: float = 8
-@export var ground_auto_roll_speed: float = 8
-@export var ground_suction_angle_offset: float = deg_to_rad(-2)
-@export var ground_strafe_angle_offset: float = deg_to_rad(10)
-
-@export var ground_bumper_bounce_speed: float = 1.5
-@export var ground_bumper_friction: float = 100
-@export var ground_bumper_min_speed: float = 10
+@export var bumper_bounce_speed: float = 1.5
+@export var bumper_friction: float = 100
+@export var bumper_min_speed: float = 10
 
 @export var starting_speed: float = 80.0
 
@@ -130,15 +128,15 @@ func move_ship_grounded(delta: float) -> void:
 	throttle_sound_adjust(throttle)
 
 	var forward: = -basis.z
-	var tilted_basis: = basis.rotated(basis.x, ground_suction_angle_offset)
+	var tilted_basis: = basis.rotated(basis.x, suction_angle_offset)
 
 	var horizon: = Vector3(forward.x, 0, forward.z).normalized()
 
-	current_yaw_speed = update_rotation_speed(current_yaw_speed, rotate_input.y, ground_yaw_acceleration, ground_yaw_decceleration, ground_yaw_max_speed, delta)
+	current_yaw_speed = update_rotation_speed(current_yaw_speed, rotate_input.y, yaw_acceleration, yaw_decceleration, yaw_max_speed, delta)
 	rotate(basis.y.normalized(), current_yaw_speed * delta)
 	Debug.track("current_yaw_speed", current_yaw_speed)
 
-	# current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
+	# current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, roll_acceleration, roll_decceleration, roll_max_speed, delta)
 	# HUD.debug("current_roll_speed", current_roll_speed)
 
 	Debug.track("throttle", throttle)
@@ -153,20 +151,20 @@ func move_ship_grounded(delta: float) -> void:
 
 	# braking
 	if throttle < 0 and current_speed > 0:
-		current_speed += throttle * ground_decceleration * delta
+		current_speed += throttle * decceleration * delta
 	# accelerate
 	else:
-		current_speed += throttle * ground_acceleration * delta
+		current_speed += throttle * acceleration * delta
 
 	# cap speed to max speed
-	if current_speed < -ground_max_speed:
-		current_speed = -ground_max_speed
-	elif current_speed > ground_max_speed:
-		current_speed = ground_max_speed
+	if current_speed < -max_speed:
+		current_speed = -max_speed
+	elif current_speed > max_speed:
+		current_speed = max_speed
 
 	
-	current_pitch_speed = update_rotation_speed(current_pitch_speed, rotate_input.x, ground_pitch_acceleration, ground_pitch_decceleration, ground_pitch_max_speed, delta)
-	current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
+	current_pitch_speed = update_rotation_speed(current_pitch_speed, rotate_input.x, pitch_acceleration, pitch_decceleration, pitch_max_speed, delta)
+	current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, roll_acceleration, roll_decceleration, roll_max_speed, delta)
 
 	# don't auto-adjust to surface if raycast is not colliding
 	if ( cast_front.is_colliding() and cast_rear.is_colliding() and 
@@ -175,26 +173,26 @@ func move_ship_grounded(delta: float) -> void:
 		# handle auto-pitch to surface and add current_pitch_speed from input
 		var front_rear_diff: = raycast_distance(cast_front) - raycast_distance(cast_rear)
 		Debug.track("front_rear_diff", front_rear_diff)
-		rotate(basis.x.normalized(), -front_rear_diff * ground_auto_pitch_speed * delta + current_pitch_speed * delta)
+		rotate(basis.x.normalized(), -front_rear_diff * auto_pitch_speed * delta + current_pitch_speed * delta)
 
 		# handle auto-roll to surface
 		var left_right_diff: = raycast_distance(cast_left) - raycast_distance(cast_right)
 		Debug.track("left_right_diff", left_right_diff)
-		rotate(basis.z.normalized(), left_right_diff * ground_auto_roll_speed * delta + current_roll_speed * delta)
+		rotate(basis.z.normalized(), left_right_diff * auto_roll_speed * delta + current_roll_speed * delta)
 
 		# add strafe movement by re-orienting the tilted basis based on input instead of roll angle
 		if not is_zero_approx(rotate_input.z):
-			tilted_basis = tilted_basis.rotated(tilted_basis.y, rotate_input.z * ground_strafe_angle_offset)
+			tilted_basis = tilted_basis.rotated(tilted_basis.y, rotate_input.z * strafe_angle_offset)
 	
 	# rotate if hitting wall
 	if bumper_front_left.is_colliding():
-		rotate(basis.y.normalized(), ground_bumper_bounce_speed * delta)
-		if current_speed > ground_bumper_min_speed:
-			current_speed -= ground_bumper_friction * delta
+		rotate(basis.y.normalized(), bumper_bounce_speed * delta)
+		if current_speed > bumper_min_speed:
+			current_speed -= bumper_friction * delta
 	if bumper_front_right.is_colliding():
-		rotate(basis.y.normalized(), -ground_bumper_bounce_speed * delta)
-		if current_speed > ground_bumper_min_speed:
-			current_speed -= ground_bumper_friction * delta
+		rotate(basis.y.normalized(), -bumper_bounce_speed * delta)
+		if current_speed > bumper_min_speed:
+			current_speed -= bumper_friction * delta
 
 	# apply gravity to current speed
 	var angle_to_horizon: float
@@ -202,7 +200,7 @@ func move_ship_grounded(delta: float) -> void:
 	if forward.dot(Vector3.UP) < 0:
 		angle_to_horizon = -angle_to_horizon
 	Debug.track("angle_to_horizon", angle_to_horizon)
-	current_speed += -angle_to_horizon * ground_gravity * delta
+	current_speed += -angle_to_horizon * gravity * delta
 
 	if current_speed > 0:
 		var tilted_forward: = -tilted_basis.z
@@ -210,11 +208,12 @@ func move_ship_grounded(delta: float) -> void:
 	else:
 		velocity = forward * current_speed
 	
-	if not is_grounded():
-		velocity += (air_gravity * delta) * -Vector3.UP
+	velocity += (gravity * delta * (5*raycast_distance(cast_ground_detector))) * -Vector3.UP
+
+	Debug.track("distance to ground", raycast_distance(cast_ground_detector))
 
 	# apply friction
-	current_speed = move_toward(current_speed, 0, ground_friction * delta)
+	current_speed = move_toward(current_speed, 0, friction * delta)
 	
 	speed_sound_adjust(current_speed)
 	adjust_camera_fov(current_speed)
@@ -269,7 +268,7 @@ func throttle_sound_adjust(in_throttle: float) -> void:
 
 
 func adjust_camera_fov(speed: float) -> void:
-	camera.fov = lerp(camera_fov_base, camera_fov_max, speed / ground_max_speed)
+	camera.fov = lerp(camera_fov_base, camera_fov_max, speed / max_speed)
 	# print(camera.fov)
 
 

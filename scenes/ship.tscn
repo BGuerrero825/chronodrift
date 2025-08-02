@@ -29,8 +29,7 @@ shape = SubResource("BoxShape3D_2gnfn")
 target_position = Vector3(0, -5, 0)
 
 [node name="cast_ground_detector" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13)
-target_position = Vector3(0, -3, 0)
+target_position = Vector3(0, -5, 0)
 
 [node name="cast_front" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
