@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://chtrr8xrlnya"]
+[gd_scene load_steps=3 format=3 uid="uid://chtrr8xrlnya"]
 
 [ext_resource type="Script" uid="uid://bw7dgc1xn0kbx" path="res://scripts/settings_menu.gd" id="1_hayap"]
+[ext_resource type="AudioStream" uid="uid://dodc5d2y21ty1" path="res://audio/ui_sfx/buttons/Click_013.wav" id="2_7i3iu"]
 
 [node name="SettingsMenu" type="Control"]
 process_mode = 3
@@ -22,44 +23,54 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 500
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 300
 theme_override_constants/margin_right = 500
-theme_override_constants/margin_bottom = 200
+theme_override_constants/margin_bottom = 300
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(250, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "X"
+text = "Back"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 30
+mouse_filter = 2
+theme_override_constants/separation = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "Master Volume"
 
 [node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(240, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
+value = 50.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(450, 0)
@@ -69,12 +80,12 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "SFX Volume"
 
 [node name="SFXVolumeSlider" type="HSlider" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(240, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -87,24 +98,18 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "Music Volume"
 
 [node name="MusicVolumeSlider" type="HSlider" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(240, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(450, 0)
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="FullscreenButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer4"]
+[node name="SliderClick" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Fullscreen: Off"
+stream = ExtResource("2_7i3iu")
+volume_db = -1.0
+bus = &"SFX"

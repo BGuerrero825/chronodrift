@@ -11,4 +11,11 @@ func play_menu_music() -> void:
 
 func play_gameplay_music() -> void:
 	if not gameplay.playing:
-		gameplay.play()
+		fade_in(gameplay)
+
+
+func fade_in(music: AudioStreamPlayer) -> void:
+	music.volume_db = -30
+	music.play()
+	var tween := create_tween()
+	tween.tween_property(music, "volume_db", 0, 2)

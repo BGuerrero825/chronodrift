@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://ri45jlttoygj"]
+[gd_scene load_steps=3 format=3 uid="uid://ri45jlttoygj"]
 
 [ext_resource type="Script" uid="uid://bwvlg3nkfae4v" path="res://scripts/music_manager.gd" id="1_tn5dr"]
+[ext_resource type="AudioStream" uid="uid://b3tx413ft5m4c" path="res://audio/music/ilkobra.mp3" id="2_hetdf"]
 
 [node name="MusicManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_tn5dr")
 
 [node name="GameplayMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("2_hetdf")
 bus = &"Music"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
