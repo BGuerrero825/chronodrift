@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3mbo8t4iasge"]
+[gd_scene load_steps=29 format=3 uid="uid://b3mbo8t4iasge"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_83il3"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_ppoe7"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dp6mjv31mtp04" path="res://assets/environment/kloppenheim_02_puresky_1k.hdr" id="7_rqm5n"]
 [ext_resource type="PackedScene" uid="uid://bt2i3l2j0kxim" path="res://assets/buildings/destroyed_building.glb" id="8_41xju"]
 [ext_resource type="PackedScene" uid="uid://btiatyhoqo33s" path="res://scenes/levels/tunnel_mesh.tscn" id="9_ppoe7"]
+[ext_resource type="PackedScene" uid="uid://bkmqnufwq5qpr" path="res://assets/vfx/god_ray/god_ray.tscn" id="10_cco82"]
+[ext_resource type="Shader" uid="uid://cgawimi57wdb1" path="res://assets/vfx/god_ray/god_ray.gdshader" id="11_wl5la"]
 
 [sub_resource type="Curve3D" id="Curve3D_s8va5"]
 closed = true
@@ -60,6 +62,58 @@ fog_light_color = Color(0.2975, 0.317625, 0.35, 1)
 fog_light_energy = 0.6
 fog_density = 0.005
 fog_sky_affect = 0.2
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(4, 2, 1, 1)
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_length = 5.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mnbks"]
+noise_type = 3
+seed = 1823
+fractal_type = 3
+fractal_lacunarity = 1.0
+fractal_gain = 1.0
+fractal_weighted_strength = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rqm5n"]
+seamless = true
+noise = SubResource("FastNoiseLite_mnbks")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_41xju"]
+noise_type = 3
+fractal_type = 3
+fractal_lacunarity = 1.0
+fractal_gain = 1.0
+fractal_weighted_strength = 0.5
+fractal_ping_pong_strength = 2.2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k8aq6"]
+seamless = true
+noise = SubResource("FastNoiseLite_41xju")
+
+[sub_resource type="Gradient" id="Gradient_dlkyn"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.672167, 0.494907, 0.140582, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fttee"]
+noise_type = 3
+fractal_type = 3
+fractal_lacunarity = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eygnq"]
+seamless = true
+color_ramp = SubResource("Gradient_dlkyn")
+noise = SubResource("FastNoiseLite_fttee")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vbnsl"]
+render_priority = 0
+shader = ExtResource("11_wl5la")
+shader_parameter/texture_to_scroll = SubResource("NoiseTexture2D_eygnq")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_k8aq6")
+shader_parameter/alpha_noise = SubResource("NoiseTexture2D_rqm5n")
+shader_parameter/blend_amount = 0.25
+shader_parameter/scroll_speed = 0.1
+shader_parameter/angle_degrees = 110.0
 
 [node name="basic_track" type="Node3D"]
 
@@ -119,6 +173,7 @@ material = SubResource("StandardMaterial3D_e8g8k")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Path3D/TunnelPath"]
 transform = Transform3D(1, 0, 0, 0, -0.0201921, 0.999796, 0, -0.999796, -0.0201921, 689.445, 38.9107, -18.2814)
+light_color = Color(3, 2, 0.012, 1)
 light_energy = 16.0
 spot_range = 50.0
 
@@ -157,6 +212,13 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 342.35
 
 [node name="destroyed_building3" parent="." instance=ExtResource("8_41xju")]
 transform = Transform3D(-0.00127413, 0, 0.999999, 0, 1, 0, -0.999999, 0, -0.00127413, 133.013, -87.4084, 47.1851)
+
+[node name="GodRay" parent="." instance=ExtResource("10_cco82")]
+transform = Transform3D(5.47213, -6.70552e-08, -2.51098, 2.18365, 2.8961, 0.42829, 8.08007, -0.782676, 1.58478, 690.706, 11.6873, -11.1182)
+material_override = SubResource("ShaderMaterial_vbnsl")
+cast_shadow = 0
+visibility_range_end = 150.0
+visibility_range_fade_mode = 1
 
 [editable path="Path3D/track_mesh"]
 [editable path="Path3D/TunnelPath/tunnel_mesh"]
