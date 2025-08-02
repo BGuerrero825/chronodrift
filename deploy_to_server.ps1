@@ -15,10 +15,10 @@ Write-Host $BUILD_PATH
 $REMOTE_SERVER = "blog"  # key config must be setup in .ssh
 
 $REMOTE_PATH = "/home/wes/blog/gamejam"
-$PROJECT_NAME = "bigmode25-dev-" + $env:USERNAME
+$PROJECT_NAME = "chronodrift-dev-" + $env:USERNAME
 
 if ($args[0] -eq "main") {
-   $PROJECT_NAME = "bigmode25-dev-main"
+   $PROJECT_NAME = "chronodrift-dev-main"
 }
 
 $URL = "https://ogsyn.dev/gamejam/$PROJECT_NAME.html"

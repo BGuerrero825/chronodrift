@@ -53,8 +53,10 @@ extends CharacterBody3D
 @export var ground_bumper_friction: float = 100
 @export var ground_bumper_min_speed: float = 10
 
+@export var starting_speed: float = 80.0
+
 var throttle: float  # current throttle input
-var current_speed: float  # tracks current acceleration in the direction the ship is looking
+var current_speed: float = starting_speed # tracks current acceleration in the direction the ship is looking
 var rotate_input: Vector3  # tracks current input for rotation (pitch, roll, yaw)
 var is_stalling: bool  # tracks whether ship is currently stalling
 var grounded: bool  # tracks current grounded state (updated in func is_grounded())
@@ -69,12 +71,23 @@ var current_lap_time: float = 0  # tracks current time, reset to 0 when reaching
 # TODO: part of temp impl for mouse
 var mouse_delta_x: float = 0.0
 
+var _paused := false
+
 
 func _ready() -> void:
+	pause_ship()
 	EventsBus.register_player(self)
+	EventsBus.replay_controller_ready.connect(unpause_ship)
 
+func pause_ship() -> void:
+	_paused = true
+
+func unpause_ship() -> void:
+	_paused = false
 
 func _physics_process(delta: float) -> void:
+	if _paused:
+		return
 	# update lap timer
 	current_lap_time += delta
 	move_ship(delta)
