@@ -6,6 +6,7 @@ extends Node3D
 @export var level_1_scene: PackedScene
 @export var level_2_scene: PackedScene
 @export var level_3_scene: PackedScene
+@export var game_hud_scene: PackedScene
 var main_menu: MainMenu
 var settings_menu: SettingsMenu
 
@@ -37,7 +38,9 @@ func go_main_menu() -> void:
 
 func go_level(level_scene: PackedScene) -> void:
 	MusicManager.play_gameplay_music()
-
+	var hud: Control = game_hud_scene.instantiate()
+	ui.add_child(hud)
+	
 	var level: Node3D = level_scene.instantiate()
 	add_child(level)
 	level.position = Vector3.ZERO
