@@ -75,182 +75,182 @@ var _paused := false
 
 
 func _ready() -> void:
-    pause_ship()
-    EventsBus.register_player(self)
-    EventsBus.replay_controller_ready.connect(unpause_ship)
+	pause_ship()
+	EventsBus.register_player(self)
+	EventsBus.replay_controller_ready.connect(unpause_ship)
 
 func pause_ship() -> void:
-    _paused = true
+	_paused = true
 
 func unpause_ship() -> void:
-    _paused = false
+	_paused = false
 
 func _physics_process(delta: float) -> void:
-    if _paused:
-        return
-    # update lap timer
-    current_lap_time += delta
-    move_ship(delta)
+	if _paused:
+		return
+	# update lap timer
+	current_lap_time += delta
+	move_ship(delta)
 
 
 func _input(event):
-    if event is InputEventMouseMotion:
-        mouse_delta_x = event.relative.x
+	if event is InputEventMouseMotion:
+		mouse_delta_x = event.relative.x
 
 
 # returns raycast distance to collider, this should not be called if raycast is not colliding
 func raycast_distance(raycast: RayCast3D) -> float:
-    assert(raycast.is_colliding(), "getting raycast distance when there is no collision")
-    return global_transform.origin.distance_to(raycast.get_collision_point())
+	assert(raycast.is_colliding(), "getting raycast distance when there is no collision")
+	return global_transform.origin.distance_to(raycast.get_collision_point())
 
 
 # returns a new current rotation speed
 func update_rotation_speed(current_rotation_speed: float, 
-                            current_input: float,
-                            rotation_acceleration: float,
-                            rotation_decceleration: float,
-                            max_rotation_speed: float,
-                            delta: float) -> float:
+							current_input: float,
+							rotation_acceleration: float,
+							rotation_decceleration: float,
+							max_rotation_speed: float,
+							delta: float) -> float:
 
-    if not is_zero_approx(current_input):
-        if sign(current_rotation_speed) != current_input:
-            current_rotation_speed += current_input * rotation_decceleration * delta
-        current_rotation_speed += current_input * rotation_acceleration * delta
-        current_rotation_speed = clampf(current_rotation_speed, -max_rotation_speed, max_rotation_speed)
-    else:
-        current_rotation_speed = move_toward(current_rotation_speed, 0, rotation_decceleration * delta)
+	if not is_zero_approx(current_input):
+		if sign(current_rotation_speed) != current_input:
+			current_rotation_speed += current_input * rotation_decceleration * delta
+		current_rotation_speed += current_input * rotation_acceleration * delta
+		current_rotation_speed = clampf(current_rotation_speed, -max_rotation_speed, max_rotation_speed)
+	else:
+		current_rotation_speed = move_toward(current_rotation_speed, 0, rotation_decceleration * delta)
 
-    return current_rotation_speed
+	return current_rotation_speed
 
 
 func move_ship_grounded(delta: float) -> void:
 
-    throttle_sound_adjust(throttle)
+	throttle_sound_adjust(throttle)
 
-    var forward: = -basis.z
-    var tilted_basis: = basis.rotated(basis.x, ground_suction_angle_offset)
+	var forward: = -basis.z
+	var tilted_basis: = basis.rotated(basis.x, ground_suction_angle_offset)
 
-    var horizon: = Vector3(forward.x, 0, forward.z).normalized()
+	var horizon: = Vector3(forward.x, 0, forward.z).normalized()
 
-    current_yaw_speed = update_rotation_speed(current_yaw_speed, rotate_input.y, ground_yaw_acceleration, ground_yaw_decceleration, ground_yaw_max_speed, delta)
-    rotate(basis.y.normalized(), current_yaw_speed * delta)
-    Debug.track("current_yaw_speed", current_yaw_speed)
+	current_yaw_speed = update_rotation_speed(current_yaw_speed, rotate_input.y, ground_yaw_acceleration, ground_yaw_decceleration, ground_yaw_max_speed, delta)
+	rotate(basis.y.normalized(), current_yaw_speed * delta)
+	Debug.track("current_yaw_speed", current_yaw_speed)
 
-    # current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
-    # HUD.debug("current_roll_speed", current_roll_speed)
+	# current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
+	# HUD.debug("current_roll_speed", current_roll_speed)
 
-    Debug.track("throttle", throttle)
-    Debug.track("current_speed", current_speed)
-    Debug.track("velocity.length", velocity.length())
+	Debug.track("throttle", throttle)
+	Debug.track("current_speed", current_speed)
+	Debug.track("velocity.length", velocity.length())
 
-    # TODO: check if this will work without the physics collision box
-    # magnetically stick to surface until player pitches up or an extremely sharp drop-off
+	# TODO: check if this will work without the physics collision box
+	# magnetically stick to surface until player pitches up or an extremely sharp drop-off
 
-    # I want to get the front/back raycast distances to the nearest ground and adjust the velocity to keep
-    # those as close as possible to a certain goal hover height
+	# I want to get the front/back raycast distances to the nearest ground and adjust the velocity to keep
+	# those as close as possible to a certain goal hover height
 
-    # braking
-    if throttle < 0 and current_speed > 0:
-        current_speed += throttle * ground_decceleration * delta
-    # accelerate
-    else:
-        current_speed += throttle * ground_acceleration * delta
+	# braking
+	if throttle < 0 and current_speed > 0:
+		current_speed += throttle * ground_decceleration * delta
+	# accelerate
+	else:
+		current_speed += throttle * ground_acceleration * delta
 
-    # cap speed to max speed
-    if current_speed < -ground_max_speed:
-        current_speed = -ground_max_speed
-    elif current_speed > ground_max_speed:
-        current_speed = ground_max_speed
+	# cap speed to max speed
+	if current_speed < -ground_max_speed:
+		current_speed = -ground_max_speed
+	elif current_speed > ground_max_speed:
+		current_speed = ground_max_speed
 
-    
-    current_pitch_speed = update_rotation_speed(current_pitch_speed, rotate_input.x, ground_pitch_acceleration, ground_pitch_decceleration, ground_pitch_max_speed, delta)
-    current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
+	
+	current_pitch_speed = update_rotation_speed(current_pitch_speed, rotate_input.x, ground_pitch_acceleration, ground_pitch_decceleration, ground_pitch_max_speed, delta)
+	current_roll_speed = update_rotation_speed(current_roll_speed, rotate_input.z, ground_roll_acceleration, ground_roll_decceleration, ground_roll_max_speed, delta)
 
-    # don't auto-adjust to surface if raycast is not colliding
-    if ( cast_front.is_colliding() and cast_rear.is_colliding() and 
-         cast_left.is_colliding() and cast_right.is_colliding() ):
+	# don't auto-adjust to surface if raycast is not colliding
+	if ( cast_front.is_colliding() and cast_rear.is_colliding() and 
+		 cast_left.is_colliding() and cast_right.is_colliding() ):
 
-        # handle auto-pitch to surface and add current_pitch_speed from input
-        var front_rear_diff: = raycast_distance(cast_front) - raycast_distance(cast_rear)
-        Debug.track("front_rear_diff", front_rear_diff)
-        rotate(basis.x.normalized(), -front_rear_diff * ground_auto_pitch_speed * delta + current_pitch_speed * delta)
+		# handle auto-pitch to surface and add current_pitch_speed from input
+		var front_rear_diff: = raycast_distance(cast_front) - raycast_distance(cast_rear)
+		Debug.track("front_rear_diff", front_rear_diff)
+		rotate(basis.x.normalized(), -front_rear_diff * ground_auto_pitch_speed * delta + current_pitch_speed * delta)
 
-        # handle auto-roll to surface
-        var left_right_diff: = raycast_distance(cast_left) - raycast_distance(cast_right)
-        Debug.track("left_right_diff", left_right_diff)
-        rotate(basis.z.normalized(), left_right_diff * ground_auto_roll_speed * delta + current_roll_speed * delta)
+		# handle auto-roll to surface
+		var left_right_diff: = raycast_distance(cast_left) - raycast_distance(cast_right)
+		Debug.track("left_right_diff", left_right_diff)
+		rotate(basis.z.normalized(), left_right_diff * ground_auto_roll_speed * delta + current_roll_speed * delta)
 
-        # add strafe movement by re-orienting the tilted basis based on input instead of roll angle
-        if not is_zero_approx(rotate_input.z):
-            tilted_basis = tilted_basis.rotated(tilted_basis.y, rotate_input.z * ground_strafe_angle_offset)
-    
-    # rotate if hitting wall
-    if bumper_front_left.is_colliding():
-        rotate(basis.y.normalized(), ground_bumper_bounce_speed * delta)
-        if current_speed > ground_bumper_min_speed:
-            current_speed -= ground_bumper_friction * delta
-    if bumper_front_right.is_colliding():
-        rotate(basis.y.normalized(), -ground_bumper_bounce_speed * delta)
-        if current_speed > ground_bumper_min_speed:
-            current_speed -= ground_bumper_friction * delta
+		# add strafe movement by re-orienting the tilted basis based on input instead of roll angle
+		if not is_zero_approx(rotate_input.z):
+			tilted_basis = tilted_basis.rotated(tilted_basis.y, rotate_input.z * ground_strafe_angle_offset)
+	
+	# rotate if hitting wall
+	if bumper_front_left.is_colliding():
+		rotate(basis.y.normalized(), ground_bumper_bounce_speed * delta)
+		if current_speed > ground_bumper_min_speed:
+			current_speed -= ground_bumper_friction * delta
+	if bumper_front_right.is_colliding():
+		rotate(basis.y.normalized(), -ground_bumper_bounce_speed * delta)
+		if current_speed > ground_bumper_min_speed:
+			current_speed -= ground_bumper_friction * delta
 
-    # apply gravity to current speed
-    var angle_to_horizon: float
-    angle_to_horizon = forward.angle_to(horizon)
-    if forward.dot(Vector3.UP) < 0:
-        angle_to_horizon = -angle_to_horizon
-    Debug.track("angle_to_horizon", angle_to_horizon)
-    current_speed += -angle_to_horizon * ground_gravity * delta
+	# apply gravity to current speed
+	var angle_to_horizon: float
+	angle_to_horizon = forward.angle_to(horizon)
+	if forward.dot(Vector3.UP) < 0:
+		angle_to_horizon = -angle_to_horizon
+	Debug.track("angle_to_horizon", angle_to_horizon)
+	current_speed += -angle_to_horizon * ground_gravity * delta
 
-    if current_speed > 0:
-        var tilted_forward: = -tilted_basis.z
-        velocity = tilted_forward * current_speed
-    else:
-        velocity = forward * current_speed
-    
-    if not is_grounded():
-        velocity += (air_gravity * delta) * -Vector3.UP
+	if current_speed > 0:
+		var tilted_forward: = -tilted_basis.z
+		velocity = tilted_forward * current_speed
+	else:
+		velocity = forward * current_speed
+	
+	if not is_grounded():
+		velocity += (air_gravity * delta) * -Vector3.UP
 
-    # apply friction
-    current_speed = move_toward(current_speed, 0, ground_friction * delta)
-    
-    speed_sound_adjust(current_speed)
-    adjust_camera_fov(current_speed)
+	# apply friction
+	current_speed = move_toward(current_speed, 0, ground_friction * delta)
+	
+	speed_sound_adjust(current_speed)
+	adjust_camera_fov(current_speed)
 
-    move_and_slide()
+	move_and_slide()
 
 
 func is_grounded() -> bool:
-    var new_grounded:bool = cast_ground_detector.is_colliding()
+	var new_grounded:bool = cast_ground_detector.is_colliding()
 
-    # transitioning from grounded to not grounded
-    if grounded and not new_grounded:
-        current_pitch_speed = 0
+	# transitioning from grounded to not grounded
+	if grounded and not new_grounded:
+		current_pitch_speed = 0
 
-    grounded = new_grounded
+	grounded = new_grounded
 
-    if grounded: is_stalling = false  # always disable stalling when grounded
-    Debug.track("grounded", grounded)
-    return grounded
-    # return true
-    # return false
+	if grounded: is_stalling = false  # always disable stalling when grounded
+	Debug.track("grounded", grounded)
+	return grounded
+	# return true
+	# return false
 
 
 func move_ship(delta: float) -> void:
-    # take keyboard yaw if pressed, otherwise, take mouse
-    var yaw_input = Input.get_axis("yaw_right", "yaw_left")
-    if yaw_input != 0:
-        rotate_input.y = yaw_input
-    else: # TODO: fix temp mouse control impl
-        rotate_input.y = -mouse_delta_x / 10
-        mouse_delta_x = 0
-    rotate_input.x = Input.get_axis("pitch_down", "pitch_up")
+	# take keyboard yaw if pressed, otherwise, take mouse
+	var yaw_input = Input.get_axis("yaw_right", "yaw_left")
+	if yaw_input != 0:
+		rotate_input.y = yaw_input
+	else: # TODO: fix temp mouse control impl
+		rotate_input.y = -mouse_delta_x / 10
+		mouse_delta_x = 0
+	rotate_input.x = Input.get_axis("pitch_down", "pitch_up")
 
-    rotate_input.z = Input.get_axis("roll_right", "roll_left")
-    
-    throttle = Input.get_axis("brake", "gas")
+	rotate_input.z = Input.get_axis("roll_right", "roll_left")
+	
+	throttle = Input.get_axis("brake", "gas")
 
-    move_ship_grounded(delta)
+	move_ship_grounded(delta)
 
 
 func throttle_sound_adjust(in_throttle: float) -> void:
@@ -267,9 +267,9 @@ func throttle_sound_adjust(in_throttle: float) -> void:
 
 
 func adjust_camera_fov(speed: float) -> void:
-    camera.fov = lerp(camera_fov_base, camera_fov_max, speed / ground_max_speed)
-    # print(camera.fov)
+	camera.fov = lerp(camera_fov_base, camera_fov_max, speed / ground_max_speed)
+	# print(camera.fov)
 
 
 func speed_sound_adjust(speed: float) -> void:
-    speed = clampf(speed, 0, 150)
+	speed = clampf(speed, 0, 150)
