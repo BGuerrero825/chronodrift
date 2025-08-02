@@ -6,7 +6,7 @@ extends Control
 @export var fastest_g: float
 @export var slowest_b: float
 @export var fastest_b: float
-var throttle: float = 0.5
+var throttle: float = 0
 var speed_ratio: float = 0.5
 var ship: PlayerShip
 
@@ -15,7 +15,7 @@ var ship: PlayerShip
 
 
 func _process(_delta: float) -> void:
-	if not ship:
+	if not is_instance_valid(ship):
 		ship = EventsBus.get_player_ref()
 		return
 	# Set throttle bar color / fill
