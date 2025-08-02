@@ -4,10 +4,11 @@ extends AnimatableBody3D
 @export var _paused := true
 @export var replay_data : ReplayData = null
 var current_tick := 0
+var tick_offset := 0
 
 func play() -> void:
 	_paused = false
-	current_tick = 0
+	current_tick = tick_offset
 
 func pause() -> void:
 	_paused = true

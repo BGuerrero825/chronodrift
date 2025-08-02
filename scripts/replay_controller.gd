@@ -16,6 +16,7 @@ var player_ref: PlayerShip = null
 var replay_ships: Array[ReplayShip] = []
 
 const replay_tick_rate := 0.008
+const replay_offset_time := int(0.05 / replay_tick_rate)
 var tick_accumulator := 0.0
 
 const start_delay := 2.0
@@ -90,9 +91,12 @@ func _reset_player() -> void:
     player_ref.velocity = Vector3.ZERO
     player_ref.current_speed = player_ref.starting_speed
 
-func _start_replaying_all() -> void:	
+func _start_replaying_all() -> void:
+    var idx := 1
     for replay_ship in replay_ships:
+        replay_ship.tick_offset = idx * replay_offset_time
         replay_ship.play()
+        idx += 1
     
     change_state(State.REPLAYING)
 

@@ -15,5 +15,4 @@ func emit_player_reached_goal() -> void:
     player_reached_goal.emit()
 
 func emit_replay_controller_ready() -> void:
-    Debug.log("-------------------------------")
     replay_controller_ready.emit()
