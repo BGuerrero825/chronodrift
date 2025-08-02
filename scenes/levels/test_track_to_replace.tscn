@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://0gt60veuu3jj"]
+[gd_scene load_steps=6 format=3 uid="uid://0gt60veuu3jj"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_xel3y"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_fupfa"]
 [ext_resource type="PackedScene" uid="uid://b3ghog3f33nbe" path="res://scenes/replay_controller.tscn" id="3_xq7g1"]
+[ext_resource type="PackedScene" uid="uid://bwn0gfx6baet5" path="res://scenes/goal.tscn" id="4_r2icg"]
 
 [sub_resource type="Curve3D" id="Curve3D_ortey"]
 bake_interval = 0.5
@@ -45,5 +46,8 @@ transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.09264
 
 [node name="ReplayController" parent="." instance=ExtResource("3_xq7g1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
+
+[node name="Checkpoint" parent="ReplayController" instance=ExtResource("4_r2icg")]
+transform = Transform3D(-0.0412305, 0, -0.99915, 0, 1, 0, 0.99915, 0, -0.0412305, 1172, -167.042, -428.044)
 
 [editable path="track_mesh"]

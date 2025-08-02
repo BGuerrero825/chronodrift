@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwn0gfx6baet5"]
+
+[ext_resource type="Script" uid="uid://bc06kgs8p2ud0" path="res://scripts/goal.gd" id="1_jbojv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xl315"]
+size = Vector3(3.91699, 36.8926, 39.2193)
+
+[node name="Goal" type="Area3D"]
+script = ExtResource("1_jbojv")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+inner_radius = 16.9091
+outer_radius = 22.0159
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4585, 0.60556, 0.255707)
+shape = SubResource("BoxShape3D_xl315")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
