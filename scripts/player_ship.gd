@@ -76,6 +76,7 @@ var current_lap_time: float = 0  # tracks current time, reset to 0 when reaching
 var mouse_delta_x: float = 0.0
 
 var _paused := false
+var invulnerable := true
 
 
 func _ready() -> void:
@@ -118,6 +119,7 @@ func destroy_ship() -> void:
 
 func respawn_ship()  -> void:
 	ship_model.visible = true
+	invulnerable = true
 	unpause_ship()
 
 # returns raycast distance to collider, this should not be called if raycast is not colliding
@@ -295,3 +297,9 @@ func adjust_camera_fov(speed: float) -> void:
 
 func speed_sound_adjust(speed: float) -> void:
 	speed = clampf(speed, 0, 150)
+
+
+func _on_area_3d_area_entered(area:Area3D) -> void:
+	if area is ReplayShip and not invulnerable: destroy_ship()
+	if area is SafeGate: invulnerable = true
+	if area is DangerGate: invulnerable = false
