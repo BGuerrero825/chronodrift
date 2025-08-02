@@ -18,132 +18,139 @@ var replay_ships: Array[ReplayShip] = []
 const replay_tick_rate := 0.008
 var tick_accumulator := 0.0
 
+const start_delay := 2.0
+
 @onready var replay_ship_scene := preload("res://scenes/replay_ship.tscn")
 
 func _ready() -> void:
-	player_ref = EventsBus.get_player_ref()
-	assert(player_ref != null, "player ref not available when replay controller starts")
+    player_ref = EventsBus.get_player_ref()
+    assert(player_ref != null, "player ref not available when replay controller starts")
 
-	start_position = player_ref.global_position
-	start_transform = player_ref.global_transform
-	Debug.log("starting position: " + str(start_position))
-	
-	EventsBus.player_reached_goal.connect(player_reached_goal)
-	_start_new_recording()
+    start_position = player_ref.global_position
+    start_transform = player_ref.global_transform
+    Debug.log("starting position: " + str(start_position))
+    
+    EventsBus.player_reached_goal.connect(player_reached_goal)
+
+    await get_tree().create_timer(start_delay).timeout
+
+    EventsBus.emit_replay_controller_ready()
+    _start_new_recording()
+
 
 func player_reached_goal() -> void:
-	Debug.log("replay controller sees player reached goal")
-	_finish_current_recording()
-	_reset_player()
-	_start_new_recording()
-	_start_replaying_all()
+    Debug.log("replay controller sees player reached goal")
+    _finish_current_recording()
+    _reset_player()
+    _start_new_recording()
+    _start_replaying_all()
 
 func _process(_delta: float) -> void: 
-	if OS.is_debug_build():
-		debug_input()
+    if OS.is_debug_build():
+        debug_input()
 
 func _physics_process(delta: float) -> void:
-	tick_accumulator += delta
-	
-	if tick_accumulator >= replay_tick_rate:
-		tick_accumulator = 0.0
-		process_tick()
+    tick_accumulator += delta
+    
+    if tick_accumulator >= replay_tick_rate:
+        tick_accumulator = 0.0
+        process_tick()
 
 func process_tick() -> void:
-	if _is_recording and current_recording_data:
-		current_recording_data.record_frame(player_ref)
+    if _is_recording and current_recording_data:
+        current_recording_data.record_frame(player_ref)
 
-	process_state(_current_state)
+    process_state(_current_state)
 
 func _start_new_recording() -> void:
-	Debug.log("starting new recording for replay " + str(current_replay_id))
-	current_recording_data = ReplayData.new()
-	current_recording_data.replay_id = current_replay_id
-	_is_recording = true
+    Debug.log("starting new recording for replay " + str(current_replay_id))
+    current_recording_data = ReplayData.new()
+    current_recording_data.replay_id = current_replay_id
+    _is_recording = true
 
 func _finish_current_recording() -> void:
-	if current_recording_data:
-		Debug.log("finishing recording for replay " + str(current_recording_data.replay_id))
-		replay_data_array.append(current_recording_data)
+    if current_recording_data:
+        Debug.log("finishing recording for replay " + str(current_recording_data.replay_id))
+        replay_data_array.append(current_recording_data)
 
-		var tmp_replay_ship := replay_ship_scene.instantiate()
-		replay_ships.append(tmp_replay_ship)
-		tmp_replay_ship.replay_data = current_recording_data
-		add_child(tmp_replay_ship)
-		tmp_replay_ship.global_position = start_position
+        var tmp_replay_ship := replay_ship_scene.instantiate()
+        replay_ships.append(tmp_replay_ship)
+        tmp_replay_ship.replay_data = current_recording_data
+        add_child(tmp_replay_ship)
+        tmp_replay_ship.global_position = start_position
 
-		current_recording_data = null
-		current_replay_id += 1
+        current_recording_data = null
+        current_replay_id += 1
 
-	_is_recording = false
+    _is_recording = false
 
 func _reset_player() -> void:
-	player_ref.global_position = start_position
-	player_ref.global_transform = start_transform
-	player_ref.velocity = Vector3.ZERO
-	player_ref.current_speed = 0
+    player_ref.global_position = start_position
+    player_ref.global_transform = start_transform
+    player_ref.velocity = Vector3.ZERO
+    player_ref.current_speed = player_ref.starting_speed
 
 func _start_replaying_all() -> void:	
-	for replay_ship in replay_ships:
-		replay_ship.play()
-	
-	change_state(State.REPLAYING)
+    for replay_ship in replay_ships:
+        replay_ship.play()
+    
+    change_state(State.REPLAYING)
 
 func change_state(new_state: State) -> void:
-	if new_state == _current_state:
-		return
-	exit_state(_current_state)
-	_previous_state = _current_state
-	_current_state = new_state
-	enter_state(_current_state)
+    if new_state == _current_state:
+        return
+    exit_state(_current_state)
+    _previous_state = _current_state
+    _current_state = new_state
+    enter_state(_current_state)
 
 func process_state(current_state: State) -> void:
-	match current_state:
-		State.REPLAYING:
-			Debug.track("replay_state", "REPLAYING")
-			Debug.track("recording_state", "RECORDING" if _is_recording else "NOT_RECORDING")
-			for ship in replay_ships:
-				ship.increment_tick()
-		State.PAUSED:
-			Debug.track("replay_state", "PAUSED")
-			Debug.track("recording_state", "RECORDING" if _is_recording else "NOT_RECORDING")
-		_:
-			assert(false, "processing unknown state")
+    match current_state:
+        State.REPLAYING:
+            Debug.track("replay_state", "REPLAYING")
+            Debug.track("recording_state", "RECORDING" if _is_recording else "NOT_RECORDING")
+            for ship in replay_ships:
+                ship.increment_tick()
+        State.PAUSED:
+            Debug.track("replay_state", "PAUSED")
+            Debug.track("recording_state", "RECORDING" if _is_recording else "NOT_RECORDING")
+        _:
+            assert(false, "processing unknown state")
 
 func enter_state(state: State) -> void:
-	match state:
-		State.REPLAYING:
-			Debug.log("entering REPLAYING state")
-			for replay in replay_ships:
-				if is_instance_valid(replay):
-					replay.play()
-		State.PAUSED:
-			Debug.log("entering PAUSED state")
-		_:
-			assert(false, "entering unknown state")
+    match state:
+        State.REPLAYING:
+            Debug.log("entering REPLAYING state")
+            for replay in replay_ships:
+                if is_instance_valid(replay):
+                    replay.play()
+        State.PAUSED:
+            Debug.log("entering PAUSED state")
+        _:
+            assert(false, "entering unknown state")
 
 func exit_state(state: State) -> void:
-	match state:
-		State.REPLAYING:
-			Debug.log("exiting REPLAYING state")
-		State.PAUSED:
-			Debug.log("exiting PAUSED state")
-		_:
-			assert(false, "exiting unknown state")
+    match state:
+        State.REPLAYING:
+            Debug.log("exiting REPLAYING state")
+        State.PAUSED:
+            Debug.log("exiting PAUSED state")
+        _:
+            assert(false, "exiting unknown state")
 
 func debug_input() -> void:
-	if Input.is_action_just_released("debug1"):
-		_is_recording = not _is_recording
-		Debug.log("Recording: " + str(_is_recording))
-	
-	if Input.is_action_just_released("debug2"):
-		change_state(State.REPLAYING)
-	
-	if Input.is_action_just_released("debug3"):
-		change_state(State.PAUSED)
+    if Input.is_action_just_released("debug1"):
+        _is_recording = not _is_recording
+        Debug.log("Recording: " + str(_is_recording))
+    
+    if Input.is_action_just_released("debug2"):
+        change_state(State.REPLAYING)
+    
+    if Input.is_action_just_released("debug3"):
+        change_state(State.PAUSED)
 
-	if Input.is_action_just_released("debug4"):
-		_finish_current_recording()
-		_reset_player()
-		_start_replaying_all()
-		_start_new_recording()
+    if Input.is_action_just_released("debug4"):
+        _finish_current_recording()
+        _reset_player()
+        _start_replaying_all()
+        _start_new_recording()
