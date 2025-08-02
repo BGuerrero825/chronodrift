@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm120n5731jm5"]
+
+[ext_resource type="Script" uid="uid://bbyfdnm1lffd" path="res://scripts/ui_sound.gd" id="1_dqmea"]
+[ext_resource type="AudioStream" uid="uid://cc20h5rrgvra3" path="res://audio/ui_sfx/buttons/click_1.wav" id="1_vochh"]
+[ext_resource type="AudioStream" uid="uid://d37w6v6punw6d" path="res://audio/ui_sfx/buttons/click_2.wav" id="2_dqmea"]
+[ext_resource type="AudioStream" uid="uid://dqrdri20fsg7p" path="res://audio/ui_sfx/buttons/click_3.wav" id="3_jmv3g"]
+[ext_resource type="AudioStream" uid="uid://c3nrcexi5m4nk" path="res://audio/ui_sfx/buttons/hover_1.wav" id="4_xwsgp"]
+[ext_resource type="AudioStream" uid="uid://dodc5d2y21ty1" path="res://audio/ui_sfx/buttons/Click_013.wav" id="6_dqmea"]
+[ext_resource type="AudioStream" uid="uid://166iut1k4gg5" path="res://audio/ui_sfx/buttons/Click_017.wav" id="7_jmv3g"]
+
+[node name="UISound" type="Node"]
+script = ExtResource("1_dqmea")
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_vochh")
+bus = &"SFX"
+
+[node name="ButtonPress2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_dqmea")
+bus = &"SFX"
+
+[node name="ButtonPress3" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_jmv3g")
+bus = &"SFX"
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_xwsgp")
+bus = &"SFX"
+
+[node name="ButtonHover2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_dqmea")
+bus = &"SFX"
+
+[node name="ButtonHover3" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_jmv3g")
+bus = &"SFX"

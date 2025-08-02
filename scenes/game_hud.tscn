@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8wawmsvfd31f"]
+
+[ext_resource type="Script" uid="uid://be1cvb5bygaso" path="res://scripts/game_hud.gd" id="1_gjmhc"]
+[ext_resource type="Script" uid="uid://bgc7ty3argunx" path="res://scripts/speed_bar.gd" id="1_jna2d"]
+[ext_resource type="Shader" uid="uid://dujlgldxi7rhp" path="res://shaders/speed_bar.gdshader" id="1_n64bn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjmhc"]
+shader = ExtResource("1_n64bn")
+shader_parameter/bar_mode = 0
+shader_parameter/fill_mode = 1
+shader_parameter/segment_count = 12
+shader_parameter/discrete_fill_amount = 12
+shader_parameter/fade_fill_amount = 0.5
+shader_parameter/pour_fill_amount = 1.0
+shader_parameter/animation_speed = 1.0
+shader_parameter/flash_type = 0
+shader_parameter/flash_segment = 0
+shader_parameter/flash_intensity = 0.0
+shader_parameter/single_segment_previous_fill = 1.0
+shader_parameter/single_segment_current_fill = 1.0
+shader_parameter/single_segment_flash_intensity = 0.8
+shader_parameter/flash_from_segment = 0
+shader_parameter/flash_to_segment = 0
+shader_parameter/single_segment_fade_from = 1.0
+shader_parameter/single_segment_fade_to = 1.0
+shader_parameter/single_segment_fade_progress = 0.0
+shader_parameter/drain_previous_fill = 1.0
+shader_parameter/drain_current_fill = 1.0
+shader_parameter/drain_time_progress = 0.0
+shader_parameter/background_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/filled_color = Color(0.1, 1, 0.5, 1)
+shader_parameter/border_color = Color(0, 0, 0, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/drain_flash_color = Color(1, 1, 1, 1)
+shader_parameter/custom_frame = false
+shader_parameter/frame_trim = 0.0
+shader_parameter/alpha_threshold = 0.69
+shader_parameter/scan_steps = 15
+shader_parameter/edge_smoothness = 0.02
+shader_parameter/mask_expansion = 0.0
+shader_parameter/frame_edge_opacity = 0.9
+shader_parameter/fluid_base_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/fluid_highlight_color = Color(0.8, 0.9, 1, 1)
+shader_parameter/fluid_shadow_color = Color(0.1, 0.3, 0.6, 1)
+shader_parameter/fluid_flow_speed = 1.5
+shader_parameter/fluid_turbulence = 1.0
+shader_parameter/fluid_noise_scale = 6.0
+shader_parameter/gas_mode = false
+shader_parameter/gas_intensity = 0.8
+shader_parameter/effect_mode = 1
+shader_parameter/effect_strength = 0.325
+shader_parameter/effect_speed = 1.5
+shader_parameter/wave_thickness = 0.1
+shader_parameter/bubbles_aspect_ratio = 1.0
+shader_parameter/vertical_gradient = true
+shader_parameter/V_gradient_strength = 0.671
+shader_parameter/horizontal_gradient = false
+shader_parameter/H_gradient_strength = 0.75
+shader_parameter/segment_gap = 0.0
+shader_parameter/universal_border_size = 0.1
+shader_parameter/horizontal_border_size = 1.0
+shader_parameter/inner_border_thickness_multiplier = 1.5
+shader_parameter/outer_border_size = 3.0
+shader_parameter/slant_amount = -0.077
+shader_parameter/scale = -0.085
+shader_parameter/slant_clip_margin = 0.0
+
+[node name="GameHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gjmhc")
+slowest_r = 0.37
+fastest_r = 1.0
+slowest_g = 1.0
+slowest_b = 0.73
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="SpeedBar" type="ColorRect" parent="MarginContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gjmhc")
+custom_minimum_size = Vector2(350, 120)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_jna2d")
+fill_type = "Fade"
+effect_type = "Drain"

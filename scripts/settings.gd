@@ -3,7 +3,11 @@ extends Node
 var full_screen := false
 var master_volume: float = 50
 var sfx_volume: float = 50
-var music_volume: float = 50
+var music_volume: float = 20
+
+
+func _ready() -> void:
+	set_volume_for_bus("Music")
 
 
 func set_volume_for_bus(bus_name: String) -> void:

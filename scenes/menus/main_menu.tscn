@@ -13,6 +13,15 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xqga4")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -64,3 +73,10 @@ clip_contents = true
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 text = "Level 3"
+
+[node name="Settings" type="Button" parent="Margin/ButtonsVBox"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+text = "Settings"
