@@ -250,7 +250,7 @@ func throttle_sound_adjust(_in_throttle: float) -> void:
 
 func adjust_camera_fov(speed: float) -> void:
 	camera.fov = lerp(camera_fov_base, camera_fov_max, speed / ground_max_speed)
-	print(camera.fov)
+	# print(camera.fov)
 
 
 func speed_sound_adjust(speed: float) -> void:

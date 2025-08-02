@@ -14,4 +14,4 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
     if OS.is_debug_build():
         tracker_label.text = Debug.track_str
-        log_label.text = Debug.log_str
+        log_label.text = Debug.log_str 

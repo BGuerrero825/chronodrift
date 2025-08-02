@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnw5ilawv3gd4"]
 
-[ext_resource type="Texture2D" uid="uid://cxw8btm4ubj0" path="res://textures/concrete_wall_004_ao_1k.png" id="1_vghf8"]
+[ext_resource type="Texture2D" uid="uid://cxw8btm4ubj0" path="res://assets/environment/concrete_wall_004_ao_1k.png" id="1_vghf8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d813i"]
 albedo_color = Color(0.905882, 0.882353, 1, 1)
