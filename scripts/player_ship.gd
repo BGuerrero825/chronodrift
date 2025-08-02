@@ -8,8 +8,10 @@ extends CharacterBody3D
 # Pitch: Right Joystick or up and down down arrow
 
 @onready var camera: = $Camera3D
+
 @onready var engine_sound_a: AudioStreamPlayer3D = %EngineHum
 @onready var engine_sound_b: AudioStreamPlayer3D = %EngineBuzz
+@onready var collision_sound: AudioStreamPlayer3D = %CollisionSound
 
 @onready var cast_center: = $cast_center
 @onready var cast_ground_detector: = $cast_ground_detector
@@ -197,13 +199,16 @@ func move_ship_grounded(delta: float) -> void:
 			current_speed -= ground_bumper_friction * delta
 		scraping_particles.position = bumper_front_left.position
 		scraping_particles.emitting = true
+		collision_sound.collide(bumper_front_left.position)
 	elif bumper_front_right.is_colliding():
 		rotate(basis.y.normalized(), -ground_bumper_bounce_speed * delta)
 		if current_speed > ground_bumper_min_speed:
 			current_speed -= ground_bumper_friction * delta
 		scraping_particles.position = bumper_front_right.position
 		scraping_particles.emitting = true
+		collision_sound.collide(bumper_front_right.position)
 	else:
+		collision_sound.stop_colliding()
 		scraping_particles.emitting = false
 
 	# apply gravity to current speed
