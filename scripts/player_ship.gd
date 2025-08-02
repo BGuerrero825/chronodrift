@@ -46,6 +46,8 @@ extends CharacterBody3D
 
 @export var ground_friction: float = 1.5
 @export var ground_max_speed: float = 100
+@export var ground_max_speed_linear_increment: float = 2
+@export var ground_max_speed_percent_increment: float = 1.0
 @export var ground_gravity: float = 50
 @export var ground_auto_pitch_speed: float = 8
 @export var ground_auto_roll_speed: float = 8
