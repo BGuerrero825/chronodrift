@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_thtrp"]
 size = Vector3(7, 2, 13)
 
-[node name="ReplayShip" type="AnimatableBody3D"]
+[node name="ReplayShip" type="Area3D"]
 script = ExtResource("1_itx2w")
 metadata/_edit_group_ = true
 

@@ -13,7 +13,8 @@ size = Vector3(2.8, 0.6, 5)
 [node name="Ship" type="CharacterBody3D"]
 script = ExtResource("1_2gnfn")
 
-[node name="ship_guest" parent="." instance=ExtResource("1_q631a")]
+[node name="ship_model" parent="." instance=ExtResource("1_q631a")]
+unique_name_in_owner = true
 transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0.792349, -0.653594)
 
 [node name="Camera3D" type="Camera3D" parent="."]

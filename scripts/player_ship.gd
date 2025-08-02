@@ -21,6 +21,8 @@ extends CharacterBody3D
 @onready var bumper_front_left: = $bumper_front_left
 @onready var bumper_front_right: = $bumper_front_right
 
+@onready var ship_model := %ship_model
+
 @export var camera_fov_base: float = 95
 @export var camera_fov_max: float = 125
 
@@ -83,22 +85,40 @@ func _ready() -> void:
 
 func pause_ship() -> void:
 	_paused = true
+	engine_sound_a.stop()
+	engine_sound_b.stop()
 
 func unpause_ship() -> void:
 	_paused = false
+	engine_sound_a.play()
+	engine_sound_b.play()
 
 func _physics_process(delta: float) -> void:
 	if _paused:
 		return
 	# update lap timer
+
+	if OS.is_debug_build():
+		_debug_controls()
+
 	current_lap_time += delta
 	move_ship(delta)
 
+func _debug_controls() -> void:
+	if Input.is_action_just_released("debug4"):
+		destroy_ship()
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta_x = event.relative.x
 
+func destroy_ship() -> void:
+	ship_model.visible = false
+	pause_ship()
+
+func respawn_ship()  -> void:
+	ship_model.visible = true
+	unpause_ship()
 
 # returns raycast distance to collider, this should not be called if raycast is not colliding
 func raycast_distance(raycast: RayCast3D) -> float:
