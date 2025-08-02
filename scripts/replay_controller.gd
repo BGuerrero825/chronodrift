@@ -16,7 +16,8 @@ var player_ref: PlayerShip = null
 var replay_ships: Array[ReplayShip] = []
 
 const replay_tick_rate := 0.008
-const replay_offset_time := int(0.05 / replay_tick_rate)
+@export var replay_offset_time_seconds = 0.1
+var _replay_offset_time := int(0.05 / replay_tick_rate)
 var tick_accumulator := 0.0
 
 const start_delay := 2.0
@@ -42,7 +43,7 @@ func _ready() -> void:
 func player_reached_goal() -> void:
 	Debug.log("replay controller sees player reached goal")
 	_finish_current_recording()
-	_reset_player()
+	_reset_player_increase_speed()
 	_start_new_recording()
 	_start_replaying_all()
 
@@ -85,18 +86,21 @@ func _finish_current_recording() -> void:
 
 	_is_recording = false
 
-func _reset_player() -> void:
+func _reset_player_increase_speed() -> void:
 	player_ref.global_position = start_position
 	player_ref.global_transform = start_transform
 	player_ref.velocity = Vector3.ZERO
 	player_ref.current_speed = player_ref.starting_speed
 
+	player_ref.ground_max_speed += player_ref.ground_max_speed_linear_increment
+	player_ref.ground_max_speed *= player_ref.ground_max_speed_percent_increment
+
 func _start_replaying_all() -> void:
-	var current_tick_offset := replay_offset_time * len(replay_ships)
+	var current_tick_offset := _replay_offset_time * len(replay_ships)
 	for s in replay_ships:
 		s.tick_offset = current_tick_offset
 		s.play()
-		current_tick_offset -= replay_offset_time
+		current_tick_offset -= _replay_offset_time
 	change_state(State.REPLAYING)
 
 func change_state(new_state: State) -> void:
@@ -154,6 +158,6 @@ func debug_input() -> void:
 
 	if Input.is_action_just_released("debug4"):
 		_finish_current_recording()
-		_reset_player()
+		_reset_player_increase_speed()
 		_start_replaying_all()
 		_start_new_recording()
