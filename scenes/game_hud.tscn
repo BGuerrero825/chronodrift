@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c8wawmsvfd31f"]
 
-[ext_resource type="Script" uid="uid://be1cvb5bygaso" path="res://scripts/game_hud.gd" id="1_gjmhc"]
+[ext_resource type="Script" uid="uid://be1cvb5bygaso" path="res://scripts/bar_controller.gd" id="1_gjmhc"]
 [ext_resource type="Script" uid="uid://bgc7ty3argunx" path="res://scripts/speed_bar.gd" id="1_jna2d"]
 [ext_resource type="Shader" uid="uid://dujlgldxi7rhp" path="res://shaders/speed_bar.gdshader" id="1_n64bn"]
 
@@ -643,9 +643,9 @@ shader_parameter/horizontal_gradient = false
 shader_parameter/H_gradient_strength = 0.75
 shader_parameter/segment_gap = 0.0
 shader_parameter/universal_border_size = 0.1
-shader_parameter/horizontal_border_size = 1.0
+shader_parameter/horizontal_border_size = 2.0
 shader_parameter/inner_border_thickness_multiplier = 0.0
-shader_parameter/outer_border_size = 3.0
+shader_parameter/outer_border_size = 20.0
 shader_parameter/slant_amount = -0.077
 shader_parameter/scale = -0.085
 shader_parameter/slant_clip_margin = 0.0
@@ -704,9 +704,9 @@ shader_parameter/horizontal_gradient = false
 shader_parameter/H_gradient_strength = 0.75
 shader_parameter/segment_gap = 0.0
 shader_parameter/universal_border_size = 0.1
-shader_parameter/horizontal_border_size = 1.0
+shader_parameter/horizontal_border_size = 2.0
 shader_parameter/inner_border_thickness_multiplier = 1.5
-shader_parameter/outer_border_size = 3.0
+shader_parameter/outer_border_size = 10.0
 shader_parameter/slant_amount = -0.077
 shader_parameter/scale = -0.085
 shader_parameter/slant_clip_margin = 0.0
