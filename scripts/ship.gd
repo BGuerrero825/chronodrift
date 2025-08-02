@@ -8,6 +8,8 @@ extends CharacterBody3D
 # Pitch: Right Joystick or up and down down arrow
 
 @onready var camera: = $Camera3D
+@onready var engine_sound_a: AudioStreamPlayer3D = %EngineHum
+@onready var engine_sound_b: AudioStreamPlayer3D = %EngineBuzz
 
 @onready var cast_center: = $cast_center
 @onready var cast_ground_detector: = $cast_ground_detector
@@ -251,14 +253,17 @@ func move_ship(delta: float) -> void:
     move_ship_grounded(delta)
 
 
+func throttle_sound_adjust(in_throttle: float) -> void:
+	# scaling formula:
+	# OldRange = (OldMax - OldMin)  
+	# NewRange = (NewMax - NewMin)  
+	# NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+	# var sound_throttle: = clampf(in_throttle, 0, 1)
+	var sound_throttle: = clampf(in_throttle, 0, 1)
 
-func throttle_sound_adjust(_in_throttle: float) -> void:
-    # scaling formula:
-    # OldRange = (OldMax - OldMin)  
-    # NewRange = (NewMax - NewMin)  
-    # NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
-    # var sound_throttle: = clampf(in_throttle, 0, 1)
-    pass
+	var pitch : float = (sound_throttle * 1.5) + 0.5
+	engine_sound_a.pitch_scale = lerp(engine_sound_a.pitch_scale, pitch, 0.2)
+	engine_sound_b.pitch_scale = lerp(engine_sound_b.pitch_scale, pitch, 0.2)
 
 
 func adjust_camera_fov(speed: float) -> void:
