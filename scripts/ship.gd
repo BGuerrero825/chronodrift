@@ -21,6 +21,9 @@ extends CharacterBody3D
 @onready var bumper_front_left: = $bumper_front_left
 @onready var bumper_front_right: = $bumper_front_right
 
+@onready var thruster_particles: Node3D = %ThrusterParticles
+@onready var scraping_particles: GPUParticles3D = %ScrapingParticles
+
 @export var camera_fov_base: float = 95
 @export var camera_fov_max: float = 125
 
@@ -126,6 +129,7 @@ func update_rotation_speed(current_rotation_speed: float,
 func move_ship_grounded(delta: float) -> void:
 
 	throttle_sound_adjust(throttle)
+	thruster_particles.throttle_updated(throttle)
 
 	var forward: = -basis.z
 	var tilted_basis: = basis.rotated(basis.x, ground_suction_angle_offset)
@@ -189,10 +193,16 @@ func move_ship_grounded(delta: float) -> void:
 		rotate(basis.y.normalized(), ground_bumper_bounce_speed * delta)
 		if current_speed > ground_bumper_min_speed:
 			current_speed -= ground_bumper_friction * delta
-	if bumper_front_right.is_colliding():
+		scraping_particles.position = bumper_front_left.position
+		scraping_particles.emitting = true
+	elif bumper_front_right.is_colliding():
 		rotate(basis.y.normalized(), -ground_bumper_bounce_speed * delta)
 		if current_speed > ground_bumper_min_speed:
 			current_speed -= ground_bumper_friction * delta
+		scraping_particles.position = bumper_front_right.position
+		scraping_particles.emitting = true
+	else:
+		scraping_particles.emitting = false
 
 	# apply gravity to current speed
 	var angle_to_horizon: float
