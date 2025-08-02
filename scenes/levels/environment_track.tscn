@@ -80,7 +80,7 @@ transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.09264
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
 
 [node name="Goal" parent="." instance=ExtResource("8_4q1sw")]
-transform = Transform3D(0.999363, 0, 0.0356842, 0, 1, 0, -0.0356842, 0, 0.999363, 754.676, 2.40611, -2.37839)
+transform = Transform3D(0.829603, 0, -0.558353, 0, 1, 0, 0.558353, 0, 0.829603, 1232.76, 2.40611, -331.893)
 
 [node name="Crane" parent="." instance=ExtResource("5_pjnwa")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 639.974, -16.5032, -31.3982)
