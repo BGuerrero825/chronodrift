@@ -1,20 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgot8vg7jrx3b"]
 
 [ext_resource type="Script" uid="uid://daaw3lh0qr8md" path="res://scripts/replay_ship.gd" id="1_itx2w"]
+[ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="2_thtrp"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itx2w"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_cdb7c"]
-radius = 2.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_thtrp"]
+size = Vector3(7, 2, 13)
 
 [node name="ReplayShip" type="AnimatableBody3D"]
 script = ExtResource("1_itx2w")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.48509, 0)
-radius = 2.0
-material = SubResource("StandardMaterial3D_itx2w")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_cdb7c")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
+shape = SubResource("BoxShape3D_thtrp")
 disabled = true
+
+[node name="ship_guest" parent="." instance=ExtResource("2_thtrp")]
+transform = Transform3D(-0.4, 0, 6.03983e-08, 0, 0.4, 0, -6.03983e-08, 0, -0.4, 0, 1, 0)

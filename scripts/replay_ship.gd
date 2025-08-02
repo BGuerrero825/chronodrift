@@ -12,15 +12,18 @@ func play() -> void:
 func pause() -> void:
 	_paused = true
 
-func _process(_delta: float) -> void:
+func increment_tick() -> void:
 	Debug.track("replay_ship_pos", self.position)
 	if _paused:
 		return
 	
 	assert(replay_data != null, "attempting to replay a replay ship without replay data")
 	
-	if current_tick > len(replay_data.position_tracker) - 1:
+	if current_tick >= len(replay_data.position_tracker):
+		_paused = true
 		return
 	
 	global_position = replay_data.position_tracker[current_tick]
+	global_transform = replay_data.transform_tracker[current_tick]
+
 	current_tick += 1
