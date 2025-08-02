@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://br7vhue32wrce"]
+
+[ext_resource type="Texture2D" uid="uid://c7v72ugm3ytgx" path="res://assets/vfx/thrusters/Flare09.png" id="1_hckdn"]
+[ext_resource type="ArrayMesh" uid="uid://c3lrnx05s5i3p" path="res://assets/vfx/thrusters/MuzzlePlanes01.obj" id="1_uvvh3"]
+[ext_resource type="Script" uid="uid://bes5vl7j4076x" path="res://assets/vfx/thrusters/thruster_particles.gd" id="1_vsbsq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsbsq"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("1_hckdn")
+
+[sub_resource type="Curve" id="Curve_ugld6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uvvh3"]
+curve = SubResource("Curve_ugld6")
+
+[sub_resource type="Curve" id="Curve_hckdn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.311258), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_vsbsq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.386589), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_uagu0"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.299669), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ocwxl"]
+curve_x = SubResource("Curve_hckdn")
+curve_y = SubResource("Curve_vsbsq")
+curve_z = SubResource("Curve_uagu0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ugld6"]
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 3.0
+scale_curve = SubResource("CurveXYZTexture_ocwxl")
+color = Color(1, 2, 3, 1)
+alpha_curve = SubResource("CurveTexture_uvvh3")
+
+[node name="ThrusterParticles" type="Node3D"]
+script = ExtResource("1_vsbsq")
+
+[node name="MainThruster" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.999876, 0, -0.0157248, 0, 1, 0, 0.0157248, 0, 0.999876, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vsbsq")
+amount = 16
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ugld6")
+draw_pass_1 = ExtResource("1_uvvh3")

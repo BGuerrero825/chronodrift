@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1lqrsav6jgk7"]
+[gd_scene load_steps=13 format=3 uid="uid://b1lqrsav6jgk7"]
 
 [ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
@@ -6,6 +6,10 @@
 [ext_resource type="AudioStream" uid="uid://gh2b756mpqbx" path="res://audio/engine/engine_a.wav" id="4_gudjc"]
 [ext_resource type="AudioStream" uid="uid://wpkcrl16uujh" path="res://audio/engine/engine_b.wav" id="5_3m36u"]
 [ext_resource type="AudioStream" uid="uid://djte806d2ebib" path="res://audio/engine/rocket.wav" id="5_7j21i"]
+[ext_resource type="PackedScene" uid="uid://br7vhue32wrce" path="res://assets/vfx/thrusters/thruster_particles.tscn" id="7_3m36u"]
+[ext_resource type="PackedScene" uid="uid://cjc0mscbabxn3" path="res://assets/vfx/scraping/scraping_particles.tscn" id="8_8qiel"]
+[ext_resource type="AudioStream" uid="uid://btgqsc8tnk8aq" path="res://audio/scraping_edited.wav" id="9_itrim"]
+[ext_resource type="Script" uid="uid://dl5wwukwwnf1k" path="res://scripts/collision_sound.gd" id="10_bseor"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
 size = Vector3(2.8, 0.6, 5)
@@ -78,6 +82,24 @@ bus = &"SFX"
 stream = ExtResource("5_7j21i")
 volume_db = -15.0
 autoplay = true
+
+[node name="ThrusterParticles" parent="." instance=ExtResource("7_3m36u")]
+unique_name_in_owner = true
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.736, 1.83674)
+
+[node name="ScrapingParticles" parent="." instance=ExtResource("8_8qiel")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.36143, 0, -6.16994)
+emitting = false
+amount = 62
+
+[node name="CollisionSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.735146)
+stream = ExtResource("9_itrim")
+panning_strength = 5.0
+script = ExtResource("10_bseor")
+offset_forward = 3.0
 
 [node name="Area3D" type="Area3D" parent="."]
 

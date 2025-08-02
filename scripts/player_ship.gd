@@ -8,8 +8,10 @@ extends CharacterBody3D
 # Pitch: Right Joystick or up and down down arrow
 
 @onready var camera: = $Camera3D
+
 @onready var engine_sound_a: AudioStreamPlayer3D = %EngineHum
 @onready var engine_sound_b: AudioStreamPlayer3D = %EngineBuzz
+@onready var collision_sound: AudioStreamPlayer3D = %CollisionSound
 
 @onready var cast_center: = $cast_center
 @onready var cast_ground_detector: = $cast_ground_detector
@@ -21,6 +23,8 @@ extends CharacterBody3D
 @onready var bumper_front_left: = $bumper_front_left
 @onready var bumper_front_right: = $bumper_front_right
 
+@onready var thruster_particles: Node3D = %ThrusterParticles
+@onready var scraping_particles: GPUParticles3D = %ScrapingParticles
 @onready var ship_model := %ship_model
 
 @export var camera_fov_base: float = 95
@@ -150,6 +154,7 @@ func update_rotation_speed(current_rotation_speed: float,
 func move_ship_grounded(delta: float) -> void:
 
 	throttle_sound_adjust(throttle)
+	thruster_particles.throttle_updated(throttle)
 
 	var forward: = -basis.z
 	var tilted_basis: = basis.rotated(basis.x, ground_suction_angle_offset)
@@ -213,10 +218,19 @@ func move_ship_grounded(delta: float) -> void:
 		rotate(basis.y.normalized(), ground_bumper_bounce_speed * delta)
 		if current_speed > ground_bumper_min_speed:
 			current_speed -= ground_bumper_friction * delta
-	if bumper_front_right.is_colliding():
+		scraping_particles.position = bumper_front_left.position
+		scraping_particles.emitting = true
+		collision_sound.collide(bumper_front_left.position)
+	elif bumper_front_right.is_colliding():
 		rotate(basis.y.normalized(), -ground_bumper_bounce_speed * delta)
 		if current_speed > ground_bumper_min_speed:
 			current_speed -= ground_bumper_friction * delta
+		scraping_particles.position = bumper_front_right.position
+		scraping_particles.emitting = true
+		collision_sound.collide(bumper_front_right.position)
+	else:
+		collision_sound.stop_colliding()
+		scraping_particles.emitting = false
 
 	# apply gravity to current speed
 	var angle_to_horizon: float
