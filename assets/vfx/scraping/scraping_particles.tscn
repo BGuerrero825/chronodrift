@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjc0mscbabxn3"]
+
+[ext_resource type="Texture2D" uid="uid://c46gjfvvsqmw6" path="res://assets/vfx/scraping/beam01.png" id="1_u5r1i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oihdl"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("1_u5r1i")
+
+[sub_resource type="Curve" id="Curve_u5r1i"]
+_data = [Vector2(1e-05, 0.53413), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_i0q22"]
+_limits = [0.0, 3.5, 0.0, 1.0]
+_data = [Vector2(0, 3.5), 0.0, 0.0, 0, 0, Vector2(1, 0.743601), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_62h3x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_t2y4v"]
+curve_x = SubResource("Curve_u5r1i")
+curve_y = SubResource("Curve_i0q22")
+curve_z = SubResource("Curve_62h3x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nr6nm"]
+particle_flag_align_y = true
+direction = Vector3(1, 0.2, 0)
+spread = 5.667
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+scale_min = 0.2
+scale_max = 0.6
+scale_curve = SubResource("CurveXYZTexture_t2y4v")
+color = Color(4, 3, 2, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5l46m"]
+
+[node name="ScrapingParticles" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_oihdl")
+amount = 42
+lifetime = 0.5
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_nr6nm")
+draw_pass_1 = SubResource("QuadMesh_5l46m")
