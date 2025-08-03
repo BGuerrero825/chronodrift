@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xmx8yc1etl02"]
+[gd_scene load_steps=16 format=3 uid="uid://xmx8yc1etl02"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_s8va5"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_dga24"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="6_dnkej"]
 [ext_resource type="Texture2D" uid="uid://dp6mjv31mtp04" path="res://assets/environment/kloppenheim_02_puresky_1k.hdr" id="7_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://bt2i3l2j0kxim" path="res://assets/buildings/destroyed_building.glb" id="8_wtwp4"]
+[ext_resource type="PackedScene" uid="uid://dnyrvn7pakx2q" path="res://assets/environment/GroundTerrain.glb" id="9_dga24"]
 
 [sub_resource type="Curve3D" id="Curve3D_s8va5"]
 closed = true
@@ -16,16 +17,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, -0.335215, 0.288619, -0.139904, -0.397815, -0.142117, 0.689311, 0.351739, 0.394567, 0.448435, 0, -0.274806, -0.21037)
 }
 point_count = 14
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpeqc"]
-albedo_color = Color(0.85, 0.629, 0.629, 1)
-albedo_texture = ExtResource("6_dnkej")
-uv1_scale = Vector3(100, 100, 100)
-texture_filter = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_4q1sw"]
-material = SubResource("StandardMaterial3D_cpeqc")
-size = Vector2(20000, 20000)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pjnwa"]
 panorama = ExtResource("7_mm8aj")
@@ -44,6 +35,16 @@ fog_light_color = Color(0.2975, 0.317625, 0.35, 1)
 fog_light_energy = 0.6
 fog_density = 0.005
 fog_sky_affect = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpeqc"]
+albedo_color = Color(0.85, 0.629, 0.629, 1)
+albedo_texture = ExtResource("6_dnkej")
+uv1_scale = Vector3(100, 100, 100)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4q1sw"]
+material = SubResource("StandardMaterial3D_cpeqc")
+size = Vector2(20000, 20000)
 
 [node name="basic_track" type="Node3D"]
 
@@ -88,10 +89,6 @@ transform = Transform3D(-1.63338, 0, -0.471236, 0, 1.7, 0, 0.471236, 0, -1.63338
 [node name="Crane2" parent="." instance=ExtResource("5_iav0o")]
 transform = Transform3D(1.15847, 0, -0.31297, 0, 1.2, 0, 0.31297, 0, 1.15847, 167.282, -17.2201, -14.4424)
 
-[node name="Ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.7587, 0)
-mesh = SubResource("PlaneMesh_4q1sw")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cpeqc")
 
@@ -103,5 +100,13 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 342.35
 
 [node name="destroyed_building3" parent="." instance=ExtResource("8_wtwp4")]
 transform = Transform3D(-0.00127413, 0, 0.999999, 0, 1, 0, -0.999999, 0, -0.00127413, 133.013, -87.4084, 47.1851)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.7587, 0)
+visible = false
+mesh = SubResource("PlaneMesh_4q1sw")
+
+[node name="GroundTerrain2" parent="." instance=ExtResource("9_dga24")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 44.4531, 0)
 
 [editable path="track_mesh"]
