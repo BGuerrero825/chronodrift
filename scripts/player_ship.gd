@@ -90,9 +90,6 @@ var current_pitch_speed:float
 
 var current_lap_time: float = 0  # tracks current time, reset to 0 when reaching finish
 
-# TODO: part of temp impl for mouse
-var mouse_delta_x: float = 0.0
-
 var _paused := false
 var invulnerable := true
 
@@ -127,10 +124,6 @@ func _physics_process(delta: float) -> void:
 func _debug_controls() -> void:
 	if Input.is_action_just_released("debug4"):
 		destroy_ship()
-
-func _input(event):
-	if event is InputEventMouseMotion:
-		mouse_delta_x = event.relative.x
 
 func destroy_ship() -> void:
 	ship_model.visible = false
@@ -268,9 +261,12 @@ func move_ship_grounded(delta: float) -> void:
 		velocity = forward * current_speed
 	
 	# apply track magnetism
-	var track_normal = cast_ground_detector.get_collision_normal()
-	var track_distance = raycast_distance(cast_ground_detector)
-	Debug.track("distance to ground", raycast_distance(cast_ground_detector))
+	var track_normal = Vector3.UP
+	var track_distance = 10.
+	if cast_ground_detector.is_colliding():
+		track_distance = raycast_distance(cast_ground_detector)
+		track_normal = cast_ground_detector.get_collision_normal()
+		Debug.track("distance to ground", raycast_distance(cast_ground_detector))
 	velocity += track_magnetism * delta * pow(track_distance, track_magnetism_scaling) * -track_normal
 
 
@@ -297,15 +293,8 @@ func is_grounded() -> bool:
 
 
 func move_ship(delta: float) -> void:
-	# take keyboard yaw if pressed, otherwise, take mouse
-	var yaw_input = Input.get_axis("yaw_right", "yaw_left")
-	if yaw_input != 0:
-		rotate_input.y = yaw_input
-	else: # TODO: fix temp mouse control impl
-		rotate_input.y = -mouse_delta_x / 10
-		mouse_delta_x = 0
+	rotate_input.y = Input.get_axis("yaw_right", "yaw_left")
 	rotate_input.x = Input.get_axis("pitch_down", "pitch_up")
-
 	rotate_input.z = Input.get_axis("roll_right", "roll_left")
 	
 	throttle = Input.get_action_strength("gas")
