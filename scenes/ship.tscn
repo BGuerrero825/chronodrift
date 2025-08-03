@@ -133,6 +133,20 @@ transform = Transform3D(1, 0, 0, 0, 0.999991, -0.00434945, 0, 0.00434945, 0.9999
 [node name="Torus_002" parent="ship_model/Sphere" index="2"]
 transform = Transform3D(5.97705e-05, -0.00637498, -1.21213, 1.21212, 0.00787516, 7.22501e-08, -0.00945442, 1.00961, -0.00765379, 0, -0.057909, -0.00222015)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.633843, -2.03424)
+light_energy = 13.0
+spot_range = 40.0
+spot_attenuation = 1.3
+spot_angle = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.79993)
+light_color = Color(0.7954, 0.90016, 0.97, 1)
+light_energy = 12.0
+omni_range = 16.0
+omni_attenuation = 1.8
+
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 
 [editable path="ship_model"]
