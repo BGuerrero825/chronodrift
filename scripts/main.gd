@@ -6,7 +6,6 @@ extends Node3D
 @export var settings_menu_scene: PackedScene
 @export var level_1_scene: PackedScene
 @export var level_2_scene: PackedScene
-@export var level_3_scene: PackedScene
 var main_menu: MainMenu
 var settings_menu: SettingsMenu
 var level: Node3D
@@ -46,7 +45,6 @@ func go_main_menu() -> void:
 	main_menu.position = Vector2.ZERO
 	main_menu.play_1.pressed.connect(go_level.bind(level_1_scene))
 	main_menu.play_2.pressed.connect(go_level.bind(level_2_scene))
-	main_menu.play_3.pressed.connect(go_level.bind(level_3_scene))
 	main_menu.settings_button.pressed.connect(_on_settings_button_pressed)
 
 

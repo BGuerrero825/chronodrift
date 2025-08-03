@@ -36,11 +36,11 @@ theme_override_constants/margin_top = 100
 custom_minimum_size = Vector2(800, 200)
 layout_mode = 2
 mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/bold_font_size = 100
 theme_override_font_sizes/bold_italics_font_size = 100
 theme_override_font_sizes/italics_font_size = 100
 theme_override_font_sizes/mono_font_size = 100
-theme_override_font_sizes/normal_font_size = 100
-theme_override_font_sizes/bold_font_size = 100
 bbcode_enabled = true
 text = "Chronodrift"
 scroll_active = false
@@ -66,13 +66,6 @@ clip_contents = true
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 text = "Level 2"
-
-[node name="PlayButton3" type="Button" parent="Margin/ButtonsVBox"]
-unique_name_in_owner = true
-clip_contents = true
-custom_minimum_size = Vector2(350, 100)
-layout_mode = 2
-text = "Level 3"
 
 [node name="Settings" type="Button" parent="Margin/ButtonsVBox"]
 unique_name_in_owner = true
