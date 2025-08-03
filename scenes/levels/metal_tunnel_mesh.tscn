@@ -16,7 +16,7 @@ albedo_texture = ExtResource("1_anqr7")
 
 [node name="tunnel_outer" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(7.96649, 15.9133, -8.00772, 16.017, -23.9819, 8.02991, -23.9819, -3.84702, -7.95586, -12.0416, 7.96649, -11.9897, 24.0444, -3.89889, 24.0444, 8.08177)
+polygon = PackedVector2Array(8.83989, 24.1192, -8.30645, 24.1192, -32.0065, 15.8127, -32.0065, -7.96352, -8.38265, -16.1938, 8.38264, -16.1938, 32.0065, -8.03972, 31.9278, 16.0479)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -34,7 +34,7 @@ material = SubResource("StandardMaterial3D_d813i")
 [node name="tunnel_bore" type="CSGPolygon3D" parent="tunnel_outer"]
 operation = 2
 use_collision = true
-polygon = PackedVector2Array(19.8434, 6.83703, 7.91462, 12.6458, -8.11145, 12.6458, -20.0921, 7.14821, -16.0467, -4.78058, 15.9017, -4.78058)
+polygon = PackedVector2Array(27.9676, 13.2979, 8.00163, 19.9278, -7.92542, 20.0041, -28.12, 13.2979, -28.1962, -5.37252, 27.9676, -5.37252)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
