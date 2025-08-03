@@ -1,6 +1,7 @@
 class_name Main
 extends Node3D
 
+@export var shader_compiler: PackedScene
 @export var main_menu_scene: PackedScene
 @export var settings_menu_scene: PackedScene
 @export var level_1_scene: PackedScene
@@ -17,6 +18,14 @@ func _ready() -> void:
 	# MusicManager.play_menu_music()
 	MusicManager.play_gameplay_music()
 
+	Settings.sfx_volume = 0
+	Settings.set_volume_for_bus("SFX")
+	var sc = shader_compiler.instantiate()
+	add_child(sc)
+	await sc.done
+	sc.queue_free()
+	Settings.sfx_volume = 50
+	Settings.set_volume_for_bus("SFX")
 	go_main_menu()
 
 
