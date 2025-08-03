@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1lqrsav6jgk7"]
+[gd_scene load_steps=16 format=3 uid="uid://b1lqrsav6jgk7"]
 
 [ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
@@ -11,7 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://br7vhue32wrce" path="res://assets/vfx/thrusters/thruster_particles.tscn" id="7_3m36u"]
 [ext_resource type="PackedScene" uid="uid://cjc0mscbabxn3" path="res://assets/vfx/scraping/scraping_particles.tscn" id="8_8qiel"]
 [ext_resource type="AudioStream" uid="uid://btgqsc8tnk8aq" path="res://audio/scraping_edited.wav" id="9_itrim"]
-[ext_resource type="Script" path="res://scripts/collision_sound.gd" id="10_bseor"]
+[ext_resource type="Script" uid="uid://dl5wwukwwnf1k" path="res://scripts/collision_sound.gd" id="10_bseor"]
+[ext_resource type="PackedScene" uid="uid://j1ttl2cmkmh5" path="res://assets/vfx/explosion/sky_explosion.tscn" id="13_48mkp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
 size = Vector3(2.8, 0.6, 5)
@@ -122,5 +123,8 @@ offset_forward = 3.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.569208)
 shape = SubResource("BoxShape3D_7j21i")
+
+[node name="SkyExplosion" parent="." instance=ExtResource("13_48mkp")]
+unique_name_in_owner = true
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
