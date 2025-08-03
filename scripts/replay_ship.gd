@@ -6,6 +6,8 @@ extends Area3D
 var current_tick := 0
 var tick_offset := 0
 
+@onready var thruster_particles: Node3D = %ThrusterParticles
+
 func play() -> void:
 	_paused = false
 	current_tick = tick_offset
@@ -26,5 +28,7 @@ func increment_tick() -> void:
 	
 	global_position = replay_data.position_tracker[current_tick]
 	global_transform = replay_data.transform_tracker[current_tick]
+
+	thruster_particles.throttle_updated(replay_data.throttle_tracker[current_tick])
 
 	current_tick += 1
