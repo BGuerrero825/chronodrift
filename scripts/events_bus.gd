@@ -9,6 +9,7 @@ signal player_destroyed
 signal player_triggered_lap_reset
 signal player_triggered_level_reset
 signal start_delay_triggered(seconds)
+signal player_beat_target_time
 
 func register_replay_controller(controller: ReplayController) -> void:
     _replay_controller_ref = controller
@@ -39,3 +40,6 @@ func emit_player_triggered_level_reset() -> void:
 
 func emit_start_delay_triggered(seconds) -> void:
     start_delay_triggered.emit(seconds)
+
+func emit_player_beat_target_time() -> void:
+    player_beat_target_time.emit()
