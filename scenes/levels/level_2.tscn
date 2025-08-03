@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cljexgm46jj47"]
+[gd_scene load_steps=37 format=3 uid="uid://cljexgm46jj47"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_ndlae"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="5_sibr7"]
@@ -7,10 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://c2i2xnuagapim" path="res://scenes/gate_danger.tscn" id="8_5niy6"]
 [ext_resource type="PackedScene" uid="uid://b5bopckenjkp" path="res://scenes/gate_safe.tscn" id="9_wikm6"]
 [ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="11_1a10c"]
+[ext_resource type="PackedScene" uid="uid://ciq80x3i8tcpr" path="res://scenes/levels/metal_tunnel_mesh_closed.tscn" id="11_r88tb"]
+[ext_resource type="PackedScene" uid="uid://bvk1luuqav2wy" path="res://scenes/levels/metal_tunnel_mesh.tscn" id="12_brxtv"]
 [ext_resource type="Texture2D" uid="uid://dp6mjv31mtp04" path="res://assets/environment/kloppenheim_02_puresky_1k.hdr" id="12_mx6s3"]
+[ext_resource type="Texture2D" uid="uid://kee3fbgvfkf8" path="res://assets/environment/mjst_metal_base_diffuse.jpg" id="13_tv7cl"]
 [ext_resource type="PackedScene" uid="uid://bkmqnufwq5qpr" path="res://assets/vfx/god_ray/god_ray.tscn" id="14_r6ket"]
+[ext_resource type="PackedScene" uid="uid://ibwekykv1l5h" path="res://scenes/levels/lake_level_inherited.tscn" id="14_r88tb"]
+[ext_resource type="PackedScene" uid="uid://bt2i3l2j0kxim" path="res://assets/buildings/destroyed_building.glb" id="15_ndlae"]
 [ext_resource type="Shader" uid="uid://cgawimi57wdb1" path="res://assets/vfx/god_ray/god_ray.gdshader" id="15_xworo"]
-[ext_resource type="PackedScene" uid="uid://dlocim2hjhsib" path="res://assets/environment/lake_level.glb" id="16_wwjag"]
+[ext_resource type="PackedScene" uid="uid://bb707s4jelh2u" path="res://assets/buildings/crane.glb" id="16_v8d84"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpeqc"]
 albedo_color = Color(0.85, 0.629, 0.629, 1)
@@ -91,6 +96,25 @@ shader_parameter/blend_amount = 0.25
 shader_parameter/scroll_speed = 0.1
 shader_parameter/angle_degrees = 110.0
 
+[sub_resource type="Curve3D" id="Curve3D_1yj8c"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -30, 0, -0.088, 0, 0, 0, 0, 0, 0, 100, 0, 0.102),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r88tb"]
+albedo_texture = ExtResource("13_tv7cl")
+uv1_scale = Vector3(10, 10, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tv7cl"]
+transparency = 1
+albedo_color = Color(0.3375, 0.75, 0.73625, 0.65098)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ndlae"]
+material = SubResource("StandardMaterial3D_tv7cl")
+size = Vector2(60, 25)
+
 [sub_resource type="Curve3D" id="Curve3D_qsp8v"]
 closed = true
 _data = {
@@ -98,6 +122,20 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0.2, 0, 1.1, 0.8, 0.5, 0.25, 0.3, 0.3, 1, 2, 1, -0.2, 0, 0.8, 0.4, 0.4, -0.3, -0.1, 0, 0)
 }
 point_count = 22
+
+[sub_resource type="Curve3D" id="Curve3D_brxtv"]
+_data = {
+"points": PackedVector3Array(0, 0, 20, 0, 0, -40, 300.251, 220, -166.164, 50, 0, 0, -50, 0, 0, 189.356, 220, -232.215, 30, 0, 0, -40, 0, 0, 63.079, 220, -127.611, 20, 0, 0, -30, 0, 0, 1.229, 220, -130.188, 40, 0, 0, -30, 0, 0, -200.646, 220, -65.076, 0, 0, -35, 0, 0, 35, -260.362, 220, -28.318),
+"tilts": PackedFloat32Array(-0.2, 0, 0.8, 0.4, 0.4, -0.6)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_tv7cl"]
+_data = {
+"points": PackedVector3Array(-50, 0, 0, 50, 0, 0, 449.097, 0, -0.181293, 0, 0, -100, 0, 0, 50, 613.74, 50, 100.417, -50, 0, -20, 30, 0, 5, 597.955, 150, 233.989, -30, 0, 0, 50, 0, 0, 702.793, 170, 217.859, 0, 0, -40, 0, 0, 40, 802.24, 190, 302.152, 50, 0, 0, -50, 0, 0, 706.581, 220, 384.551, 50, 0, 30, -50, 0, -30, 510.335, 240, 317.239),
+"tilts": PackedFloat32Array(0, 0.2, 0, 1.1, 0.8, 0.5, 0.25)
+}
+point_count = 7
 
 [node name="basic_track" type="Node3D"]
 
@@ -114,22 +152,24 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 200.0
 
 [node name="Ship" parent="." instance=ExtResource("5_sibr7")]
-transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.0926485, 34.4991, 12.3721, -0.16252)
+transform = Transform3D(0.00848236, 0, -0.999964, 0, 1, 0, 0.999964, 0, 0.00848236, 35.5681, 2.41944, -0.16252)
 
 [node name="ReplayController" parent="." instance=ExtResource("6_lkn2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
+target_lap_time = 33.0
 
 [node name="Goal" parent="." instance=ExtResource("7_sbygb")]
-transform = Transform3D(0.999363, 0, 0.0356842, 0, 1, 0, -0.0356842, 0, 0.999363, 18.51, 16.5699, -0.105562)
+transform = Transform3D(0.999363, 0, 0.0356842, 0, 1, 0, -0.0356842, 0, 0.999363, 20.9732, 9.73717, -0.105562)
 
 [node name="DangerGate" parent="Goal" instance=ExtResource("8_5niy6")]
-transform = Transform3D(1, 0, 1.86265e-08, 0, 1, 0, -1.86265e-08, 0, 1, 67.6, -8.41568, 2.41379)
+transform = Transform3D(1, 0, 2.23517e-08, 0, 1, 0, -2.23517e-08, 0, 1, 116.005, -8.41568, 4.14219)
 
 [node name="SafeGate" parent="Goal/DangerGate" instance=ExtResource("9_wikm6")]
-transform = Transform3D(1, 0, 3.72529e-09, 0, 1, 0, -3.72529e-09, 0, 1, -95.6914, 0, -3.41685)
+transform = Transform3D(1, 0, 1.11759e-08, 0, 1, 0, -1.11759e-08, 0, 1, -153.542, 0, -5.48253)
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+visible = false
 mesh = SubResource("PlaneMesh_4q1sw")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -142,8 +182,32 @@ cast_shadow = 0
 visibility_range_end = 150.0
 visibility_range_fade_mode = 1
 
-[node name="lake_level" parent="." instance=ExtResource("16_wwjag")]
-visible = false
+[node name="GoalPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_1yj8c")
+
+[node name="metal_tunnel_mesh_closed" parent="GoalPath" instance=ExtResource("11_r88tb")]
+
+[node name="tunnel_outer" parent="GoalPath/metal_tunnel_mesh_closed" index="0"]
+path_node = NodePath("../..")
+
+[node name="tunnel_bore" parent="GoalPath/metal_tunnel_mesh_closed/tunnel_outer" index="0"]
+path_node = NodePath("../../..")
+
+[node name="TunnelOpening" type="CSGBox3D" parent="GoalPath/metal_tunnel_mesh_closed/tunnel_outer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.4305, 17.8127, 0)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_r88tb")
+
+[node name="TunnelOpening2" type="CSGBox3D" parent="GoalPath/metal_tunnel_mesh_closed/tunnel_outer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.993, 15.8326, 0)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_r88tb")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 90.8334, 6.61819, 0)
+mesh = SubResource("PlaneMesh_ndlae")
 
 [node name="TrackPath" type="Path3D" parent="."]
 curve = SubResource("Curve3D_qsp8v")
@@ -165,4 +229,104 @@ path_node = NodePath("../..")
 [node name="wall2" parent="TrackPath/track_mesh" index="4"]
 path_node = NodePath("../..")
 
+[node name="TunnelPath2" type="Path3D" parent="."]
+curve = SubResource("Curve3D_brxtv")
+
+[node name="metal_tunnel_mesh" parent="TunnelPath2" instance=ExtResource("12_brxtv")]
+
+[node name="tunnel_outer" parent="TunnelPath2/metal_tunnel_mesh" index="0"]
+path_node = NodePath("../..")
+smooth_faces = true
+
+[node name="tunnel_bore" parent="TunnelPath2/metal_tunnel_mesh/tunnel_outer" index="0"]
+path_node = NodePath("../../..")
+smooth_faces = true
+
+[node name="opening" parent="TunnelPath2/metal_tunnel_mesh/tunnel_outer" index="1"]
+path_node = NodePath("../../..")
+smooth_faces = true
+
+[node name="TunnelOpening" type="CSGBox3D" parent="TunnelPath2/metal_tunnel_mesh/tunnel_outer" index="2"]
+transform = Transform3D(-0.0398353, 0, -0.999206, 0, 1, 0, 0.999206, 0, -0.0398353, 298.126, 222.339, -164.098)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_r88tb")
+
+[node name="TunnelOpening2" type="CSGBox3D" parent="TunnelPath2/metal_tunnel_mesh/tunnel_outer" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -277.545, 229.088, -30.4786)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_r88tb")
+
+[node name="TunnelPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_tv7cl")
+
+[node name="metal_tunnel_mesh" parent="TunnelPath" instance=ExtResource("12_brxtv")]
+
+[node name="tunnel_outer" parent="TunnelPath/metal_tunnel_mesh" index="0"]
+path_node = NodePath("../..")
+
+[node name="tunnel_bore" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="0"]
+path_node = NodePath("../../..")
+
+[node name="opening" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="1"]
+path_node = NodePath("../../..")
+
+[node name="TunnelOpening" type="CSGBox3D" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 448.602, 0, 0)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_r88tb")
+
+[node name="TunnelOpening2" type="CSGBox3D" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="3"]
+transform = Transform3D(0.873976, 0, -0.485969, 0, 1, 0, 0.485969, 0, 0.873976, 513.603, 239.388, 318.615)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_r88tb")
+
+[node name="lake_level2" parent="." instance=ExtResource("14_r88tb")]
+transform = Transform3D(0.874154, 0, 0.485649, 0, 1, 0, -0.485649, 0, 0.874154, 9.69437, 85.2573, 118.07)
+
+[node name="destroyed_building" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.764438, 1.69084e-07, 0.644697, 0, -3, 8.74228e-08, 0.644697, -2.00488e-07, -0.764438, 339.726, 215.796, 215.251)
+
+[node name="destroyed_building8" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.764438, 1.69084e-07, 0.644697, 0, -3, 8.74228e-08, 0.644697, -2.00488e-07, -0.764438, 339.726, 587.346, 215.251)
+
+[node name="destroyed_building2" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.764438, 1.69084e-07, 0.644697, 0, -3, 8.74228e-08, 0.644697, -2.00488e-07, -0.764438, 413.306, 229.68, -168.191)
+
+[node name="destroyed_building3" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.0537826, 2.61889e-07, 0.998553, -1.86502e-15, -3, 8.74228e-08, 0.998553, -1.41055e-08, -0.0537826, -87.6817, 180.524, -50.9814)
+
+[node name="destroyed_building4" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.0537826, 2.61889e-07, 0.998553, -1.86502e-15, -3, 8.74228e-08, 0.998553, -1.41055e-08, -0.0537826, -238.72, 283.323, 70.8328)
+
+[node name="destroyed_building6" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(1, 0, 0, 0, -3, 8.74228e-08, 0, -2.62268e-07, -1, 239.457, 181.246, -63.1187)
+
+[node name="destroyed_building5" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(1.5, -2.62268e-07, -1.31134e-07, -1.31134e-07, -3, 0, -1.31134e-07, 2.29282e-14, -1.5, 357.958, 171.935, 71.1241)
+
+[node name="destroyed_building9" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(1.5, -2.62268e-07, -1.31134e-07, -1.31134e-07, -3, 0, -1.31134e-07, 2.29282e-14, -1.5, 357.958, 409.972, 71.1241)
+
+[node name="destroyed_building10" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.0237703, -4.15614e-09, -1.49981, -1.31134e-07, -3, 0, -1.49981, 2.62235e-07, -0.0237703, 118.712, 237.327, 89.9877)
+
+[node name="destroyed_building7" parent="." instance=ExtResource("15_ndlae")]
+transform = Transform3D(0.0537826, 2.61889e-07, 0.998553, -1.86502e-15, -3, 8.74228e-08, 0.998553, -1.41055e-08, -0.0537826, 761.984, 200.234, 132.071)
+
+[node name="crane" parent="." instance=ExtResource("16_v8d84")]
+transform = Transform3D(-1.44113, 0, -1.38678, 0, 2, 0, 1.38678, 0, -1.44113, -108.775, -54.0033, 44.5692)
+
+[node name="crane2" parent="." instance=ExtResource("16_v8d84")]
+transform = Transform3D(-0.0806122, 0, 1.99837, 0, 2, 0, -1.99837, 0, -0.0806122, 255.247, 158.995, -44.9338)
+
+[node name="crane3" parent="." instance=ExtResource("16_v8d84")]
+transform = Transform3D(2.64268, 0.0719663, -1.41813, -0.0289659, 2.99825, 0.0981758, 1.41966, -0.0727899, 2.64183, 344.292, 98.092, 109.656)
+
+[editable path="GoalPath/metal_tunnel_mesh_closed"]
 [editable path="TrackPath/track_mesh"]
+[editable path="TunnelPath2/metal_tunnel_mesh"]
+[editable path="TunnelPath/metal_tunnel_mesh"]

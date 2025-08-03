@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c8y0usf67bktq" path="res://scenes/shader_compiler.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://chtrr8xrlnya" path="res://scenes/menus/settings_menu.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b3mbo8t4iasge" path="res://scenes/levels/level_1.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://xmx8yc1etl02" path="res://scenes/levels/old_level_1.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cljexgm46jj47" path="res://scenes/levels/level_2.tscn" id="6_tefeu"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_o5qli")
@@ -13,7 +13,7 @@ shader_compiler = ExtResource("2_tefeu")
 main_menu_scene = ExtResource("2_sugp2")
 settings_menu_scene = ExtResource("3_jyhfs")
 level_1_scene = ExtResource("4_jyhfs")
-level_2_scene = ExtResource("5_tbgi4")
+level_2_scene = ExtResource("6_tefeu")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
