@@ -181,11 +181,16 @@ spot_range = 50.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.541675, -0.454519, 0, 0.642788, 0.766044, 0.707107, -0.541675, 0.454519, 0, 0, 0)
 light_color = Color(0.97, 0.89434, 0.7178, 1)
-light_energy = 4.0
+light_energy = 3.0
+light_angular_distance = 20.0
+light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.08
+directional_shadow_max_distance = 200.0
 
 [node name="Ship" parent="." instance=ExtResource("2_dga24")]
-transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.0926485, 34.4991, 12.2843, -0.16252)
+transform = Transform3D(-0.0926485, 0, -0.995699, 0, 1, 0, 0.995699, 0, -0.0926485, 34.4991, 12.3721, -0.16252)
 
 [node name="ReplayController" parent="." instance=ExtResource("3_qxy0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
