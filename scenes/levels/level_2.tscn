@@ -156,7 +156,7 @@ transform = Transform3D(0.00848236, 0, -0.999964, 0, 1, 0, 0.999964, 0, 0.008482
 
 [node name="ReplayController" parent="." instance=ExtResource("6_lkn2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.8383, 172.361, -0.454557)
-target_lap_time = 33.0
+target_lap_time = 35.2
 
 [node name="Goal" parent="." instance=ExtResource("7_sbygb")]
 transform = Transform3D(0.999363, 0, 0.0356842, 0, 1, 0, -0.0356842, 0, 0.999363, 20.9732, 9.73717, -0.105562)

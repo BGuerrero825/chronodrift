@@ -10,6 +10,7 @@ script = ExtResource("1_jbojv")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 inner_radius = 16.9091
 outer_radius = 22.0159
 

@@ -6,7 +6,7 @@ extends Control
 @onready var lap_time := %LapTime
 @onready var target_time := %TargetTime
 @onready var start_timer := %StartTime
-@onready var victory_label := %Victory
+@onready var victory_label := %VictoryVBox
 @onready var replay_goal := %ReplayGoalMessage
 @onready var destroyed_message := %DestroyedMessage
 

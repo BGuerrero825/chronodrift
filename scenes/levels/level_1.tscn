@@ -170,7 +170,7 @@ path_node = NodePath("../..")
 curve = SubResource("Curve3D_83il3")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="TrackPath/TunnelPath"]
-transform = Transform3D(1, 0, 0, 0, -0.0201921, 0.999796, 0, -0.999796, -0.0201921, 689.445, 38.9107, -18.2814)
+transform = Transform3D(1, 0, 0, 0, 0.0688162, 0.997629, 0, -0.997629, 0.0688162, 537.576, 35.5466, 4.87082)
 light_color = Color(3, 2, 0.012, 1)
 light_energy = 16.0
 spot_range = 50.0
@@ -193,7 +193,6 @@ path_node = NodePath("../..")
 path_node = NodePath("../../..")
 
 [node name="opening" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="1"]
-polygon = PackedVector2Array(-7.95423, 8.04637, -7.90833, 27.9461, 8.17111, 27.9461, 8.06266, 8.01288)
 path_node = NodePath("../../..")
 
 [node name="TunnelOpening" type="CSGBox3D" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="2"]
@@ -265,7 +264,7 @@ transform = Transform3D(-0.993627, 0, 0.112718, 0, 1, 0, -0.112718, 0, -0.993627
 transform = Transform3D(-0.00127413, 0, 0.999999, 0, 1, 0, -0.999999, 0, -0.00127413, 133.013, -87.4084, 47.1851)
 
 [node name="GodRay" parent="." instance=ExtResource("10_iav0o")]
-transform = Transform3D(5.47213, -6.70552e-08, -2.51098, 2.18365, 2.8961, 0.42829, 8.08007, -0.782676, 1.58478, 690.706, 11.6873, -11.1182)
+transform = Transform3D(0.118259, 0.430996, -2.96866, -1.41895, 2.93955, 0.421683, 9.89811, 0.416251, 0.0959152, 537.733, 8.35888, -0.71474)
 material_override = SubResource("ShaderMaterial_vbnsl")
 cast_shadow = 0
 visibility_range_end = 150.0

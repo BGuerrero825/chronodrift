@@ -320,7 +320,7 @@ func throttle_sound_adjust(in_throttle: float) -> void:
 
 
 func brake_sound_adjust(_in_brake: float) -> void:
-	if Input.is_action_just_pressed("brake"):
+	if Input.is_action_just_pressed("brake") and not airbrake_hold_sound.playing:
 		airbrake_engage_sound.play()
 	if brake > 0.1:
 		if not airbrake_hold_sound.playing:
