@@ -12,6 +12,7 @@ var current_replay_id := 1
 
 var start_position := Vector3.ZERO
 var start_transform := Transform3D.IDENTITY
+var start_max_speed := 0.0
 var player_ref: PlayerShip = null
 var replay_ships: Array[ReplayShip] = []
 
@@ -20,25 +21,47 @@ const replay_tick_rate := 0.008
 var _replay_offset_time := int(0.05 / replay_tick_rate)
 var tick_accumulator := 0.0
 
+var current_lap_time := 0.0
+@export var target_lap_time := 30.0
+
 const start_delay := 2.0
+
+var start_delay_active := false
 
 @onready var replay_ship_scene := preload("res://scenes/replay_ship.tscn")
 
 func _ready() -> void:
+	EventsBus.register_replay_controller(self)
 	player_ref = EventsBus.get_player_ref()
 	assert(player_ref != null, "player ref not available when replay controller starts")
 
 	start_position = player_ref.global_position
 	start_transform = player_ref.global_transform
+	start_max_speed = player_ref.max_speed
 	Debug.log("starting position: " + str(start_position))
 	
 	EventsBus.player_reached_goal.connect(player_reached_goal)
+	EventsBus.player_triggered_lap_reset.connect(_respawn_player)
+	EventsBus.player_triggered_level_reset.connect(_reset_level)
 
-	await get_tree().create_timer(start_delay).timeout
+	await delay_start(start_delay)
 
 	EventsBus.emit_replay_controller_ready()
 	_start_new_recording()
 
+func _reset_level() -> void:
+	for s in replay_ships:
+		if is_instance_valid(s):
+			s.queue_free()
+	replay_ships = []
+	player_ref.max_speed = start_max_speed
+	_respawn_player()
+
+func delay_start(seconds: float) -> void:
+	EventsBus.emit_start_delay_triggered(seconds)
+	start_delay_active = true
+	await get_tree().create_timer(seconds).timeout
+	start_delay_active = false
 
 func player_reached_goal() -> void:
 	Debug.log("replay controller sees player reached goal")
@@ -53,6 +76,7 @@ func _physics_process(delta: float) -> void:
 		debug_input()
 
 	tick_accumulator += delta
+	current_lap_time += delta
 	
 	if tick_accumulator >= replay_tick_rate:
 		tick_accumulator = 0.0
@@ -65,6 +89,7 @@ func process_tick() -> void:
 	process_state(_current_state)
 
 func _start_new_recording() -> void:
+	current_lap_time = 0
 	Debug.log("starting new recording for replay " + str(current_replay_id))
 	current_recording_data = ReplayData.new()
 	current_recording_data.replay_id = current_replay_id
@@ -99,6 +124,7 @@ func _increase_player_speed() -> void:
 func _start_replaying_all() -> void:
 	var current_tick_offset := _replay_offset_time * len(replay_ships)
 	for s in replay_ships:
+		# if is_instance_valid(s):
 		s.tick_offset = current_tick_offset
 		s.play()
 		current_tick_offset -= _replay_offset_time
@@ -128,7 +154,8 @@ func process_state(current_state: State) -> void:
 			Debug.track("replay_state", "REPLAYING")
 			Debug.track("recording_state", "RECORDING" if _is_recording else "NOT_RECORDING")
 			for ship in replay_ships:
-				ship.increment_tick()
+				if is_instance_valid(ship):
+					ship.increment_tick()
 		State.PAUSED:
 			Debug.track("replay_state", "PAUSED")
 			Debug.track("recording_state", "RECORDING" if _is_recording else "NOT_RECORDING")
@@ -140,8 +167,8 @@ func enter_state(state: State) -> void:
 		State.REPLAYING:
 			Debug.log("entering REPLAYING state")
 			for replay in replay_ships:
-				if is_instance_valid(replay):
-					replay.play()
+				# if is_instance_valid(replay):
+				replay.play()
 		State.PAUSED:
 			Debug.log("entering PAUSED state")
 		_:
