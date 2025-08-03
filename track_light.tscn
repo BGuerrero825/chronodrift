@@ -19,7 +19,6 @@ material = SubResource("StandardMaterial3D_bahl2")
 
 [node name="TrackLight" type="MeshInstance3D"]
 mesh = SubResource("CylinderMesh_iwr0g")
-skeleton = NodePath("../Path3D/metal_tunnel_mesh/tunnel_outer/opening")
 
 [node name="Head" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 4.66223, -0.745002)
