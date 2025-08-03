@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwy8x0eiyynbl"]
+[gd_scene load_steps=7 format=3 uid="uid://bwy8x0eiyynbl"]
 
 [ext_resource type="Script" uid="uid://vo16kiq8tpw2" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c8dj67v0h1ja4" path="res://scenes/menus/main_menu.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c8y0usf67bktq" path="res://scenes/shader_compiler.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://chtrr8xrlnya" path="res://scenes/menus/settings_menu.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b3mbo8t4iasge" path="res://scenes/levels/level_1.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://xmx8yc1etl02" path="res://scenes/levels/old_level_1.tscn" id="5_tbgi4"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_o5qli")
+shader_compiler = ExtResource("2_tefeu")
 main_menu_scene = ExtResource("2_sugp2")
 settings_menu_scene = ExtResource("3_jyhfs")
 level_1_scene = ExtResource("4_jyhfs")

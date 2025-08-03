@@ -1,11 +1,11 @@
 class_name Main
 extends Node3D
 
+@export var shader_compiler: PackedScene
 @export var main_menu_scene: PackedScene
 @export var settings_menu_scene: PackedScene
 @export var level_1_scene: PackedScene
 @export var level_2_scene: PackedScene
-@export var level_3_scene: PackedScene
 var main_menu: MainMenu
 var settings_menu: SettingsMenu
 var level: Node3D
@@ -17,6 +17,14 @@ func _ready() -> void:
 	# MusicManager.play_menu_music()
 	MusicManager.play_gameplay_music()
 
+	Settings.sfx_volume = 0
+	Settings.set_volume_for_bus("SFX")
+	var sc = shader_compiler.instantiate()
+	add_child(sc)
+	await sc.done
+	sc.queue_free()
+	Settings.sfx_volume = 50
+	Settings.set_volume_for_bus("SFX")
 	go_main_menu()
 
 
@@ -37,7 +45,6 @@ func go_main_menu() -> void:
 	main_menu.position = Vector2.ZERO
 	main_menu.play_1.pressed.connect(go_level.bind(level_1_scene))
 	main_menu.play_2.pressed.connect(go_level.bind(level_2_scene))
-	main_menu.play_3.pressed.connect(go_level.bind(level_3_scene))
 	main_menu.settings_button.pressed.connect(_on_settings_button_pressed)
 
 

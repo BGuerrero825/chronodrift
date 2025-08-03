@@ -1,0 +1,291 @@
+[gd_scene load_steps=35 format=3 uid="uid://c8y0usf67bktq"]
+
+[ext_resource type="Script" uid="uid://bwpup0fka0ogy" path="res://scripts/shader_compiler.gd" id="1_3a8fi"]
+[ext_resource type="PackedScene" uid="uid://bkmqnufwq5qpr" path="res://assets/vfx/god_ray/god_ray.tscn" id="1_ee03w"]
+[ext_resource type="PackedScene" uid="uid://dgot8vg7jrx3b" path="res://scenes/replay_ship.tscn" id="2_27ffk"]
+[ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="3_wfe8k"]
+[ext_resource type="PackedScene" uid="uid://dps5pw8c8odc6" path="res://scenes/hud.tscn" id="4_3a8fi"]
+[ext_resource type="AudioStream" uid="uid://c1jfbay7d84nt" path="res://audio/engine/airbrake-engage.ogg" id="5_13bmt"]
+[ext_resource type="AudioStream" uid="uid://crt82r7a6b2qe" path="res://audio/engine/airbrake-hold.ogg" id="6_mkqrx"]
+[ext_resource type="AudioStream" uid="uid://gh2b756mpqbx" path="res://audio/engine/engine_a.wav" id="7_a5cpw"]
+[ext_resource type="AudioStream" uid="uid://wpkcrl16uujh" path="res://audio/engine/engine_b.wav" id="8_sich2"]
+[ext_resource type="AudioStream" uid="uid://djte806d2ebib" path="res://audio/engine/rocket.wav" id="9_e31dr"]
+[ext_resource type="PackedScene" uid="uid://br7vhue32wrce" path="res://assets/vfx/thrusters/thruster_particles.tscn" id="10_2qbmh"]
+[ext_resource type="PackedScene" uid="uid://cjc0mscbabxn3" path="res://assets/vfx/scraping/scraping_particles.tscn" id="11_te153"]
+[ext_resource type="AudioStream" uid="uid://btgqsc8tnk8aq" path="res://audio/scraping_edited.wav" id="12_qjljs"]
+[ext_resource type="Script" uid="uid://dl5wwukwwnf1k" path="res://scripts/collision_sound.gd" id="13_o3ohd"]
+[ext_resource type="PackedScene" uid="uid://j1ttl2cmkmh5" path="res://assets/vfx/explosion/sky_explosion.tscn" id="14_5ct47"]
+[ext_resource type="PackedScene" uid="uid://c0slonyu2boqb" path="res://assets/ship/half_shippytesty.glb" id="15_g3s8c"]
+[ext_resource type="AudioStream" uid="uid://f604lbv3daj8" path="res://audio/ship_explosion.ogg" id="16_s65lw"]
+[ext_resource type="Script" uid="uid://cv2f4srkcxy5u" path="res://assets/vfx/explosion/sky_explosion.gd" id="18_13bmt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
+size = Vector3(2.8, 0.6, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7j21i"]
+size = Vector3(1.68729, 1, 2.52084)
+
+[sub_resource type="Curve" id="Curve_nxwb4"]
+_data = [Vector2(0.535519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u2xu5"]
+curve = SubResource("Curve_nxwb4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tvsad"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 40.0
+scale_min = 1.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_u2xu5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrtg4"]
+albedo_color = Color(0.3028, 0.534977, 0.987138, 1)
+emission_enabled = true
+emission = Color(0.301961, 0.533333, 0.988235, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3k8w3"]
+material = SubResource("StandardMaterial3D_yrtg4")
+top_radius = 0.1
+bottom_radius = 0.0
+
+[sub_resource type="Gradient" id="Gradient_a30v6"]
+offsets = PackedFloat32Array(0.00645161, 0.43871, 1)
+colors = PackedColorArray(0.487917, 0.7241, 1, 1, 0.331461, 0.607915, 0.978704, 1, 0.209961, 0.433408, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r6uar"]
+gradient = SubResource("Gradient_a30v6")
+
+[sub_resource type="Curve" id="Curve_2m2mr"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.813187), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kojhq"]
+curve = SubResource("Curve_2m2mr")
+
+[sub_resource type="Curve" id="Curve_8pscb"]
+_data = [Vector2(0, 0.208791), 0.0, 0.0, 0, 0, Vector2(0.47541, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.032967), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nrffv"]
+curve = SubResource("Curve_8pscb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pf7ki"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_nrffv")
+color = Color(0.301961, 0.533333, 0.988235, 1)
+color_ramp = SubResource("GradientTexture1D_r6uar")
+emission_curve = SubResource("CurveTexture_kojhq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmjq3"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_vmhnl"]
+material = SubResource("StandardMaterial3D_kmjq3")
+radial_segments = 8
+rings = 8
+
+[node name="ShaderCompiler" type="Node3D"]
+script = ExtResource("1_3a8fi")
+
+[node name="GodRay" parent="." instance=ExtResource("1_ee03w")]
+
+[node name="ReplayShip" parent="." instance=ExtResource("2_27ffk")]
+
+[node name="Ship" type="CharacterBody3D" parent="."]
+script = ExtResource("3_wfe8k")
+
+[node name="Camera3D" type="Camera3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 0.988338, 0.152279, 0, -0.152279, 0.988338, 0, 4.33174, 6.79795)
+current = true
+fov = 95.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00975937, 0, -0.874708)
+shape = SubResource("BoxShape3D_2gnfn")
+
+[node name="cast_center" type="RayCast3D" parent="Ship"]
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_ground_detector" type="RayCast3D" parent="Ship"]
+target_position = Vector3(0, -10, 0)
+
+[node name="cast_front" type="RayCast3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_rear" type="RayCast3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_left" type="RayCast3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+target_position = Vector3(0, -5, 0)
+
+[node name="cast_right" type="RayCast3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+target_position = Vector3(0, -5, 0)
+
+[node name="bumper_front_left" type="RayCast3D" parent="Ship"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.33816, 0, -3.14354)
+
+[node name="bumper_front_right" type="RayCast3D" parent="Ship"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.36143, 0, -3.15387)
+
+[node name="HUD" parent="Ship" instance=ExtResource("4_3a8fi")]
+
+[node name="AirBrakeEngage" type="AudioStreamPlayer3D" parent="Ship"]
+unique_name_in_owner = true
+stream = ExtResource("5_13bmt")
+volume_db = -12.0
+pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="AirBrakeHold" type="AudioStreamPlayer3D" parent="Ship"]
+unique_name_in_owner = true
+stream = ExtResource("6_mkqrx")
+volume_db = -9.0
+pitch_scale = 0.8
+bus = &"SFX"
+
+[node name="EngineHum" type="AudioStreamPlayer3D" parent="Ship"]
+unique_name_in_owner = true
+stream = ExtResource("7_a5cpw")
+volume_db = 5.0
+autoplay = true
+bus = &"SFX"
+
+[node name="EngineBuzz" type="AudioStreamPlayer3D" parent="Ship"]
+unique_name_in_owner = true
+stream = ExtResource("8_sich2")
+volume_db = -5.0
+autoplay = true
+bus = &"SFX"
+
+[node name="RocketDrone" type="AudioStreamPlayer3D" parent="Ship"]
+unique_name_in_owner = true
+stream = ExtResource("9_e31dr")
+volume_db = -18.0
+autoplay = true
+bus = &"SFX"
+
+[node name="ThrusterParticles" parent="Ship" instance=ExtResource("10_2qbmh")]
+unique_name_in_owner = true
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.922363, 1.83674)
+
+[node name="ScrapingParticles" parent="Ship" instance=ExtResource("11_te153")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.36143, 0, -6.16994)
+amount = 62
+
+[node name="CollisionSound" type="AudioStreamPlayer3D" parent="Ship"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.735146)
+stream = ExtResource("12_qjljs")
+panning_strength = 5.0
+bus = &"SFX"
+script = ExtResource("13_o3ohd")
+offset_forward = 3.0
+
+[node name="Area3D" type="Area3D" parent="Ship"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.569208)
+shape = SubResource("BoxShape3D_7j21i")
+
+[node name="SkyExplosion" parent="Ship" instance=ExtResource("14_5ct47")]
+unique_name_in_owner = true
+
+[node name="ship_model" parent="Ship" instance=ExtResource("15_g3s8c")]
+unique_name_in_owner = true
+transform = Transform3D(-0.4, 0, 3.49691e-08, 0, 0.4, 0, -3.49691e-08, 0, -0.4, 0, 1, -0.654)
+
+[node name="Ship_All" parent="Ship/ship_model" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999991, -0.00434945, 0, 0.00434945, 0.999991, 0, 0.0119758, 0)
+
+[node name="Torus_002" parent="Ship/ship_model/Sphere" index="2"]
+transform = Transform3D(5.97705e-05, -0.00637498, -1.21213, 1.21212, 0.00787516, 7.22501e-08, -0.00945442, 1.00961, -0.00765379, 0, -0.057909, -0.00222015)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.633843, -2.03424)
+light_energy = 13.0
+spot_range = 40.0
+spot_attenuation = 1.3
+spot_angle = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.79993)
+light_color = Color(0.7954, 0.90016, 0.97, 1)
+light_energy = 12.0
+omni_range = 16.0
+omni_attenuation = 1.8
+
+[node name="ShipExplosion" type="AudioStreamPlayer" parent="Ship"]
+unique_name_in_owner = true
+stream = ExtResource("16_s65lw")
+bus = &"SFX"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.5
+offset_top = -8.5
+offset_right = 120.5
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 75
+text = "Compiling Shaders..."
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32899, 5.39515)
+
+[node name="SkyExplosion" type="Node3D" parent="."]
+script = ExtResource("18_13bmt")
+
+[node name="Debris" type="GPUParticles3D" parent="SkyExplosion"]
+unique_name_in_owner = true
+amount = 24
+lifetime = 0.5
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tvsad")
+draw_pass_1 = SubResource("CylinderMesh_3k8w3")
+
+[node name="Fire" type="GPUParticles3D" parent="SkyExplosion"]
+unique_name_in_owner = true
+amount = 20
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_pf7ki")
+draw_pass_1 = SubResource("SphereMesh_vmhnl")
+
+[connection signal="area_entered" from="Ship/Area3D" to="Ship" method="_on_area_3d_area_entered"]
+
+[editable path="Ship/ship_model"]
