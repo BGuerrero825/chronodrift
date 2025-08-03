@@ -101,6 +101,7 @@ func _ready() -> void:
 	pause_ship()
 	EventsBus.register_player(self)
 	EventsBus.replay_controller_ready.connect(unpause_ship)
+	ship_model.get_child(2).play("shake_ship")
 
 
 func pause_ship() -> void:

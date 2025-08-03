@@ -25,7 +25,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.311258), 0.0, 0.0, 0, 0
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_vsbsq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.386589), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.190273), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_uagu0"]
