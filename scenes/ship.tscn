@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://br7vhue32wrce" path="res://assets/vfx/thrusters/thruster_particles.tscn" id="7_3m36u"]
 [ext_resource type="PackedScene" uid="uid://cjc0mscbabxn3" path="res://assets/vfx/scraping/scraping_particles.tscn" id="8_8qiel"]
 [ext_resource type="AudioStream" uid="uid://btgqsc8tnk8aq" path="res://audio/scraping_edited.wav" id="9_itrim"]
-[ext_resource type="Script" path="res://scripts/collision_sound.gd" id="10_bseor"]
+[ext_resource type="Script" uid="uid://dl5wwukwwnf1k" path="res://scripts/collision_sound.gd" id="10_bseor"]
 [ext_resource type="PackedScene" uid="uid://j1ttl2cmkmh5" path="res://assets/vfx/explosion/sky_explosion.tscn" id="13_48mkp"]
 [ext_resource type="PackedScene" uid="uid://c0slonyu2boqb" path="res://assets/ship/half_shippytesty.glb" id="13_tbq4g"]
 

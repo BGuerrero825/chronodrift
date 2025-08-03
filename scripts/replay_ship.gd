@@ -7,6 +7,10 @@ var current_tick := 0
 var tick_offset := 0
 
 @onready var thruster_particles: Node3D = %ThrusterParticles
+@onready var ship_model: Node3D = %ship_model
+
+func _ready() -> void:
+	ship_model.get_child(2).play("shake_ship")
 
 func play() -> void:
 	_paused = false
