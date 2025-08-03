@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq3icijr47hlc"]
+
+[ext_resource type="Texture2D" uid="uid://kee3fbgvfkf8" path="res://assets/environment/mjst_metal_base_diffuse.jpg" id="1_ocb4q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtwp4"]
+albedo_texture = ExtResource("1_ocb4q")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iwr0g"]
+material = SubResource("StandardMaterial3D_wtwp4")
+top_radius = 0.3
+bottom_radius = 0.3
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bahl2"]
+albedo_texture = ExtResource("1_ocb4q")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_np2pn"]
+material = SubResource("StandardMaterial3D_bahl2")
+
+[node name="TrackLight" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_iwr0g")
+skeleton = NodePath("../Path3D/metal_tunnel_mesh/tunnel_outer/opening")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 4.66223, -0.745002)
+mesh = SubResource("CapsuleMesh_np2pn")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head"]
+transform = Transform3D(0.80164, 8.6706e-09, 0.597807, 8.67059e-09, 1, -2.6131e-08, -0.597807, 2.6131e-08, 0.80164, 0.159334, -6.96464e-09, -0.0116291)
+light_energy = 30.0
+light_size = 20.0
+light_bake_mode = 1
+spot_range = 45.0
+spot_angle = 30.0

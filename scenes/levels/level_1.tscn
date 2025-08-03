@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://b3mbo8t4iasge"]
+[gd_scene load_steps=33 format=3 uid="uid://b3mbo8t4iasge"]
 
 [ext_resource type="PackedScene" uid="uid://dnw5ilawv3gd4" path="res://scenes/levels/track_mesh.tscn" id="1_s8va5"]
 [ext_resource type="PackedScene" uid="uid://b1lqrsav6jgk7" path="res://scenes/ship.tscn" id="2_dga24"]
-[ext_resource type="PackedScene" uid="uid://btiatyhoqo33s" path="res://scenes/levels/tunnel_mesh.tscn" id="2_excbq"]
 [ext_resource type="PackedScene" uid="uid://b3ghog3f33nbe" path="res://scenes/replay_controller.tscn" id="3_qxy0u"]
 [ext_resource type="PackedScene" uid="uid://bwn0gfx6baet5" path="res://scenes/goal.tscn" id="4_excbq"]
+[ext_resource type="PackedScene" uid="uid://bvk1luuqav2wy" path="res://scenes/levels/metal_tunnel_mesh.tscn" id="4_mm8aj"]
+[ext_resource type="Texture2D" uid="uid://kee3fbgvfkf8" path="res://assets/environment/mjst_metal_base_diffuse.jpg" id="4_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://bb707s4jelh2u" path="res://assets/buildings/crane.glb" id="5_iav0o"]
 [ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="6_dnkej"]
 [ext_resource type="PackedScene" uid="uid://c2i2xnuagapim" path="res://scenes/gate_danger.tscn" id="7_dnkej"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bt2i3l2j0kxim" path="res://assets/buildings/destroyed_building.glb" id="8_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://bkmqnufwq5qpr" path="res://assets/vfx/god_ray/god_ray.tscn" id="10_iav0o"]
 [ext_resource type="Shader" uid="uid://cgawimi57wdb1" path="res://assets/vfx/god_ray/god_ray.gdshader" id="11_dnkej"]
+[ext_resource type="PackedScene" uid="uid://bq3icijr47hlc" path="res://track_light.tscn" id="14_mm8aj"]
 
 [sub_resource type="Curve3D" id="Curve3D_s8va5"]
 closed = true
@@ -29,13 +31,16 @@ _data = {
 }
 point_count = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppoe7"]
-albedo_texture = ExtResource("6_dnkej")
-uv1_scale = Vector3(0.1, 0.1, 0.1)
-uv1_triplanar = true
+[sub_resource type="Curve3D" id="Curve3D_mm8aj"]
+_data = {
+"points": PackedVector3Array(-100, 0, 0, 0, 0, 0, 513.26, 1.81198e-05, 0.571162, 0, 0, 0, 30, 0, 0, 608.85, 1.81198e-05, 1.62272, 0, -10, 180, 0, 10, -180, 770, 10, -190, 30, 0, 0, -150, 0, 0, 608.594, 20, -383.518, 0, 0, -20, -10, 0, 60, 446.56, 20, -255.545, 0, 0, 0, -50, 0, 0, 319.557, 20, -193.396),
+"tilts": PackedFloat32Array(0.288619, -0.139904, -0.397815, -0.142117, 0.689311, 0.351739)
+}
+point_count = 6
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8g8k"]
-albedo_texture = ExtResource("6_dnkej")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwr0g"]
+albedo_texture = ExtResource("4_wtwp4")
+uv1_scale = Vector3(10, 10, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpeqc"]
 albedo_color = Color(0.85, 0.629, 0.629, 1)
@@ -118,75 +123,84 @@ shader_parameter/angle_degrees = 110.0
 
 [node name="basic_track" type="Node3D"]
 
-[node name="Path3D" type="Path3D" parent="."]
+[node name="TrackPath" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 curve = SubResource("Curve3D_s8va5")
 
-[node name="track_mesh" parent="Path3D" instance=ExtResource("1_s8va5")]
+[node name="track_mesh" parent="TrackPath" instance=ExtResource("1_s8va5")]
 
-[node name="track_floor" parent="Path3D/track_mesh" index="0"]
+[node name="track_floor" parent="TrackPath/track_mesh" index="0"]
 path_node = NodePath("../..")
 path_joined = true
 
-[node name="track_rail2" parent="Path3D/track_mesh" index="1"]
+[node name="track_rail2" parent="TrackPath/track_mesh" index="1"]
 path_node = NodePath("../..")
 
-[node name="track_rail1" parent="Path3D/track_mesh" index="2"]
+[node name="track_rail1" parent="TrackPath/track_mesh" index="2"]
 path_node = NodePath("../..")
 
-[node name="wall1" parent="Path3D/track_mesh" index="3"]
+[node name="wall1" parent="TrackPath/track_mesh" index="3"]
 path_node = NodePath("../..")
 
-[node name="wall2" parent="Path3D/track_mesh" index="4"]
+[node name="wall2" parent="TrackPath/track_mesh" index="4"]
 path_node = NodePath("../..")
 
-[node name="TunnelPath" type="Path3D" parent="Path3D"]
+[node name="TunnelPath" type="Path3D" parent="TrackPath"]
 curve = SubResource("Curve3D_83il3")
 
-[node name="tunnel_mesh" parent="Path3D/TunnelPath" instance=ExtResource("2_excbq")]
-
-[node name="tunnel_rock" parent="Path3D/TunnelPath/tunnel_mesh" index="0"]
-path_node = NodePath("../..")
-
-[node name="tunnel_bore" parent="Path3D/TunnelPath/tunnel_mesh/tunnel_rock" index="0"]
-path_node = NodePath("../../..")
-
-[node name="TunnelOpening" type="CSGCylinder3D" parent="Path3D/TunnelPath/tunnel_mesh/tunnel_rock" index="1"]
-transform = Transform3D(-0.0292999, -0.999571, 0, 0.999571, -0.0292999, 0, 0, 0, 1, 610.321, 10.8958, -0.58091)
-operation = 2
-radius = 30.0
-height = 5.0
-material = SubResource("StandardMaterial3D_ppoe7")
-
-[node name="TunnelOpening2" type="CSGCylinder3D" parent="Path3D/TunnelPath/tunnel_mesh/tunnel_rock" index="2"]
-transform = Transform3D(-0.0292999, -0.999571, 0, 0.999571, -0.0292999, 0, 0, 0, 1, 608.683, 20.6853, -386.418)
-operation = 2
-radius = 30.0
-height = 5.0
-material = SubResource("StandardMaterial3D_ppoe7")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Path3D/TunnelPath/tunnel_mesh/tunnel_rock" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 690.801, 24.3312, -18.1146)
-operation = 2
-radius = 10.0
-height = 15.0
-material = SubResource("StandardMaterial3D_e8g8k")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Path3D/TunnelPath"]
+[node name="SpotLight3D" type="SpotLight3D" parent="TrackPath/TunnelPath"]
 transform = Transform3D(1, 0, 0, 0, -0.0201921, 0.999796, 0, -0.999796, -0.0201921, 689.445, 38.9107, -18.2814)
 light_color = Color(3, 2, 0.012, 1)
 light_energy = 16.0
 spot_range = 50.0
 
+[node name="tunnel_mesh" parent="TrackPath/TunnelPath" instance=ExtResource("4_mm8aj")]
+
+[node name="TrackLight" parent="TrackPath" instance=ExtResource("14_mm8aj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.3, 10.1757, 13.4125)
+skeleton = NodePath("")
+
+[node name="TrackLight2" parent="TrackPath" instance=ExtResource("14_mm8aj")]
+transform = Transform3D(-0.976904, 0, 0.213678, 0, 1, 0, -0.213678, 0, -0.976904, 184.581, 6.7658, -4.39772)
+skeleton = NodePath("")
+
+[node name="TunnelPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+curve = SubResource("Curve3D_mm8aj")
+
+[node name="metal_tunnel_mesh" parent="TunnelPath" instance=ExtResource("4_mm8aj")]
+
+[node name="tunnel_outer" parent="TunnelPath/metal_tunnel_mesh" index="0"]
+path_node = NodePath("../..")
+
+[node name="tunnel_bore" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="0"]
+path_node = NodePath("../../..")
+
+[node name="opening" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="1"]
+path_node = NodePath("../../..")
+
+[node name="TunnelOpening" type="CSGBox3D" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 515.518, 0, 0)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_iwr0g")
+
+[node name="TunnelOpening2" type="CSGBox3D" parent="TunnelPath/metal_tunnel_mesh/tunnel_outer" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.922133, 0.386872, 0, -0.386872, 0.922133, 322.176, 7.50476, -195.546)
+operation = 2
+size = Vector3(10, 80, 80)
+material = SubResource("StandardMaterial3D_iwr0g")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.541675, -0.454519, 0, 0.642788, 0.766044, 0.707107, -0.541675, 0.454519, 0, 0, 0)
 light_color = Color(0.97, 0.89434, 0.7178, 1)
-light_energy = 3.0
+light_energy = 2.5
 light_angular_distance = 20.0
 light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_mode = 1
-directional_shadow_split_1 = 0.08
+directional_shadow_split_1 = 0.3
+directional_shadow_blend_splits = true
 directional_shadow_max_distance = 200.0
 
 [node name="Ship" parent="." instance=ExtResource("2_dga24")]
@@ -233,5 +247,5 @@ cast_shadow = 0
 visibility_range_end = 150.0
 visibility_range_fade_mode = 1
 
-[editable path="Path3D/track_mesh"]
-[editable path="Path3D/TunnelPath/tunnel_mesh"]
+[editable path="TrackPath/track_mesh"]
+[editable path="TunnelPath/metal_tunnel_mesh"]
