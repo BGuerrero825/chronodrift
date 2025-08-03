@@ -180,6 +180,7 @@ unique_name_in_owner = true
 stream = ExtResource("9_e31dr")
 volume_db = -18.0
 autoplay = true
+bus = &"SFX"
 
 [node name="ThrusterParticles" parent="Ship" instance=ExtResource("10_2qbmh")]
 unique_name_in_owner = true
@@ -195,6 +196,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.735146)
 stream = ExtResource("12_qjljs")
 panning_strength = 5.0
+bus = &"SFX"
 script = ExtResource("13_o3ohd")
 offset_forward = 3.0
 
