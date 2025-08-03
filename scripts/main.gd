@@ -8,6 +8,7 @@ extends Node3D
 @export var level_3_scene: PackedScene
 var main_menu: MainMenu
 var settings_menu: SettingsMenu
+var level: Node3D
 
 @onready var ui: CanvasLayer = %UILayer
 
@@ -26,6 +27,11 @@ func _input(event: InputEvent) -> void:
 
 
 func go_main_menu() -> void:
+	if is_instance_valid(level):
+		level.queue_free()
+	if is_instance_valid(main_menu):
+		return
+
 	main_menu = main_menu_scene.instantiate()
 	ui.add_child(main_menu)
 	main_menu.position = Vector2.ZERO
@@ -38,7 +44,7 @@ func go_main_menu() -> void:
 func go_level(level_scene: PackedScene) -> void:
 	MusicManager.play_gameplay_music()
 	
-	var level: Node3D = level_scene.instantiate()
+	level = level_scene.instantiate()
 	add_child(level)
 	level.position = Vector3.ZERO
 
@@ -48,6 +54,9 @@ func _on_settings_button_pressed() -> void:
 	settings_menu.position = Vector2.ZERO
 	settings_menu.exit_button.pressed.connect(settings_menu.queue_free)
 	
+	settings_menu.main_menu_button.pressed.connect(go_main_menu)
+	settings_menu.main_menu_button.pressed.connect(settings_menu.queue_free)
+
 	settings_menu.reset_lap_button.pressed.connect(EventsBus.emit_player_triggered_lap_reset)
 	settings_menu.reset_lap_button.pressed.connect(settings_menu.queue_free)
 
