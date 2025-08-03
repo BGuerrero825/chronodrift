@@ -186,7 +186,8 @@ light_angular_distance = 20.0
 light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_mode = 1
-directional_shadow_split_1 = 0.08
+directional_shadow_split_1 = 0.3
+directional_shadow_blend_splits = true
 directional_shadow_max_distance = 200.0
 
 [node name="Ship" parent="." instance=ExtResource("2_dga24")]
