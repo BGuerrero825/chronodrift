@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b1lqrsav6jgk7"]
+[gd_scene load_steps=17 format=3 uid="uid://b1lqrsav6jgk7"]
 
 [ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://dps5pw8c8odc6" path="res://scenes/hud.tscn" id="3_4tobq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dl5wwukwwnf1k" path="res://scripts/collision_sound.gd" id="10_bseor"]
 [ext_resource type="PackedScene" uid="uid://j1ttl2cmkmh5" path="res://assets/vfx/explosion/sky_explosion.tscn" id="13_48mkp"]
 [ext_resource type="PackedScene" uid="uid://c0slonyu2boqb" path="res://assets/ship/half_shippytesty.glb" id="13_tbq4g"]
+[ext_resource type="AudioStream" uid="uid://f604lbv3daj8" path="res://audio/ship_explosion.ogg" id="14_tbq4g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
 size = Vector3(2.8, 0.6, 5)
@@ -146,6 +147,11 @@ light_color = Color(0.7954, 0.90016, 0.97, 1)
 light_energy = 12.0
 omni_range = 16.0
 omni_attenuation = 1.8
+
+[node name="ShipExplosion" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("14_tbq4g")
+bus = &"SFX"
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 
