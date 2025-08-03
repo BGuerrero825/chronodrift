@@ -93,8 +93,8 @@ func _reset_player() -> void:
 	player_ref.current_speed = player_ref.starting_speed
 
 func _increase_player_speed() -> void:
-	player_ref.ground_max_speed += player_ref.ground_max_speed_linear_increment
-	player_ref.ground_max_speed *= player_ref.ground_max_speed_percent_increment
+	player_ref.max_speed += player_ref.max_speed_linear_increment
+	player_ref.max_speed *= player_ref.max_speed_percent_increment
 
 func _start_replaying_all() -> void:
 	var current_tick_offset := _replay_offset_time * len(replay_ships)

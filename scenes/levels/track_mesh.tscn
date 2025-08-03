@@ -32,7 +32,7 @@ albedo_color = Color(1, 1, 1, 0)
 
 [node name="track_floor" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(-10, -0.8, -10, 0, 10, 0, 10, -0.8)
+polygon = PackedVector2Array(-11.5, -0.8, -11.5, 0, 11.5, 0, 11.5, -0.8)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -47,8 +47,7 @@ path_joined = false
 material = SubResource("StandardMaterial3D_d813i")
 
 [node name="track_rail2" type="CSGPolygon3D" parent="."]
-use_collision = true
-polygon = PackedVector2Array(-10, -0.8, -10, 0, -14, 3.5, -11, -0.3)
+polygon = PackedVector2Array(-10.8, -0.8, -10.8, 0, -14, 3.5, -11.8, -0.8)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -63,8 +62,7 @@ path_joined = false
 material = SubResource("StandardMaterial3D_8web4")
 
 [node name="track_rail1" type="CSGPolygon3D" parent="."]
-use_collision = true
-polygon = PackedVector2Array(10, -0.8, 10, 0, 14, 3.5, 11, -0.3)
+polygon = PackedVector2Array(10.8, -0.8, 10.8, 0, 14, 3.5, 11.8, -0.8)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -80,7 +78,7 @@ material = SubResource("StandardMaterial3D_x2ywq")
 
 [node name="wall1" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(-10, 0, -10, 4, -12, 4, -12, 0)
+polygon = PackedVector2Array(-11.5, 0, -11.5, 5, -14, 8, -14, 0)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
@@ -96,7 +94,7 @@ material = SubResource("StandardMaterial3D_sb5rq")
 
 [node name="wall2" type="CSGPolygon3D" parent="."]
 use_collision = true
-polygon = PackedVector2Array(10, 0, 10, 4, 12, 4, 12, 0)
+polygon = PackedVector2Array(11.5, 0, 11.5, 5, 14, 8, 14, 0)
 mode = 2
 path_node = NodePath("")
 path_interval_type = 0
