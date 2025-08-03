@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8dj67v0h1ja4"]
+[gd_scene load_steps=5 format=3 uid="uid://c8dj67v0h1ja4"]
 
 [ext_resource type="Script" uid="uid://dnrrs0budlo2d" path="res://scripts/main_menu.gd" id="1_xqga4"]
+[ext_resource type="Texture2D" uid="uid://cfqvrm3py3hq3" path="res://assets/controller_stuff/controller.png" id="2_ovrgc"]
+[ext_resource type="Texture2D" uid="uid://d0ol37n6xorhi" path="res://assets/controller_stuff/arrow.png" id="3_2o76q"]
+[ext_resource type="Texture2D" uid="uid://7c3wrxhyda0h" path="res://assets/controller_stuff/wasd_arrow.jpg" id="4_6bivr"]
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -73,3 +76,286 @@ clip_contents = true
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 text = "Settings"
+
+[node name="Controller" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 441.0
+offset_right = 1072.0
+offset_bottom = 1465.0
+texture = ExtResource("2_ovrgc")
+stretch_mode = 4
+
+[node name="Arrow" type="TextureRect" parent="Controller"]
+layout_mode = 0
+offset_left = 304.7352
+offset_top = -22.08014
+offset_right = 502.76312
+offset_bottom = 173.11584
+rotation = 1.2605716
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow2" type="TextureRect" parent="Controller"]
+layout_mode = 0
+offset_left = 751.0
+offset_top = -52.00003
+offset_right = 966.99054
+offset_bottom = 128.70709
+rotation = 1.2605716
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow4" type="TextureRect" parent="Controller"]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 832.0
+offset_right = 811.0317
+offset_bottom = 1065.3695
+rotation = -1.5903174
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow5" type="TextureRect" parent="Controller"]
+layout_mode = 0
+offset_left = 52.999985
+offset_top = 865.0
+offset_right = 569.2217
+offset_bottom = 1261.6805
+rotation = -1.5903174
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow3" type="TextureRect" parent="Controller"]
+layout_mode = 0
+offset_left = 682.0
+offset_top = 120.99994
+offset_right = 897.99054
+offset_bottom = 301.70703
+rotation = 1.55694
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Controller"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = -7.0
+offset_right = 292.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 30
+text = "Brake"
+
+[node name="Label4" type="Label" parent="Controller"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 792.0
+offset_right = 343.0
+offset_bottom = 824.0
+theme_override_font_sizes/font_size = 30
+text = "Steer"
+
+[node name="Label5" type="Label" parent="Controller"]
+layout_mode = 0
+offset_left = 571.0
+offset_top = 800.0
+offset_right = 714.0
+offset_bottom = 832.0
+theme_override_font_sizes/font_size = 30
+text = "Pitch"
+
+[node name="Label2" type="Label" parent="Controller"]
+layout_mode = 0
+offset_left = 566.0
+offset_top = -36.0
+offset_right = 778.0
+offset_bottom = -4.0
+theme_override_font_sizes/font_size = 30
+text = "Throttle"
+
+[node name="Label3" type="Label" parent="Controller"]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 118.0
+offset_right = 724.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 30
+text = "Pause"
+
+[node name="ColorRect2" type="ColorRect" parent="Controller"]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 212.0
+offset_right = 567.0
+offset_bottom = 309.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="WASD" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1585.0
+offset_top = 729.0
+offset_right = 2475.0
+offset_bottom = 1115.0
+texture = ExtResource("4_6bivr")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 173.0
+offset_bottom = 197.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = 282.0
+offset_top = -20.0
+offset_right = 607.0
+offset_bottom = 194.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = 721.0
+offset_top = -23.0
+offset_right = 1046.0
+offset_bottom = 191.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = 513.0
+offset_top = -151.0
+offset_right = 838.0
+offset_bottom = 63.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 320.0
+offset_right = 1055.0
+offset_bottom = 534.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = 391.0
+offset_top = 151.0
+offset_right = 500.0
+offset_bottom = 365.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = 829.0
+offset_top = 146.0
+offset_right = 938.0
+offset_bottom = 360.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect9" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = -47.0
+offset_top = 154.0
+offset_right = 62.0
+offset_bottom = 368.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="WASD"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = -150.0
+offset_right = 403.0
+offset_bottom = 64.0
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="Arrow" type="TextureRect" parent="WASD"]
+layout_mode = 0
+offset_left = 120.000015
+offset_top = -44.999985
+offset_right = 383.40088
+offset_bottom = 166.48347
+rotation = 0.9438976
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow3" type="TextureRect" parent="WASD"]
+layout_mode = 0
+offset_left = 319.0
+offset_top = -179.99998
+offset_right = 582.4009
+offset_bottom = 31.483475
+rotation = 1.5407646
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow2" type="TextureRect" parent="WASD"]
+layout_mode = 0
+offset_left = 100.99997
+offset_top = 480.0
+offset_right = 382.73135
+offset_bottom = 712.38477
+rotation = 5.236305
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow5" type="TextureRect" parent="WASD"]
+layout_mode = 0
+offset_left = 772.0
+offset_top = -209.0
+offset_right = 1053.7313
+offset_bottom = 23.384766
+rotation = 1.5624173
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Arrow4" type="TextureRect" parent="WASD"]
+layout_mode = 0
+offset_left = 153.99997
+offset_top = 595.0
+offset_right = 435.73135
+offset_bottom = 827.38477
+rotation = 4.208039
+texture = ExtResource("3_2o76q")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="WASD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 17.0
+theme_override_font_sizes/font_size = 30
+text = "Brake"
+
+[node name="Label2" type="Label" parent="WASD"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 507.0
+offset_right = 368.0
+offset_bottom = 539.0
+theme_override_font_sizes/font_size = 30
+text = "Steer"
+
+[node name="Label3" type="Label" parent="WASD"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = -184.0
+offset_right = 352.0
+offset_bottom = -152.0
+theme_override_font_sizes/font_size = 30
+text = "Throttle"
+
+[node name="Label4" type="Label" parent="WASD"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = -209.0
+offset_right = 752.0
+offset_bottom = -177.0
+theme_override_font_sizes/font_size = 30
+text = "Pitch"
+
+[node name="Line2D" type="Line2D" parent="WASD"]
+position = Vector2(455, 28)
+points = PackedVector2Array(22, 337, 396, 337, 396, 19, 22, 19, 22, 337)
+default_color = Color(0, 1, 0.96862745, 1)
