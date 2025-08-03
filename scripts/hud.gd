@@ -17,12 +17,11 @@ var replay_controller_ref: ReplayController = null
 var victory_time := -1.0
 
 func _ready() -> void:
-	if OS.is_debug_build():
-		tracker_label.visible = true
-		log_label.visible = true
-	else:
-		tracker_label.visible = false
-		log_label.visible = false
+	tracker_label.visible = false
+	log_label.visible = false
+	# if OS.is_debug_build():
+	# 	tracker_label.visible = true
+	# 	log_label.visible = true
 	
 	EventsBus.start_delay_triggered.connect(_show_start_timer)
 	EventsBus.player_beat_target_time.connect(_show_victory)
