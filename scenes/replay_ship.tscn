@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgot8vg7jrx3b"]
+[gd_scene load_steps=5 format=3 uid="uid://dgot8vg7jrx3b"]
 
 [ext_resource type="Script" uid="uid://daaw3lh0qr8md" path="res://scripts/replay_ship.gd" id="1_itx2w"]
 [ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="2_thtrp"]
+[ext_resource type="PackedScene" uid="uid://br7vhue32wrce" path="res://assets/vfx/thrusters/thruster_particles.tscn" id="3_88p5h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_thtrp"]
 size = Vector3(1.37006, 2, 1.79419)
@@ -16,3 +17,7 @@ shape = SubResource("BoxShape3D_thtrp")
 
 [node name="ship_guest" parent="." instance=ExtResource("2_thtrp")]
 transform = Transform3D(-0.4, 0, 6.03983e-08, 0, 0.4, 0, -6.03983e-08, 0, -0.4, 0, 1, 0)
+
+[node name="ThrusterParticles" parent="." instance=ExtResource("3_88p5h")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.888166, 2.57989)
