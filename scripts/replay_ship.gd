@@ -24,6 +24,7 @@ func increment_tick() -> void:
 	
 	if current_tick >= len(replay_data.position_tracker):
 		_paused = true
+		EventsBus.emit_replay_ship_reached_goal()
 		return
 	
 	global_position = replay_data.position_tracker[current_tick]

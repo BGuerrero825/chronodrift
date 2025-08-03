@@ -2,6 +2,10 @@ class_name SettingsMenu
 extends Control
 
 @onready var exit_button: Button = %ExitButton
+@onready var main_menu_button := %MainMenu
+@onready var reset_lap_button := %ResetLap
+@onready var reset_level_button := %ResetLevel
+
 @onready var master_volume: HSlider = %MasterVolumeSlider
 @onready var sfx_volume: HSlider = %SFXVolumeSlider
 @onready var music_volume: HSlider = %MusicVolumeSlider
