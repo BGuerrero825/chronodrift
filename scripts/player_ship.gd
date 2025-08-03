@@ -17,7 +17,6 @@ extends CharacterBody3D
 @onready var rocket_drone: AudioStreamPlayer3D = %RocketDrone
 @onready var rocket_drone_orig_vol: float = %RocketDrone.volume_db
 
-
 @onready var cast_center: = $cast_center
 @onready var cast_ground_detector: = $cast_ground_detector
 @onready var cast_front: = $cast_front
@@ -30,6 +29,7 @@ extends CharacterBody3D
 
 @onready var thruster_particles: Node3D = %ThrusterParticles
 @onready var scraping_particles: GPUParticles3D = %ScrapingParticles
+@onready var explosion_particles: SkyExplosion = %SkyExplosion
 @onready var ship_model := %ship_model
 
 @export var camera_fov_base: float = 95
@@ -98,6 +98,7 @@ func _ready() -> void:
 	pause_ship()
 	EventsBus.register_player(self)
 	EventsBus.replay_controller_ready.connect(unpause_ship)
+	ship_model.get_child(2).play("shake_ship")
 
 
 func pause_ship() -> void:
@@ -127,6 +128,7 @@ func _debug_controls() -> void:
 
 func destroy_ship() -> void:
 	ship_model.visible = false
+	explosion_particles.explode()
 	pause_ship()
 
 func respawn_ship()  -> void:

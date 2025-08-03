@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://j1ttl2cmkmh5"]
 
-[ext_resource type="Script" path="res://assets/vfx/explosion/explosion.gd" id="1_u8ivg"]
+[ext_resource type="Script" uid="uid://cv2f4srkcxy5u" path="res://assets/vfx/explosion/sky_explosion.gd" id="1_u8ivg"]
 
 [sub_resource type="Curve" id="Curve_nxwb4"]
 _data = [Vector2(0.535519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -12,16 +12,16 @@ curve = SubResource("Curve_nxwb4")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tvsad"]
 particle_flag_align_y = true
 spread = 180.0
-initial_velocity_min = 150.0
-initial_velocity_max = 200.0
-scale_min = 15.0
-scale_max = 20.0
+initial_velocity_min = 30.0
+initial_velocity_max = 40.0
+scale_min = 1.5
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_u2xu5")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrtg4"]
-albedo_color = Color(0.933342, 0.290862, 0, 1)
+albedo_color = Color(0.3028, 0.534977, 0.987138, 1)
 emission_enabled = true
-emission = Color(0.890511, 0.19515, 0, 1)
+emission = Color(0.301961, 0.533333, 0.988235, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3k8w3"]
@@ -31,7 +31,7 @@ bottom_radius = 0.0
 
 [sub_resource type="Gradient" id="Gradient_a30v6"]
 offsets = PackedFloat32Array(0.00645161, 0.43871, 1)
-colors = PackedColorArray(0.739837, 0.584417, 0, 1, 0.808346, 0.545101, 0, 1, 0.95215, 0.230787, 0.301695, 1)
+colors = PackedColorArray(0.487917, 0.7241, 1, 1, 0.331461, 0.607915, 0.978704, 1, 0.209961, 0.433408, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_r6uar"]
 gradient = SubResource("Gradient_a30v6")
@@ -56,13 +56,13 @@ emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_min = 35.0
-initial_velocity_max = 50.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
-scale_min = 30.0
-scale_max = 50.0
+scale_min = 3.0
+scale_max = 5.0
 scale_curve = SubResource("CurveTexture_nrffv")
-color = Color(0.956919, 0.755729, 0, 1)
+color = Color(0.301961, 0.533333, 0.988235, 1)
 color_ramp = SubResource("GradientTexture1D_r6uar")
 emission_curve = SubResource("CurveTexture_kojhq")
 

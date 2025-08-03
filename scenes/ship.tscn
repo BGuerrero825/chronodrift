@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1lqrsav6jgk7"]
+[gd_scene load_steps=16 format=3 uid="uid://b1lqrsav6jgk7"]
 
 [ext_resource type="Script" uid="uid://la5y05ypjycj" path="res://scripts/player_ship.gd" id="1_2gnfn"]
-[ext_resource type="PackedScene" uid="uid://bcjlosgeoagng" path="res://assets/ship/ship_guest.glb" id="1_q631a"]
 [ext_resource type="PackedScene" uid="uid://dps5pw8c8odc6" path="res://scenes/hud.tscn" id="3_4tobq"]
 [ext_resource type="AudioStream" uid="uid://c1jfbay7d84nt" path="res://audio/engine/airbrake-engage.ogg" id="4_03y04"]
 [ext_resource type="AudioStream" uid="uid://gh2b756mpqbx" path="res://audio/engine/engine_a.wav" id="4_gudjc"]
@@ -12,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cjc0mscbabxn3" path="res://assets/vfx/scraping/scraping_particles.tscn" id="8_8qiel"]
 [ext_resource type="AudioStream" uid="uid://btgqsc8tnk8aq" path="res://audio/scraping_edited.wav" id="9_itrim"]
 [ext_resource type="Script" path="res://scripts/collision_sound.gd" id="10_bseor"]
+[ext_resource type="PackedScene" uid="uid://j1ttl2cmkmh5" path="res://assets/vfx/explosion/sky_explosion.tscn" id="13_48mkp"]
+[ext_resource type="PackedScene" uid="uid://c0slonyu2boqb" path="res://assets/ship/half_shippytesty.glb" id="13_tbq4g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2gnfn"]
 size = Vector3(2.8, 0.6, 5)
@@ -21,10 +22,6 @@ size = Vector3(1.68729, 1, 2.52084)
 
 [node name="Ship" type="CharacterBody3D"]
 script = ExtResource("1_2gnfn")
-
-[node name="ship_model" parent="." instance=ExtResource("1_q631a")]
-unique_name_in_owner = true
-transform = Transform3D(-0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 1, -0.654)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.988338, 0.152279, 0, -0.152279, 0.988338, 0, 4.33174, 6.79795)
@@ -101,7 +98,7 @@ autoplay = true
 
 [node name="ThrusterParticles" parent="." instance=ExtResource("7_3m36u")]
 unique_name_in_owner = true
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.736, 1.83674)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.922363, 1.83674)
 
 [node name="ScrapingParticles" parent="." instance=ExtResource("8_8qiel")]
 unique_name_in_owner = true
@@ -123,11 +120,19 @@ offset_forward = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.569208)
 shape = SubResource("BoxShape3D_7j21i")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99744, 0.0715149, 0, -0.0715149, 0.99744, 0, 0.560017, -3.04877)
-light_energy = 20.0
-light_size = 0.34
-spot_range = 40.0
-spot_angle = 60.0
+[node name="SkyExplosion" parent="." instance=ExtResource("13_48mkp")]
+unique_name_in_owner = true
+
+[node name="ship_model" parent="." instance=ExtResource("13_tbq4g")]
+unique_name_in_owner = true
+transform = Transform3D(-0.4, 0, 3.49691e-08, 0, 0.4, 0, -3.49691e-08, 0, -0.4, 0, 1, -0.654)
+
+[node name="Ship_All" parent="ship_model" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999991, -0.00434945, 0, 0.00434945, 0.999991, 0, 0.0119758, 0)
+
+[node name="Torus_002" parent="ship_model/Sphere" index="2"]
+transform = Transform3D(5.97705e-05, -0.00637498, -1.21213, 1.21212, 0.00787516, 7.22501e-08, -0.00945442, 1.00961, -0.00765379, 0, -0.057909, -0.00222015)
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+
+[editable path="ship_model"]
