@@ -197,6 +197,7 @@ light_color = Color(0.97, 0.89434, 0.7178, 1)
 light_energy = 2.5
 light_angular_distance = 20.0
 light_bake_mode = 1
+shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_split_1 = 0.3
 directional_shadow_blend_splits = true
