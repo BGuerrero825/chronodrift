@@ -17,8 +17,8 @@ var player_ref: PlayerShip = null
 var replay_ships: Array[ReplayShip] = []
 
 const replay_tick_rate := 0.008
-@export var replay_offset_time_seconds = 0.2
-var _replay_offset_time := int(0.05 / replay_tick_rate)
+@export var replay_offset_time_seconds := 0.1
+var _replay_offset_time := int(replay_offset_time_seconds / replay_tick_rate)
 var tick_accumulator := 0.0
 
 var current_lap_time := 0.0
@@ -26,7 +26,7 @@ var current_lap_time := 0.0
 
 const start_delay := 2.0
 const init_start_delay := 5.0
-const replay_won_delay := 2.5
+const replay_won_delay := 3.2
 
 var start_delay_active := false
 
@@ -81,6 +81,7 @@ func player_reached_goal() -> void:
     Debug.log("replay controller sees player reached goal")
     if current_lap_time <= target_lap_time:
         EventsBus.emit_player_beat_target_time()
+        _pause_all_replays()
         return
     _finish_current_recording()
     _pause_all_replays()
