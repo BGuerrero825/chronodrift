@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ibwekykv1l5h"]
+
+[ext_resource type="PackedScene" uid="uid://dlocim2hjhsib" path="res://assets/environment/lake_level.glb" id="1_tv1q0"]
+[ext_resource type="Texture2D" uid="uid://ienii211san3" path="res://assets/environment/gravelly_sand_diff_1k.jpg" id="2_xpr71"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yel1"]
+albedo_texture = ExtResource("2_xpr71")
+uv1_scale = Vector3(4, 4, 4)
+
+[node name="lake_level" instance=ExtResource("1_tv1q0")]
+
+[node name="mars" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_1yel1")
