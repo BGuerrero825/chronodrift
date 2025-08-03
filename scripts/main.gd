@@ -47,8 +47,12 @@ func _on_settings_button_pressed() -> void:
 	ui.add_child(settings_menu)
 	settings_menu.position = Vector2.ZERO
 	settings_menu.exit_button.pressed.connect(settings_menu.queue_free)
+	
 	settings_menu.reset_lap_button.pressed.connect(EventsBus.emit_player_triggered_lap_reset)
+	settings_menu.reset_lap_button.pressed.connect(settings_menu.queue_free)
+
 	settings_menu.reset_level_button.pressed.connect(EventsBus.emit_player_triggered_level_reset)
+	settings_menu.reset_level_button.pressed.connect(settings_menu.queue_free)
 
 	# If the main menu is up, we aren't in the game. So the main menu should
 	# grab the focus of the controller

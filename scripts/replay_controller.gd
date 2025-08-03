@@ -22,10 +22,11 @@ var _replay_offset_time := int(0.05 / replay_tick_rate)
 var tick_accumulator := 0.0
 
 var current_lap_time := 0.0
-@export var target_lap_time := 8.0
+@export var target_lap_time := 5.0
 
 const start_delay := 2.0
 const init_start_delay := 5.0
+const replay_won_delay := 2.5
 
 var start_delay_active := false
 
@@ -44,11 +45,17 @@ func _ready() -> void:
 	EventsBus.player_reached_goal.connect(player_reached_goal)
 	EventsBus.player_triggered_lap_reset.connect(_respawn_player)
 	EventsBus.player_triggered_level_reset.connect(_reset_level)
+	EventsBus.replay_ship_reached_goal.connect(_replay_ship_won)
 
 	await delay_start(init_start_delay)
 
 	EventsBus.emit_replay_controller_ready()
 	_start_new_recording()
+
+func _replay_ship_won() -> void:
+	player_ref.pause_ship()
+	await get_tree().create_timer(replay_won_delay).timeout
+	_respawn_player()
 
 func _reset_level() -> void:
 	for s in replay_ships:
@@ -70,10 +77,10 @@ func player_reached_goal() -> void:
 		EventsBus.emit_player_beat_target_time()
 		return
 	_finish_current_recording()
+	_start_replaying_all()
 	_increase_player_speed()
 	_reset_player()
 	_start_new_recording()
-	_start_replaying_all()
 
 func _physics_process(delta: float) -> void:
 	if OS.is_debug_build():
