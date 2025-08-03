@@ -129,6 +129,7 @@ func _debug_controls() -> void:
 func destroy_ship() -> void:
 	ship_model.visible = false
 	explosion_particles.explode()
+	EventsBus.emit_player_destroyed()
 	pause_ship()
 
 func respawn_ship()  -> void:

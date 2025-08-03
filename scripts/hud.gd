@@ -8,6 +8,8 @@ extends Control
 @onready var start_timer := %StartTime
 @onready var victory_label := %Victory
 @onready var replay_goal := %ReplayGoalMessage
+@onready var destroyed_message := %DestroyedMessage
+
 var start_timer_tracker := 0.0
 
 var replay_controller_ref: ReplayController = null
@@ -27,6 +29,10 @@ func _ready() -> void:
 	EventsBus.player_triggered_level_reset.connect(_hide_victory)
 	EventsBus.player_triggered_lap_reset.connect(_hide_victory)
 	EventsBus.replay_ship_reached_goal.connect(_display_replay_reached_goal)
+	EventsBus.player_destroyed.connect(_show_player_destroyed_)
+
+func _show_player_destroyed_() -> void:
+	destroyed_message.visible = true
 
 func _display_replay_reached_goal() -> void:
 	replay_goal.visible = true
@@ -41,6 +47,7 @@ func _hide_victory() -> void:
 
 func _show_start_timer(seconds) -> void:
 	replay_goal.visible = false
+	destroyed_message.visible = false
 	start_timer_tracker = seconds
 	start_timer.visible = true
 	await get_tree().create_timer(seconds).timeout
