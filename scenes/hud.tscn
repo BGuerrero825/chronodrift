@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dps5pw8c8odc6"]
 
 [ext_resource type="Script" uid="uid://c8ulb420kvf22" path="res://scripts/hud.gd" id="1_ahhtf"]
-[ext_resource type="Script" path="res://scripts/speed_bar.gd" id="2_5ysmq"]
+[ext_resource type="Script" uid="uid://bgc7ty3argunx" path="res://scripts/speed_bar.gd" id="2_5ysmq"]
 [ext_resource type="Script" uid="uid://be1cvb5bygaso" path="res://scripts/bar_controller.gd" id="2_6fi6k"]
 [ext_resource type="Shader" uid="uid://dujlgldxi7rhp" path="res://shaders/speed_bar.gdshader" id="3_6fi6k"]
 
@@ -909,6 +909,6 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "current iteration destroyed.
-resetting failed iteration..."
+resetting..."
 fit_content = true
 horizontal_alignment = 1

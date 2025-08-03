@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ri45jlttoygj"]
 
 [ext_resource type="Script" uid="uid://bwvlg3nkfae4v" path="res://scripts/music_manager.gd" id="1_tn5dr"]
-[ext_resource type="AudioStream" uid="uid://b3tx413ft5m4c" path="res://audio/music/ilkobra.mp3" id="2_hetdf"]
+[ext_resource type="AudioStream" uid="uid://cqhgb38ecqy4n" path="res://audio/music/ikobra_edited.ogg" id="2_hetdf"]
 
 [node name="MusicManager" type="Node"]
 process_mode = 3

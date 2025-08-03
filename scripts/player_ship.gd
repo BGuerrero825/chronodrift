@@ -16,6 +16,7 @@ extends CharacterBody3D
 @onready var airbrake_hold_sound: AudioStreamPlayer3D = %AirBrakeHold
 @onready var rocket_drone: AudioStreamPlayer3D = %RocketDrone
 @onready var rocket_drone_orig_vol: float = %RocketDrone.volume_db
+@onready var ship_explosion: AudioStreamPlayer = %ShipExplosion
 
 @onready var cast_center: = $cast_center
 @onready var cast_ground_detector: = $cast_ground_detector
@@ -129,6 +130,7 @@ func _debug_controls() -> void:
 func destroy_ship() -> void:
 	ship_model.visible = false
 	explosion_particles.explode()
+	ship_explosion.play()
 	EventsBus.emit_player_destroyed()
 	pause_ship()
 
